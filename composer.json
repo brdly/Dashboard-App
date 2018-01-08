@@ -1,0 +1,28 @@
+{
+    "name": "SPAT Project",
+    "description": "Second Year Project for SPAT",
+    "license": "MIT",
+    "authors": [
+        { "name": "George Broadley",  "email": "G.Broadley@edu.salford.ac.uk" },
+        { "name": "Rob Marsh",        "email": "R.Marsh3@edu.salford.ac.uk" },
+        { "name": "Mikus Sabanskis",  "email": "J.M.Sabanskis@edu.salford.ac.uk" },
+        { "name": "Matt Fisher",      "email": "M.Fisher1@edu.salford.ac.uk" },
+        { "name": "Mircea Nicolescu", "email": "M.Nicolescu@edu.salford.ac.uk" },
+        { "name": "Wasim Raja",       "email": "W.Raja1@edu.salford.ac.uk" }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "SPATApp\\App\\" : "src"
+        },
+        "files": ["config.php"]
+    },
+    "autoload-dev": {
+        "psr-0": {
+            "SPATApp\\Tests\\": "tests/"
+        }
+    }
+}
