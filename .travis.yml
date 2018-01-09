@@ -4,6 +4,7 @@ php:
   - 7.2.0
 
 before_script:
+  - cp config.php-example config.php
   - composer self-update
 
 install:
