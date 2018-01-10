@@ -19,3 +19,6 @@ install:
 
 script:
   - vendor/bin/phpunit
+
+notifications:
+    slack: spatproject:SoFkGWA9k1OrZnuJ3BFtf8X2
