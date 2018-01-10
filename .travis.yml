@@ -8,6 +8,7 @@ services:
 
 before_install:
   - mysql -e 'CREATE DATABASE spat_project;'
+  - mysql -u root --default-character-set=utf8 spat_project < schema.sql
 
 before_script:
   - cp config.php-example config.php
