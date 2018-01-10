@@ -5,6 +5,6 @@ class Config
 {
     static $dbHost      = '127.0.0.1';
     static $dbUsername  = 'root';
-    static $dbPassword  = 'password';
+    static $dbPassword  = '';
     static $dbName      = 'spat_project';
 }

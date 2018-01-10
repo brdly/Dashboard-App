@@ -10,7 +10,7 @@ before_install:
   - mysql -e 'CREATE DATABASE spat_project;'
 
 before_script:
-  - printf "<?php\nnamespace SPATApp;\nclass Config\n{\nstatic $dbHost = '127.0.0.1';\nstatic $dbUsername = 'root';\nstatic $dbPassword = '';\nstatic $dbName = 'spat_project';\n}" >> config.php
+  - cp config.php-example config.php
   - composer self-update
 
 install:
