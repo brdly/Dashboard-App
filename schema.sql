@@ -26,6 +26,7 @@ CREATE TABLE `FormData` (
   `idFormData` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `idFormField` int(10) unsigned NOT NULL,
   `formData` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `deleted` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`idFormData`),
   UNIQUE KEY `idFormData_UNIQUE` (`idFormData`),
   KEY `fk_form_field_idx` (`idFormField`),

@@ -1,8 +1,10 @@
 <?php
+namespace SPATApp;
 
-return (object) array(
-    'host' => 'localhost',
-    'username' => 'root',
-    'pass' => 'password',
-    'database' => 'spat_project'
-);
+class Config
+{
+    static $dbHost      = '127.0.0.1';
+    static $dbUsername  = 'root';
+    static $dbPassword  = '';
+    static $dbName      = 'spat_project';
+}
