@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: spat_project
 -- ------------------------------------------------------
--- Server version	5.7.20
+-- Server version	5.6.38
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -23,15 +23,15 @@ DROP TABLE IF EXISTS `FormData`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `FormData` (
-  `idFormData` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `idFormField` int(10) unsigned NOT NULL,
-  `formData` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `formData` varchar(45) NOT NULL,
   `deleted` tinyint(4) DEFAULT '0',
-  PRIMARY KEY (`idFormData`),
-  UNIQUE KEY `idFormData_UNIQUE` (`idFormData`),
-  KEY `fk_form_field_idx` (`idFormField`),
-  CONSTRAINT `fk_form_field` FOREIGN KEY (`idFormField`) REFERENCES `FormFields` (`idFormFields`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  KEY `FK_form_field_id_idx` (`idFormField`),
+  CONSTRAINT `FK_form_field_id` FOREIGN KEY (`idFormField`) REFERENCES `FormFields` (`id`) ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,33 +42,12 @@ DROP TABLE IF EXISTS `FormFields`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `FormFields` (
-  `idFormFields` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `fieldName` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `fieldName` varchar(45) DEFAULT NULL,
   `deleted` tinyint(4) DEFAULT '0',
-  PRIMARY KEY (`idFormFields`),
-  UNIQUE KEY `idFormFields_UNIQUE` (`idFormFields`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `Users`
---
-
-DROP TABLE IF EXISTS `Users`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Users` (
-  `idUsers` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `firstName` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `lastName` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `country` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `email` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `password` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `admin` tinyint(4) DEFAULT NULL,
-  PRIMARY KEY (`idUsers`),
-  UNIQUE KEY `idUsers_UNIQUE` (`idUsers`),
-  UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -80,4 +59,4 @@ CREATE TABLE `Users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-09 21:41:14
+-- Dump completed on 2018-01-11 11:36:45
