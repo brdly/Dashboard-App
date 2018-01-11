@@ -74,6 +74,17 @@ class DatabaseHelper
         return $sth->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public static function findFieldID($stringData)
+    {
+        $dbh = self::databaseConnection();
+
+        $sth = $dbh->prepare("SELECT `id` FROM `FormFields` WHERE `fieldName` = :fieldString AND `deleted` = 0", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $sth->execute(array(':fieldString' => $stringData));
+
+        return $sth->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public static function getFormDataFromField($id, $limit)
     {
         $dbh = self::databaseConnection();
