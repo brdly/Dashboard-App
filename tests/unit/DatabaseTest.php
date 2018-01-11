@@ -46,19 +46,5 @@ class DatabaseTest extends TestCase
 
         //Test getting remaining form data from field
         $this->assertCount(1, DatabaseHelper::getFormDataFromField(2, 10));
-
-        $dsn      = "mysql:dbname=" . Config::$dbName . ";host=" . Config::$dbHost;
-        $user     = Config::$dbUsername;
-        $password = Config::$dbPassword;
-        try {
-            $dbh = new PDO($dsn, $user, $password);
-        } catch (\PDOException $e) {
-            echo "Connection Failed: " . $e->getMessage();
-        }
-
-        $dbh->exec("SET FOREIGN_KEY_CHECKS = 0;
-            TRUNCATE FormData;
-            TRUNCATE FormFields;
-            SET FOREIGN_KEY_CHECKS = 1;");
     }
 }
