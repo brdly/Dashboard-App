@@ -56,7 +56,7 @@ class DatabaseHelper
 
         $tableName = \htmlspecialchars($tableName);
 
-        $sth = $dbh->prepare("DELETE FROM $tableName WHERE `id` = :fieldID", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+        $sth = $dbh->prepare("UPDATE $tableName SET `deleted` = 1 WHERE `id` = :fieldID", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
         return $sth->execute(array(':fieldID' => $id));
     }
@@ -67,18 +67,18 @@ class DatabaseHelper
 
         $tableName = \htmlspecialchars($tableName);
 
-        $sth = $dbh->prepare("SELECT `fieldName` FROM $tableName WHERE `id` = :fieldID", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+        $sth = $dbh->prepare("SELECT `fieldName` FROM $tableName WHERE `id` = :fieldID AND `deleted` = 0", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
         $sth->execute(array(':fieldID' => $id));
 
-        return $sth->fetch(PDO::FETCH_ASSOC);
+        return $sth->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function getFormDataFromField($id, $limit)
     {
         $dbh = self::databaseConnection();
 
-        $sth = $dbh->prepare("SELECT `formData` FROM FormData WHERE `idFormField` = :fieldID", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+        $sth = $dbh->prepare("SELECT `formData` FROM FormData WHERE `idFormField` = :fieldID AND `deleted` = 0 AND (SElECT `deleted` FROM FormFields WHERE `id` = :fieldID) = 0", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
         $sth->execute(array(':fieldID' => $id));
 
