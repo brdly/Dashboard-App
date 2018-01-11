@@ -71,7 +71,11 @@ class DatabaseHelper
 
         $sth->execute(array(':fieldID' => $id));
 
-        return $sth->fetchAll(PDO::FETCH_ASSOC);
+        $test = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+        var_dump($test);
+
+        return $test;
     }
 
     public static function getFormDataFromField($id, $limit)
