@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.com/GeorgeBroadley/SPATProject.svg?token=n6yY13dBGN2s9Ja5ok2S&branch=master)](https://travis-ci.com/GeorgeBroadley/SPATProject)
 
+![Imgur](https://i.imgur.com/llt8t6b.jpg)
+
 ## Setup
 
 1) Run `composer install`
