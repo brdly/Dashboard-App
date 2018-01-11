@@ -11,3 +11,7 @@
 3) Rename `config.php-example` to `config.php` and add your MySQL server details
 
 4) Run PHPUnit tests with `phpunit`
+
+### Troubleshooting
+
+* See [here](http://spat-documentation.readthedocs.io/en/latest/setup.html) if setup fails.
