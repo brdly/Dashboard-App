@@ -60,4 +60,10 @@ class DatabaseTest extends TestCase
         //Test deleting form data from database
         $this->assertTrue(DatabaseHelper::delete("FormData", 3));
     }
+
+    public function test_finding_field_id()
+    {
+        //Test finding field data
+        $this->assertNotEmpty(DatabaseHelper::findFieldID("rating"));
+    }
 }
