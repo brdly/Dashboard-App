@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.6.38)
 # Database: spat_project
-# Generation Time: 2018-01-12 12:20:09 +0000
+# Generation Time: 2018-01-12 13:12:58 +0000
 # ************************************************************
 
 
@@ -30,7 +30,7 @@ CREATE TABLE `FormData` (
   `idFormField` int(10) unsigned NOT NULL,
   `idPlatform` int(10) unsigned NOT NULL,
   `idReview` int(10) unsigned DEFAULT NULL,
-  `formData` varchar(450) NOT NULL DEFAULT '',
+  `name` varchar(450) NOT NULL DEFAULT '',
   `deleted` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
@@ -40,8 +40,20 @@ CREATE TABLE `FormData` (
   CONSTRAINT `FK_form_field_id` FOREIGN KEY (`idFormField`) REFERENCES `FormFields` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `FK_platform_id` FOREIGN KEY (`idPlatform`) REFERENCES `Platforms` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `FK_review_id` FOREIGN KEY (`idReview`) REFERENCES `FormData` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
+LOCK TABLES `FormData` WRITE;
+/*!40000 ALTER TABLE `FormData` DISABLE KEYS */;
+
+INSERT INTO `FormData` (`id`, `idFormField`, `idPlatform`, `idReview`, `name`, `deleted`)
+VALUES
+	(1,1,1,NULL,'United States',0),
+	(2,1,1,NULL,'India',0),
+	(3,2,1,1,'4',0),
+	(4,2,1,2,'3',0);
+
+/*!40000 ALTER TABLE `FormData` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table FormFields
@@ -51,12 +63,22 @@ DROP TABLE IF EXISTS `FormFields`;
 
 CREATE TABLE `FormFields` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `fieldName` varchar(45) DEFAULT NULL,
+  `name` varchar(45) DEFAULT NULL,
   `deleted` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
+LOCK TABLES `FormFields` WRITE;
+/*!40000 ALTER TABLE `FormFields` DISABLE KEYS */;
+
+INSERT INTO `FormFields` (`id`, `name`, `deleted`)
+VALUES
+	(1,'country',0),
+	(2,'rating',0);
+
+/*!40000 ALTER TABLE `FormFields` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table Platforms
@@ -70,8 +92,17 @@ CREATE TABLE `Platforms` (
   `deleted` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
+LOCK TABLES `Platforms` WRITE;
+/*!40000 ALTER TABLE `Platforms` DISABLE KEYS */;
+
+INSERT INTO `Platforms` (`id`, `name`, `deleted`)
+VALUES
+	(1,'Fiverr',0);
+
+/*!40000 ALTER TABLE `Platforms` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 
