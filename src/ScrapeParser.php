@@ -9,8 +9,8 @@
 namespace SPATApp\App;
 
 $ROOT = $_SERVER['DOCUMENT_ROOT'];
-require_once $ROOT."/src/DatabaseHelper.php";
-require_once $ROOT."/config.php";
+require_once $ROOT . "/src/DatabaseHelper.php";
+require_once $ROOT . "/config.php";
 
 use SPATApp\App\DatabaseHelper;
 use SPATApp\Config;
@@ -117,6 +117,7 @@ class ScrapeParser
         $country = substr($filename,$len-6,2);
         $section_len = ($len-6) - 5;
         $company = substr($filename,5,$section_len);
+        $company = str_replace("-", " ", $company);
 
         $file = fopen($filename,"r");
         $data = stream_get_contents($file);

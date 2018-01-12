@@ -104,9 +104,45 @@ class DatabaseHelper
 
     public static function getFormDataFromField($dbh, $id)
     {
-        $sth = $dbh->prepare("SELECT `name` FROM FormData WHERE `idFormField` = :fieldID AND `deleted` = 0 AND (SElECT `deleted` FROM FormFields WHERE `id` = :fieldID) = 0", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+        $sth = $dbh->prepare("SELECT * FROM FormData WHERE `idFormField` = :fieldID AND `deleted` = 0 AND (SElECT `deleted` FROM FormFields WHERE `id` = :fieldID) = 0", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
         $sth->execute(array(':fieldID' => $id));
+
+        return $sth->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function getAllFormData($dbh)
+    {
+        $sth = $dbh->prepare("SELECT * FROM FormData WHERE `deleted` = 0", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $sth->execute();
+
+        return $sth->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function getFormDataFromPlatform($dbh, $id)
+    {
+        $sth = $dbh->prepare("SELECT * FROM FormData WHERE `idPlatform` = :fieldID AND `deleted` = 0 AND (SElECT `deleted` FROM Platforms WHERE `id` = :fieldID) = 0", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $sth->execute(array(':fieldID' => $id));
+
+        return $sth->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function getPlatforms($dbh)
+    {
+        $sth = $dbh->prepare("SELECT `name` FROM Platforms WHERE `deleted` = 0", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $sth->execute();
+
+        return $sth->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function getFormFields($dbh)
+    {
+        $sth = $dbh->prepare("SELECT `name` FROM FormFields WHERE `deleted` = 0", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $sth->execute();
 
         return $sth->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -122,5 +158,23 @@ class DatabaseHelper
         $response = $sth->fetchAll(PDO::FETCH_ASSOC);
         $response = $response[0]["COUNT('id')"];
         return $response + 1;
+    }
+
+    public static function getUniqueReviewIDsFromPlatform($dbh, $id)
+    {
+        $sth = $dbh->prepare("SELECT DISTINCT `idReview` FROM FormData WHERE `deleted` = 0 AND `idPlatform` = :fieldID", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $sth->execute(array(':fieldID' => $id));
+
+        return $sth->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function getReviewFromReviewID($dbh, $id)
+    {
+        $sth = $dbh->prepare("SELECT * FROM FormData WHERE `deleted` = 0 AND `idReview` = :fieldID", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $sth->execute(array(':fieldID' => $id));
+
+        return $sth->fetchAll(PDO::FETCH_ASSOC);
     }
 }
