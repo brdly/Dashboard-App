@@ -6,7 +6,6 @@
 
   <!-- Javascript code for the Bar Chart -->
   <script>
-     $( document ).ready(function() {
      const CHART = document.getElementById("barChart");
 
       Chart.defaults.scale.ticks.beginAtZero = true;
@@ -17,28 +16,27 @@
          labels: ["January", "February", "March", "April"],
          datasets: [
            {
-             label:'Numbers 1',
+             label:'Fiverr',
              backgroundColor: '#800000',
              borderColor:'#800000',
              borderWidth: 2,
-             data: [10,20,55,30]
+             data: [3,3.6,3.8,3.1,3,3.2,3.8,4]
            },
            {
-             label:'Numbers 2',
+             label:'Amazon Turk',
              backgroundColor: '#FA8072',
              borderColor:'##FA8072',
              borderWidth: 2,
-             data: [5,31,74,70]
+             data: [4.8,4.3,4.9,4.8,4.8,5,4.8,4.7]
            },
            {
-             label:'Numbers 3',
+             label:'Upwork',
              backgroundColor: '#FF5733',
              borderColor:'#FF5733',
              borderWidth: 2,
-             data: [14,25,40,48]
+             data: [4.5,4.6,4.6,4.5,4.3,4.2,4,4.1]
            }
          ]
        }
      });
-    })
   </script>

@@ -4,9 +4,8 @@
   </div>
 
 
-<!-- Javascript code for the Line  Chart -->
-  <script>
-     $( document ).ready(function() {
+<!-- Javascript code for the Line Chart -->
+<script>
   const CHART = document.getElementById("lineChart");
   let lineChart = new Chart(CHART, {
   type: 'line',
@@ -14,7 +13,7 @@
     labels:["January", "February", "March", "April", "May", "June", "July" , "August"],
     datasets:  [
       {
-        label:"firstLine",
+        label:"Fiverr",
         fill: false,
         lineTension: 0.1,
         backgroundColor:"rgba(75,192,192,0.4)",
@@ -32,11 +31,11 @@
         pointHoverBorderWidth: 2,
         pointRadius: 1,
         pointHitRadius: 10,
-        data: [65,59,80,81,56,55,40],
+        data: [3,3.6,3.8,3.1,3,3.2,3.8,4],
 
       },
       {
-        label:"secondLine",
+        label:"Amazon Mechanical Turk",
         fill: false,
         lineTension: 0.1,
         backgroundColor:"rgba(75,75,192,0.4)",
@@ -54,11 +53,11 @@
         pointHoverBorderWidth: 2,
         pointRadius: 1,
         pointHitRadius: 10,
-        data: [65,55,76,92,67,69,72],
+        data: [4.8,4.3,4.9,4.8,4.8,5,4.8,4.7],
 
       },
       {
-        label:"thirdLine",
+        label:"Upwork",
         fill: false,
         lineTension: 0.1,
         backgroundColor:"rgba(192,75,192,0.4)",
@@ -76,7 +75,7 @@
         pointHoverBorderWidth: 2,
         pointRadius: 1,
         pointHitRadius: 10,
-        data: [52,49,42,49,55,53,60],
+        data: [4.5,4.6,4.6,4.5,4.3,4.2,4,4.1],
 
       }
 
@@ -92,5 +91,4 @@
     }
   }
   });
-  })
   </script>
