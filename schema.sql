@@ -39,7 +39,7 @@ CREATE TABLE `FormData` (
   KEY `FK_review_id_idx` (`idReview`),
   CONSTRAINT `FK_form_field_id` FOREIGN KEY (`idFormField`) REFERENCES `FormFields` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `FK_platform_id` FOREIGN KEY (`idPlatform`) REFERENCES `Platforms` (`id`) ON UPDATE CASCADE,
-  CONSTRAINT `FK_review_id` FOREIGN KEY (`idReview`) REFERENCES `FormData` (`id`) ON UPDATE CASCADE
+  CONSTRAINT `FK_review_id` FOREIGN KEY (`idReview`) REFERENCES `FormData` (`id`) ON UPDATE RESTRICT
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 LOCK TABLES `FormData` WRITE;

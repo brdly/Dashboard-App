@@ -29,9 +29,16 @@ class DatabaseHelper
 
     public static function addField($dbh, $formField)
     {
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
         $sth = $dbh->prepare("INSERT INTO FormFields VALUES (DEFAULT, :formField, DEFAULT)", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
-        return $sth->execute(array(':formField' => $formField));
+        $result = $sth->execute(array(':formField' => $formField));
+
+        if (!$result){
+            echo $sth->errorInfo();
+        }
+
+        return $result;
     }
 
     public static function addPlatform($dbh, $platform)
@@ -43,9 +50,13 @@ class DatabaseHelper
 
     public static function addData($dbh, $formField, $platformID, $reviewID, $dataItem)
     {
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
         $sth = $dbh->prepare("INSERT INTO FormData VALUES (DEFAULT, :formField, :platformID, :reviewID, :dataItem, DEFAULT)", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-
-        return $sth->execute(array(':formField' => $formField, ':platformID' => $platformID, ':reviewID' => $reviewID, ':dataItem' => $dataItem));
+        $result =$sth->execute(array(':formField' => $formField, ':platformID' => $platformID, ':reviewID' => $reviewID, ':dataItem' => $dataItem));
+        if (!$result){
+            echo $sth->errorInfo();
+        }
+        return $result;
     }
 
     public static function edit($dbh, $table, $id, $data)
@@ -98,5 +109,18 @@ class DatabaseHelper
         $sth->execute(array(':fieldID' => $id));
 
         return $sth->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function getNextUniqueIndex($dbh, $tableName)
+    {
+        $tableName = \htmlspecialchars($tableName);
+
+        $sth = $dbh->prepare("SELECT COUNT('id') FROM $tableName", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $sth->execute();
+
+        $response = $sth->fetchAll(PDO::FETCH_ASSOC);
+        $response = $response[0]["COUNT('id')"];
+        return $response + 1;
     }
 }
