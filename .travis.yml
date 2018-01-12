@@ -3,6 +3,13 @@ php:
   - 7.1.9
   - 7.2.0
 
+services:
+  - mysql
+
+before_install:
+  - mysql -e 'CREATE DATABASE spat_project;'
+  - mysql -u root --default-character-set=utf8 spat_project < schema.sql
+
 before_script:
   - cp config.php-example config.php
   - composer self-update
@@ -12,3 +19,6 @@ install:
 
 script:
   - vendor/bin/phpunit
+
+notifications:
+    slack: spatproject:SoFkGWA9k1OrZnuJ3BFtf8X2
