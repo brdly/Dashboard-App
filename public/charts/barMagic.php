@@ -6,13 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <base href="">
   <meta charset="utf-8">
-  <title>Bar Chart - Group 4</title>
+  <title>Overall ratings over time - Group 4</title>
   <meta name="description" content="Bar Chart for SPAT Task - Group 4.">
 
 </head>
 <body>
   <div>
-    <canvas id="barChart" height="45%" width="80%"></canvas>
+    <canvas id="barChart" height="100%" width="100%"></canvas>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 
