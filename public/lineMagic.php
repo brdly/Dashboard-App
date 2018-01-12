@@ -1,11 +1,11 @@
 
-  <div style="width:100%;height:100%;">
     <canvas id="lineChart" height="auto" width="auto"></canvas>
-  </div>
+
 
 
 <!-- Javascript code for the Line Chart -->
 <script>
+$( document ).ready(function() {
   const CHART = document.getElementById("lineChart");
   let lineChart = new Chart(CHART, {
   type: 'line',
@@ -90,5 +90,5 @@
       }]
     }
   }
-  });
+  });})
   </script>

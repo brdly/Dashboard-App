@@ -277,9 +277,9 @@
 
     <div id="slider"></div>
 
-    <section id="chartOne" class="chart chartBig"> <?php echo file_get_contents('doughnutMagic.php', true);  ?> </section>
-    <section id="chartTwo" class="chart" > <?php include_once("lineMagic.php"); ?> </section>
+    <section id="chartOne" class="chart chartBig"> <?php include_once("doughnutMagic.php");  ?> </section>
     <section id="chartThree" class="chart"> <?php include_once("barMagic.php"); ?> </section>
+    <section id="chartTwo" class="chart" > <?php include_once("lineMagic.php"); ?> </section>
 
 </main>
 

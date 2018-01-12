@@ -1,11 +1,12 @@
 
-  <div style="width:100%;height:100%;">
     <canvas id="doughnut" height="auto" width="auto"></canvas>
-  </div>
+
 
 
  <!-- The Javascript for the Doughnut chart -->
  <script>
+
+$( document ).ready(function() {
 
 const DONUT = document.getElementById("doughnut");
 
@@ -49,6 +50,6 @@ let doughnut = new Chart(DONUT, {
     }
 
   }
-});
+});})
 
 </script>

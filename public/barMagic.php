@@ -1,11 +1,12 @@
 
-  <div style="width:100%;height:100%;">
     <canvas id="barChart" height="auto" width="auto"></canvas>
-  </div>
+
 
 
   <!-- Javascript code for the Bar Chart -->
   <script>
+
+$( document ).ready(function() {
      const CHART = document.getElementById("barChart");
 
       Chart.defaults.scale.ticks.beginAtZero = true;
@@ -38,5 +39,5 @@
            }
          ]
        }
-     });
+     });})
   </script>
