@@ -1,0 +1,67 @@
+{
+    "app_name": "Admin Panel",
+    "platforms": [
+        "Amazon Mechanical Turk",
+        "CrowdFlower",
+        "CroudCloud",
+        "ClickWorker",
+        "Fiverr"
+    ],
+    "form_fields": [
+        ["Overall Rating"],
+        ["Work/Life Balance"],
+        ["Worker Benefits"],
+        ["Job Security"],
+        ["Management"],
+        ["Culture"],
+        ["Current/Former Employees"],
+        ["Location"],
+        ["Review"],
+        ["Pros/Cons"]
+    ],
+    "Amazon Mechanical Turk": {
+        "1": {
+            "rating": 4,
+            "worklife_balance": 100,
+            "benefits": 60,
+            "job_security": 40,
+            "management": 80,
+            "culture": 100,
+            "former_employee": false,
+            "location": "San Francisco, CA",
+            "date": "June 24 2016",
+            "review": "I get to set my own schedule, and work wherever I want with no supervision. I am entirely responsible for my workday. The only downfalls are that I don&#39;t get benefits, or retirement. Also, it&#39;s not quite as reliable a paycheck as I would like. I&#39;m looking for something I can settle into for the next 25 years.",
+            "pros": [
+                "Total Freedom",
+                "Setting my own schedule",
+                "Working remotely",
+                "Ability to travel",
+                "Variety",
+                "Ability to learn about multiple industries"
+            ],
+            "cons": [
+                "unreliable compensation",
+                "no benefits",
+                "no retirement"
+            ]
+        },
+        "25": {
+            "rating": 5,
+            "worklife_balance": 100,
+            "benefits": 100,
+            "job_security": 100,
+            "management": 100,
+            "culture": 100,
+            "former_employee": false,
+            "location": "Carmel, IN",
+            "date": "December 2 2017",
+            "review": "Different varieties of work.  Work at your own pace, and on your own schedule.  Fair pay.  You absolutely get out of it what you put into it.  Dont plan on leaving.",
+            "pros": [
+                "Work when you want"
+            ],
+            "cons": [
+                "No benefits"
+            ]
+        }
+    }
+}
