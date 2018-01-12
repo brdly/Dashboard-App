@@ -37,7 +37,7 @@
            {
              label:'Amazon Turk',
              backgroundColor: '#FA8072',
-             borderColor:'##FA8072',
+             borderColor:'#FA8072',
              borderWidth: 2,
              data: [4.8,4.3,4.9,4.8,4.8,5,4.8,4.7]
            },

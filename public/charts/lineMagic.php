@@ -48,7 +48,7 @@
 
       },
       {
-        label:"Amazon Mechanical Turk",
+        label:"Amazon Turk",
         fill: false,
         lineTension: 0.1,
         backgroundColor:"rgba(75,75,192,0.4)",
