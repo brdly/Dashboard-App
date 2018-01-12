@@ -12,7 +12,7 @@
 </head>
 <body>
   <div>
-    <canvas id="lineChart" height="45%" width="80%"></canvas>
+    <canvas id="lineChart" height="100%" width="100%"></canvas>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 
