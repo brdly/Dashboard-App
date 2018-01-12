@@ -82,7 +82,16 @@ class DatabaseHelper
         return $sth->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function getFormDataFromField($dbh, $id, $limit)
+    public static function findPlatformID($dbh, $stringData)
+    {
+        $sth = $dbh->prepare("SELECT `id` FROM `Platforms` WHERE `name` = :fieldString AND `deleted` = 0", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $sth->execute(array(':fieldString' => $stringData));
+
+        return $sth->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function getFormDataFromField($dbh, $id)
     {
         $sth = $dbh->prepare("SELECT `name` FROM FormData WHERE `idFormField` = :fieldID AND `deleted` = 0 AND (SElECT `deleted` FROM FormFields WHERE `id` = :fieldID) = 0", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
