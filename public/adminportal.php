@@ -197,7 +197,8 @@
         }
 
         .chartBig {
-            width:98%!important;
+            margin-left:10%;
+            width:70%!important;
             height:auto!important;
         }
 
@@ -251,6 +252,7 @@
     <section id="cw" class="button">ClickWorker</section>
     <section id="cc" class="button">CloudCrowd</section>
     <section id="fv" class="button">Fiverr</section>
+    <section id="up" class="button">Upwork</section>
 
 </header>
 
@@ -277,9 +279,9 @@
 
     <div id="slider"></div>
 
-    <section id="chartOne" class="chart chartBig"> <?php include_once("doughnutMagic.php");  ?> </section>
-    <section id="chartThree" class="chart"> <?php include_once("barMagic.php"); ?> </section>
-    <section id="chartTwo" class="chart" > <?php include_once("lineMagic.php"); ?> </section>
+    <section id="chartOne" class="chart chartBig">  <?php include_once("barMagic.php"); ?> </section>
+    <section id="chartTwo" class="chart"> <?php include_once("lineMagic.php");  ?> </section>
+    <section id="chartThree" class="chart"> <?php include_once("doughnutMagic.php");  ?> </section>
 
 </main>
 
