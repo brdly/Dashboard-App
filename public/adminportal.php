@@ -255,7 +255,7 @@
 
         var allData;
         var selectedData = []; //for chosen platforms, auto-update the data on a timer
-        var selectedOpts = [];
+        var selectedOpts = []; //if the above updates, reload the selected opts for all chosen platforms
         var oldestDate;
         var newestDate;
         var option;
@@ -316,10 +316,18 @@
                     var newArr = [platform];
                     newArr.push(data);
                     selectedData.push(newArr);
+                    //need to re-run the option loader for this new platform 
+                    //-eg, may need to run for multiple opts but only for this platform
                  } else {
                     $.each(selectedData, function (index, value) {
-                        if(value[0] == platform) { 
-                            selectedData.splice( index, 1 );
+                        try{
+                            if(value[0] == platform) { 
+                                selectedData.splice( index, 1 );
+                                //need to re-run the option unloader for this platform 
+                                //-eg, may need to remove multiple opts this platform from the dataset
+                            }
+                        } catch(e) {
+                            //no platforms selected
                         }
                     })
                     oldestDate = null;
@@ -329,10 +337,14 @@
                 var count = selectedData.length;
 
                 $.each(selectedData, function (index, platform_data) {
-                    $.each(platform_data, function (index, value) {
-                        var dt = new Date(value.Date);  
-                        if(!oldestDate || oldestDate > dt) oldestDate = dt;
-                        if(!newestDate || newestDate < dt) newestDate = dt;
+                    $.each(platform_data[1], function (index, value) {
+                        try { 
+                            var dt = new Date(value.Date);  
+                            if(!oldestDate || oldestDate > dt) oldestDate = dt;
+                            if(!newestDate || newestDate < dt) newestDate = dt;
+                        }catch(e) {
+                            //not a date
+                        }
                     })
                 })
 
@@ -371,21 +383,42 @@
                 $( ".button2" ).click(function() { 
                     $( this ).toggleClass( "menuOn" );
                     option = this.title;
-                    if(selectedData) {
-                        $.each(selectedData, function (index, platform_data) {
-                            var newArr1 = [];
-                            newArr1.push(platform_data[0]);
-                            $.each(platform_data[1], function (index, value) {
-                                var newArr2 = [option];
-                                newArr2.push(value[option]);
-                                newArr1.push(newArr2);
+
+                    if($( this ).hasClass( "menuOn" )) {
+                        menuAction = "enable";
+                    } else { menuAction = "disable"; };
+
+                    if(menuAction == "enable") { 
+                        if(selectedData) {
+                            $.each(selectedData, function (index, platform_data) {
+                                var newArr1 = [];
+                                newArr1.push(platform_data[0],option);
+                                $.each(platform_data[1], function (index, value) {
+                                    var newArr2 = [];
+                                    newArr2.push(index, value[option]);
+                                    newArr1.push(newArr2);
+                                })
+                                    selectedOpts.push(newArr1);
                             })
-                                selectedOpts.push(newArr1);
-                        })
-                    } else { 
-                        //please choose a platform 
+                        } else { 
+                            //please choose a platform 
+                        }
+                    } else {
+                        if(selectedOpts) {
+                            try{
+                                for(var i = 0; i < selectedOpts.length; i++) {
+                                    if(selectedOpts[i][1] === option) {
+                                        selectedOpts.splice( i, 1 );
+                                        i--;
+                                    }
+                                }
+                            }catch(e) { 
+                                //please choose an option
+                            }
+                        }
                     }
-                    debugger;
+                   
+                    console.log(selectedOpts.toString())
                  }); 
         });
 
