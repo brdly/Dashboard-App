@@ -255,7 +255,9 @@
 
         var allData;
         var selectedData = []; //for chosen platforms, auto-update the data on a timer
+        //selectedData is all the data from the DB for the chosen platforms
         var selectedOpts = []; //if the above updates, reload the selected opts for all chosen platforms
+        //selectedOpts is what the charts should pull their data from
         var oldestDate;
         var newestDate;
         var option;
@@ -307,7 +309,22 @@
 
                 if($( this ).hasClass( "menuOn" )) {
                     menuAction = "enable";
-                } else { menuAction = "disable"; };
+                } else { 
+                    var counter = 0;
+                    $( ".button" ).each(function( index, data ) {
+                        if(data.className.indexOf("menuOn") != -1)
+                        counter++;
+                    });
+                    if(counter <= 0) { 
+                        $( ".button2" ).each(function( index, data ) {
+                            $( this ).removeClass( "menuOn" );
+                        })
+                    }
+                    menuAction = "disable"; 
+                };
+
+                //if last button turned off, need to reset options links to off also, basically resets the forms
+                //because at least one platform needs to be turned on for data to load from it
 
                 platform = this.title;
                 var data = allData[platform];
@@ -318,13 +335,46 @@
                     selectedData.push(newArr);
                     //need to re-run the option loader for this new platform 
                     //-eg, may need to run for multiple opts but only for this platform
+                    if(selectedOpts.length>0 && selectedData.length>0 ) {
+                            var forPlatform = platform;
+                            $.each(selectedData, function (index, platform_data) {
+                                if(platform_data[0] == forPlatform) {
+                                        $.each(selectedOpts, function (i, option) {
+                                            var newArr1 = [];
+                                            newArr1.push(platform_data[0],option[1]);
+                                            $.each(platform_data[1], function (index, value) {
+                                                var newArr2 = [];
+                                                newArr2.push(index, value[option[1]]);
+                                                newArr1.push(newArr2);
+                                            })
+                                            var isDuplicate = false;
+                                            $.each(selectedOpts,function (i, element) {
+                                                if (JSON.stringify(element) === JSON.stringify(newArr1)) {
+                                                    isDuplicate = true;
+                                                    return false;
+                                                }
+                                            });
+                                        if(isDuplicate === false) selectedOpts.push(newArr1);
+                                        })
+                                        
+                                }
+                            })
+                        } else { 
+                            //please choose a platform 
+                        }
                  } else {
                     $.each(selectedData, function (index, value) {
                         try{
                             if(value[0] == platform) { 
                                 selectedData.splice( index, 1 );
                                 //need to re-run the option unloader for this platform 
-                                //-eg, may need to remove multiple opts this platform from the dataset
+                                //-eg, may need to remove multiple opts for this platform from the dataset
+                                    for(var i = 0; i < selectedOpts.length; i++) {
+                                        if(selectedOpts[i][0] === platform) {
+                                            selectedOpts.splice( i, 1 );
+                                            i--;
+                                        }
+                                    }
                             }
                         } catch(e) {
                             //no platforms selected
@@ -381,44 +431,54 @@
                 }
 
                 $( ".button2" ).click(function() { 
-                    $( this ).toggleClass( "menuOn" );
-                    option = this.title;
+                    var counter = 0;
+                    $( ".button" ).each(function( index, data ) {
+                        if(data.className.indexOf("menuOn") != -1)
+                        counter++;
+                    });
+                    if(counter >= 1) {
 
-                    if($( this ).hasClass( "menuOn" )) {
-                        menuAction = "enable";
-                    } else { menuAction = "disable"; };
+                        $( this ).toggleClass( "menuOn" );
+                        option = this.title;
 
-                    if(menuAction == "enable") { 
-                        if(selectedData) {
-                            $.each(selectedData, function (index, platform_data) {
-                                var newArr1 = [];
-                                newArr1.push(platform_data[0],option);
-                                $.each(platform_data[1], function (index, value) {
-                                    var newArr2 = [];
-                                    newArr2.push(index, value[option]);
-                                    newArr1.push(newArr2);
+                        if($( this ).hasClass( "menuOn" )) {
+                            menuAction = "enable";
+                        } else { menuAction = "disable"; };
+
+                        if(menuAction == "enable") { 
+                            if(selectedData) {
+                                $.each(selectedData, function (index, platform_data) {
+                                    var newArr1 = [];
+                                    newArr1.push(platform_data[0],option);
+                                    $.each(platform_data[1], function (index, value) {
+                                        var newArr2 = [];
+                                        newArr2.push(index, value[option]);
+                                        newArr1.push(newArr2);
+                                    })
+                                        selectedOpts.push(newArr1);
                                 })
-                                    selectedOpts.push(newArr1);
-                            })
-                        } else { 
-                            //please choose a platform 
-                        }
-                    } else {
-                        if(selectedOpts) {
-                            try{
-                                for(var i = 0; i < selectedOpts.length; i++) {
-                                    if(selectedOpts[i][1] === option) {
-                                        selectedOpts.splice( i, 1 );
-                                        i--;
+                            } else { 
+                                //please choose a platform 
+                            }
+                        } else {
+                            if(selectedOpts) {
+                                try{
+                                    for(var i = 0; i < selectedOpts.length; i++) {
+                                        if(selectedOpts[i][1] === option) {
+                                            selectedOpts.splice( i, 1 );
+                                            i--;
+                                        }
                                     }
+                                }catch(e) { 
+                                    //please choose an option
                                 }
-                            }catch(e) { 
-                                //please choose an option
                             }
                         }
+                    
+                        console.log(selectedOpts.toString())
+                    } else {
+                        alert("please choose a platform first");
                     }
-                   
-                    console.log(selectedOpts.toString())
                  }); 
         });
 
