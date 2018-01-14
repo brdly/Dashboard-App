@@ -20,16 +20,20 @@
 
         
         body {
-            font-weight:100;
-            height:100vh;
-            width:100vw;
-            margin:0;
-            padding:0;
-            background-color:white;
-            color:white;
+            font-weight: 100;
+            height: 100vh;
+            width: 100vw;
+            background-image: url(build/img/images7.jpg);
+            background-size: auto auto;
+            background-position: bottom right;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            /* background-color: white; */
+            color: white;
             font-family: 'BenchNine', sans-serif;
-            font-size:16px;
-            text-align:center;
+            font-size: 16px;
+            text-align: center;
         }
 
         #headerTopSpacer {
@@ -136,7 +140,6 @@
 
         main {
             float:left;
-            background-color:white;
             width:calc(100vw - 190px);
             height:calc(100vh - 71px);
             overflow:auto;
@@ -144,16 +147,25 @@
         
         main > section {
             float:left;
-            background-color:white;
             width:360px;
             height:200px;
             margin:10px;
             line-height:250px;
         }
         
-        footer {
-            float:left;
-            background-color:white;
+        footer {    
+            position: absolute;
+            bottom: 10px;
+            left: 0px;
+            height: 50px;
+            text-align: center;
+            width: 180px;
+        }
+
+        footer > img {
+            height:30px;
+            padding:10px;
+            cursor:pointer;
         }
 
         #slider {
@@ -538,7 +550,10 @@
 
 </main>
 
-<footer></footer>
+<footer>
+    <img src="/SPATProject/public/build/img/logout.png" />
+    <img src="/SPATProject/public/build/img/help.png" />
+</footer>
 
 </body>
 </html>
