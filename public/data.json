@@ -1,11 +1,11 @@
 {
-    "app_name":"Admin Panel",
-    "platforms":[
+    "app_name": "Admin Panel",
+    "platforms": [
         "Amazon Mechanical Turk",
         "Fiverr",
         "Upwork"
     ],
-    "form_fields":[
+    "form_fields": [
         "Rating",
         "Worklife Balance",
         "Benefits",
@@ -19,10 +19,8 @@
         "Pros",
         "Cons"
     ],
-<<<<<<< HEAD
     "Amazon Mechanical Turk": {
         "1": {
-            "Rating": "2",
             "Worklife Balance": "100",
             "Benefits": "60",
             "Job Security": "40",
@@ -33,21 +31,6 @@
             "Date": "June 24 2016",
             "Review": "I get to set my own schedule, and work wherever I want with no supervision. I am entirely responsible for my workday. The only downfalls are that I don&#39;t get benefits, or retirement. Also, it&#39;s not quite as reliable a paycheck as I would like. I&#39;m looking for something I can settle into for the next 25 years.",
             "Pros": [
-=======
-    "Amazon Mechanical Turk":{
-        "1":{
-            "Rating":"4",
-            "Worklife Balance":"100",
-            "Benefits":"60",
-            "Job Security":"40",
-            "Management":"80",
-            "Culture":"100",
-            "Former Employee":"Current ",
-            "Location":" – San Francisco, CA –",
-            "Date":"June 24 2016",
-            "Review":"I get to set my own schedule, and work wherever I want with no supervision. I am entirely responsible for my workday. The only downfalls are that I don't get benefits, or retirement. Also, it's not quite as reliable a paycheck as I would like. I'm looking for something I can settle into for the next 25 years.",
-            "Pros":[
->>>>>>> SP18
                 "Total Freedom",
                 "Setting my own schedule",
                 "Working remotely",
@@ -55,15 +38,13 @@
                 "Variety",
                 "Ability to learn about multiple industries"
             ],
-            "Cons":[
+            "Cons": [
                 "unreliable compensation",
                 "no benefits",
                 "no retirement"
             ]
         },
-<<<<<<< HEAD
         "13": {
-            "Rating": "3",
             "Worklife Balance": "100",
             "Benefits": "100",
             "Job Security": "100",
@@ -75,29 +56,12 @@
             "Review": "Human Intelligent Task ",
             "Pros": [
                 "called HIT&#39;s) is doing a task that Artificial Intelligent has not learned how to do as of yet.  It&#39;s fun and it&#39;s exciting and you get to work at your own pace and do whatever assignments you wish to sit and complete.  It&#39;s good if you are a housewife with no children and love to work on the computer all day. You can make a couple hundred bucks a month."
-=======
-        "13":{
-            "Rating":"5",
-            "Worklife Balance":"100",
-            "Benefits":"100",
-            "Job Security":"100",
-            "Management":"100",
-            "Culture":"100",
-            "Former Employee":"Current ",
-            "Location":" – online –",
-            "Date":"December 5 2017",
-            "Review":"Human Intelligent Task ",
-            "Pros":[
-                "called HIT's) is doing a task that Artificial Intelligent has not learned how to do as of yet. It's fun and it's exciting and you get to work at your own pace and do whatever assignments you wish to sit and complete. It's good if you are a housewife with no children and love to work on the computer all day. You can make a couple hundred bucks a month."
->>>>>>> SP18
             ],
-            "Cons":[
+            "Cons": [
                 "Work at Home"
             ]
         },
-<<<<<<< HEAD
         "25": {
-            "Rating": "5",
             "Worklife Balance": "100",
             "Benefits": "100",
             "Job Security": "100",
@@ -108,29 +72,13 @@
             "Date": "December 2 2017",
             "Review": "Different varieties of work.  Work at your own pace, and on your own schedule.  Fair pay.  You absolutely get out of it what you put into it.  Dont plan on leaving.",
             "Pros": [
-=======
-        "25":{
-            "Rating":"5",
-            "Worklife Balance":"100",
-            "Benefits":"100",
-            "Job Security":"100",
-            "Management":"100",
-            "Culture":"100",
-            "Former Employee":"Current ",
-            "Location":" – Carmel, IN –",
-            "Date":"December 2 2017",
-            "Review":"Different varieties of work. Work at your own pace, and on your own schedule. Fair pay. You absolutely get out of it what you put into it. Dont plan on leaving.",
-            "Pros":[
->>>>>>> SP18
                 "Work when you want"
             ],
-            "Cons":[
+            "Cons": [
                 "No benefits"
             ]
         },
-<<<<<<< HEAD
         "37": {
-            "Rating": "5",
             "Worklife Balance": "80",
             "Benefits": "40",
             "Job Security": "40",
@@ -142,7 +90,6 @@
             "Review": "turking is easy work to do while sitting at home, it is basically a part time thing for pocket change ,BUT if you work alot and build up hits you can make 300-500 a week earning a basic paycheck"
         },
         "47": {
-            "Rating": "4",
             "Worklife Balance": "60",
             "Benefits": "20",
             "Job Security": "20",
@@ -153,41 +100,13 @@
             "Date": "November 13 2017",
             "Review": "A typical day on mturk consists of getting online, and using scripts to find freelance work.  some days are better than others.  good for stay at home mom, or pt work.",
             "Pros": [
-=======
-        "37":{
-            "Rating":"4",
-            "Worklife Balance":"80",
-            "Benefits":"40",
-            "Job Security":"40",
-            "Management":"100",
-            "Culture":"60",
-            "Former Employee":"Current ",
-            "Location":" – Anywhere –",
-            "Date":"November 26 2017",
-            "Review":"turking is easy work to do while sitting at home, it is basically a part time thing for pocket change ,BUT if you work alot and build up hits you can make 300-500 a week earning a basic paycheck"
-        },
-        "47":{
-            "Rating":"3",
-            "Worklife Balance":"60",
-            "Benefits":"20",
-            "Job Security":"20",
-            "Management":"60",
-            "Culture":"60",
-            "Former Employee":"Current ",
-            "Location":" – York, PA –",
-            "Date":"November 13 2017",
-            "Review":"A typical day on mturk consists of getting online, and using scripts to find freelance work. some days are better than others. good for stay at home mom, or pt work.",
-            "Pros":[
->>>>>>> SP18
                 "freedom"
             ],
-            "Cons":[
+            "Cons": [
                 "pay"
             ]
         },
-<<<<<<< HEAD
         "59": {
-            "Rating": "2",
             "Worklife Balance": "60",
             "Benefits": "40",
             "Job Security": "20",
@@ -199,7 +118,6 @@
             "Review": "Amazon is a great company but this is more of a part time online job. It is not really possible to make a living wage and there are no benefits. I am my own boss and can work from home"
         },
         "69": {
-            "Rating": "2",
             "Worklife Balance": "40",
             "Benefits": "20",
             "Job Security": "20",
@@ -211,7 +129,6 @@
             "Review": "better requester and pay needed, good for extra pocket money, not to live on. there are hundreds of jobs available, but the pay is merely a couple of cents per hour."
         },
         "79": {
-            "Rating": "5",
             "Worklife Balance": "80",
             "Benefits": "40",
             "Job Security": "20",
@@ -223,7 +140,6 @@
             "Review": "Amazon Mechanical Turk is a pay per HIT, like finding an email, writing a web description. So don&#39;t expect big bucks, just nice pocket money. HITS start as low as a penny and go all the way up to $10+."
         },
         "89": {
-            "Rating": "4",
             "Worklife Balance": "100",
             "Benefits": "20",
             "Job Security": "60",
@@ -234,68 +150,16 @@
             "Date": "August 24 2017",
             "Review": "The money you make is entirely dependent on how much you want to work. Amazon is simply a tool the provides you with jobs to do, you can do as many as you want but you will not make money very quickly.",
             "Pros": [
-=======
-        "59":{
-            "Rating":"5",
-            "Worklife Balance":"60",
-            "Benefits":"40",
-            "Job Security":"20",
-            "Management":"100",
-            "Culture":"100",
-            "Former Employee":"Current ",
-            "Location":" – at home –",
-            "Date":"October 30 2017",
-            "Review":"Amazon is a great company but this is more of a part time online job. It is not really possible to make a living wage and there are no benefits. I am my own boss and can work from home"
-        },
-        "69":{
-            "Rating":"2",
-            "Worklife Balance":"40",
-            "Benefits":"20",
-            "Job Security":"20",
-            "Management":"20",
-            "Culture":"40",
-            "Former Employee":"Current ",
-            "Location":" – Internet –",
-            "Date":"September 25 2017",
-            "Review":"better requester and pay needed, good for extra pocket money, not to live on. there are hundreds of jobs available, but the pay is merely a couple of cents per hour."
-        },
-        "79":{
-            "Rating":"3",
-            "Worklife Balance":"80",
-            "Benefits":"40",
-            "Job Security":"20",
-            "Management":"40",
-            "Culture":"40",
-            "Former Employee":"Current ",
-            "Location":" – Seattle, WA –",
-            "Date":"August 27 2017",
-            "Review":"Amazon Mechanical Turk is a pay per HIT, like finding an email, writing a web description. So don't expect big bucks, just nice pocket money. HITS start as low as a penny and go all the way up to $10+."
-        },
-        "89":{
-            "Rating":"4",
-            "Worklife Balance":"100",
-            "Benefits":"20",
-            "Job Security":"60",
-            "Management":"60",
-            "Culture":"60",
-            "Former Employee":"Current ",
-            "Location":" – Mascoutah, IL –",
-            "Date":"August 24 2017",
-            "Review":"The money you make is entirely dependent on how much you want to work. Amazon is simply a tool the provides you with jobs to do, you can do as many as you want but you will not make money very quickly.",
-            "Pros":[
->>>>>>> SP18
                 "Work any hours",
                 "work anywhere"
             ],
-            "Cons":[
+            "Cons": [
                 "Very low pay",
                 "no social environment",
                 "no promotions"
             ]
         },
-<<<<<<< HEAD
         "101": {
-            "Rating": "1",
             "Worklife Balance": "100",
             "Benefits": "60",
             "Job Security": "0",
@@ -314,7 +178,6 @@
             ]
         },
         "113": {
-            "Rating": "1",
             "Worklife Balance": "60",
             "Benefits": "60",
             "Job Security": "60",
@@ -326,7 +189,6 @@
             "Review": "Never managed to invest enough time, find the right group of hits, much less get a Master&#39;s rating with possibly the first reason why, but doing online tasks has paid for a phone, tablet and several PC upgrades."
         },
         "123": {
-            "Rating": "1",
             "Worklife Balance": "80",
             "Benefits": "20",
             "Job Security": "60",
@@ -337,60 +199,13 @@
             "Date": "July 28 2017",
             "Review": "The HIT&#39;s are plentiful and fairly easy.  They do not pay very well, but the convenience of being able to make a few extra dollars from home for very little of your time is nice.  However, this is not a full or even part-time sustainable job.  Just a nice little way of making a few extra dollars a day if you are a go-getter such as myself.",
             "Pros": [
-=======
-        "101":{
-            "Rating":"5",
-            "Worklife Balance":"100",
-            "Benefits":"60",
-            "Job Security":"0",
-            "Management":"0",
-            "Culture":"0",
-            "Former Employee":"Current ",
-            "Location":" – Pittsburgh, PA –",
-            "Date":"August 16 2017",
-            "Review":"This is a great way to earn some extra cash. You can work as little or as much as you want at any time of the day or night. There are a lot of very low paying HIT's that only pay pennies that are fairly brainless but there are some higher paying opportunities of several dollars for a couple minutes. Personally I work a few hours a week and always reach my $100\/month goal, many months breaking $150-$250 dependent on work availability and how m",
-            "Pros":[
-                "Work from Home",
-                "Work at your own pace"
-            ],
-            "Cons":[
-                "Some HIT's are very low pay"
-            ]
-        },
-        "113":{
-            "Rating":"3",
-            "Worklife Balance":"60",
-            "Benefits":"60",
-            "Job Security":"60",
-            "Management":"60",
-            "Culture":"60",
-            "Former Employee":"Current ",
-            "Location":" – Work at home –",
-            "Date":"August 2 2017",
-            "Review":"Never managed to invest enough time, find the right group of hits, much less get a Master's rating with possibly the first reason why, but doing online tasks has paid for a phone, tablet and several PC upgrades."
-        },
-        "123":{
-            "Rating":"3",
-            "Worklife Balance":"80",
-            "Benefits":"20",
-            "Job Security":"60",
-            "Management":"60",
-            "Culture":"60",
-            "Former Employee":"Current ",
-            "Location":" – North East, PA –",
-            "Date":"July 28 2017",
-            "Review":"The HIT's are plentiful and fairly easy. They do not pay very well, but the convenience of being able to make a few extra dollars from home for very little of your time is nice. However, this is not a full or even part-time sustainable job. Just a nice little way of making a few extra dollars a day if you are a go-getter such as myself.",
-            "Pros":[
->>>>>>> SP18
                 "Work from home"
             ],
-            "Cons":[
+            "Cons": [
                 "Does not compensate well"
             ]
         },
-<<<<<<< HEAD
         "135": {
-            "Rating": "2",
             "Worklife Balance": "20",
             "Benefits": "20",
             "Job Security": "20",
@@ -401,29 +216,13 @@
             "Date": "July 27 2017",
             "Review": "Amazon Mechanical Turk is a very slow, extremely boring way to make money. You make 20-75 cents an hour. I only recommend this cite to desperate people.",
             "Pros": [
-=======
-        "135":{
-            "Rating":"1",
-            "Worklife Balance":"20",
-            "Benefits":"20",
-            "Job Security":"20",
-            "Management":"80",
-            "Culture":"20",
-            "Former Employee":"Current ",
-            "Location":" – Brooklyn, NY –",
-            "Date":"July 27 2017",
-            "Review":"Amazon Mechanical Turk is a very slow, extremely boring way to make money. You make 20-75 cents an hour. I only recommend this cite to desperate people.",
-            "Pros":[
->>>>>>> SP18
                 "You make some kind of money."
             ],
-            "Cons":[
+            "Cons": [
                 "You barely make any progress."
             ]
         },
-<<<<<<< HEAD
         "147": {
-            "Rating": "3",
             "Worklife Balance": "100",
             "Benefits": "100",
             "Job Security": "100",
@@ -435,7 +234,6 @@
             "Review": "Very convenient and pleasant work environment. Great work from home opportunities. Must be willing to put in the work to earn qualifications and advance."
         },
         "157": {
-            "Rating": "4",
             "Worklife Balance": "100",
             "Benefits": "60",
             "Job Security": "60",
@@ -446,41 +244,13 @@
             "Date": "May 30 2017",
             "Review": "Amazon Mechanical Turk has been helpful in having some legit extra cash coming in. There are so many scam websites and some take a  long time to cashout. With Mechanical Turk, they do pay right away and there is usually something to do, to earn.",
             "Pros": [
-=======
-        "147":{
-            "Rating":"5",
-            "Worklife Balance":"100",
-            "Benefits":"100",
-            "Job Security":"100",
-            "Management":"100",
-            "Culture":"100",
-            "Former Employee":"Current ",
-            "Location":" – Home Based –",
-            "Date":"June 14 2017",
-            "Review":"Very convenient and pleasant work environment. Great work from home opportunities. Must be willing to put in the work to earn qualifications and advance."
-        },
-        "157":{
-            "Rating":"4",
-            "Worklife Balance":"100",
-            "Benefits":"60",
-            "Job Security":"60",
-            "Management":"60",
-            "Culture":"100",
-            "Former Employee":"Current ",
-            "Location":" – At home. –",
-            "Date":"May 30 2017",
-            "Review":"Amazon Mechanical Turk has been helpful in having some legit extra cash coming in. There are so many scam websites and some take a long time to cashout. With Mechanical Turk, they do pay right away and there is usually something to do, to earn.",
-            "Pros":[
->>>>>>> SP18
                 "Is 24 X 7 and they pay reliably."
             ],
-            "Cons":[
+            "Cons": [
                 "None."
             ]
         },
-<<<<<<< HEAD
         "169": {
-            "Rating": "2",
             "Worklife Balance": "60",
             "Benefits": "20",
             "Job Security": "20",
@@ -491,29 +261,13 @@
             "Date": "May 24 2017",
             "Review": "Great for a little extra income for stay at home moms/dads. During the summer work is slower since college is out and more people use this for income.",
             "Pros": [
-=======
-        "169":{
-            "Rating":"5",
-            "Worklife Balance":"60",
-            "Benefits":"20",
-            "Job Security":"20",
-            "Management":"20",
-            "Culture":"80",
-            "Former Employee":"Current ",
-            "Location":" – Alton, IL –",
-            "Date":"May 24 2017",
-            "Review":"Great for a little extra income for stay at home moms\/dads. During the summer work is slower since college is out and more people use this for income.",
-            "Pros":[
->>>>>>> SP18
                 "Work whenever you want."
             ],
-            "Cons":[
+            "Cons": [
                 "Inconsistent pay."
             ]
         },
-<<<<<<< HEAD
         "181": {
-            "Rating": "2",
             "Worklife Balance": "60",
             "Benefits": "40",
             "Job Security": "40",
@@ -525,7 +279,6 @@
             "Review": "Was a great way to instantly get work from home. Setup an account and was able to get to work. There&#39;s thousands of small job listings each day that you can pick and choose from. No boss. No face to face customer support. Carried a ton of perks with working from home with the flexibility along with the downsides of inconstant earnings from month to month."
         },
         "191": {
-            "Rating": "5",
             "Worklife Balance": "0",
             "Benefits": "0",
             "Job Security": "0",
@@ -537,7 +290,6 @@
             "Review": "Work at your own pace, there more you put in the more money you can make. Some days it can be slow so you must have some other form of income. Remember to save enough for taxes at the end of the year."
         },
         "201": {
-            "Rating": "5",
             "Worklife Balance": "100",
             "Benefits": "20",
             "Job Security": "20",
@@ -548,53 +300,13 @@
             "Date": "December 21 2016",
             "Review": "you work from home, you choose what tasks you want, if you qualify, and can be easy supplement income. you don&#39;t have a schedule, you work when you want. you have no boss, or coworkers.",
             "Pros": [
-=======
-        "181":{
-            "Rating":"3",
-            "Worklife Balance":"60",
-            "Benefits":"40",
-            "Job Security":"40",
-            "Management":"80",
-            "Culture":"60",
-            "Former Employee":"Former ",
-            "Location":" – Home –",
-            "Date":"March 16 2017",
-            "Review":"Was a great way to instantly get work from home. Setup an account and was able to get to work. There's thousands of small job listings each day that you can pick and choose from. No boss. No face to face customer support. Carried a ton of perks with working from home with the flexibility along with the downsides of inconstant earnings from month to month."
-        },
-        "191":{
-            "Rating":"5",
-            "Worklife Balance":"0",
-            "Benefits":"0",
-            "Job Security":"0",
-            "Management":"0",
-            "Culture":"0",
-            "Former Employee":"Current ",
-            "Location":" – Seattle, WA –",
-            "Date":"March 16 2017",
-            "Review":"Work at your own pace, there more you put in the more money you can make. Some days it can be slow so you must have some other form of income. Remember to save enough for taxes at the end of the year."
-        },
-        "201":{
-            "Rating":"5",
-            "Worklife Balance":"100",
-            "Benefits":"20",
-            "Job Security":"20",
-            "Management":"20",
-            "Culture":"20",
-            "Former Employee":"Current ",
-            "Location":" – work fro home –",
-            "Date":"December 21 2016",
-            "Review":"you work from home, you choose what tasks you want, if you qualify, and can be easy supplement income. you don't have a schedule, you work when you want. you have no boss, or coworkers.",
-            "Pros":[
->>>>>>> SP18
                 "you get your money immediately"
             ],
-            "Cons":[
+            "Cons": [
                 "some tasks are too hard to qualify for"
             ]
         },
-<<<<<<< HEAD
         "213": {
-            "Rating": "5",
             "Worklife Balance": "100",
             "Benefits": "100",
             "Job Security": "60",
@@ -605,30 +317,14 @@
             "Date": "August 18 2016",
             "Review": "The job is perfect for a little extra cash, or to supplement your paycheck. I like that I can chose the kind of work I do and shake it up to do different things at times.",
             "Pros": [
-=======
-        "213":{
-            "Rating":"5",
-            "Worklife Balance":"100",
-            "Benefits":"100",
-            "Job Security":"60",
-            "Management":"100",
-            "Culture":"100",
-            "Former Employee":"Current ",
-            "Location":" – Woodbine, GA –",
-            "Date":"August 18 2016",
-            "Review":"The job is perfect for a little extra cash, or to supplement your paycheck. I like that I can chose the kind of work I do and shake it up to do different things at times.",
-            "Pros":[
->>>>>>> SP18
                 "Work at Home",
                 "Work=pay"
             ],
-            "Cons":[
+            "Cons": [
                 "No guaranteed money. Competing with others for the same jobs."
             ]
         },
-<<<<<<< HEAD
         "225": {
-            "Rating": "3",
             "Worklife Balance": "80",
             "Benefits": "60",
             "Job Security": "20",
@@ -642,7 +338,6 @@
     },
     "Fiverr": {
         "235": {
-            "Rating": "4",
             "Worklife Balance": "100",
             "Benefits": "80",
             "Job Security": "80",
@@ -654,7 +349,6 @@
             "Review": "Low barrier to get your first freelancing gig as compared to other professional freelancing websites. Good income per month as one starts to earn reputation doing gigs on Fiverr."
         },
         "245": {
-            "Rating": "4",
             "Worklife Balance": "80",
             "Benefits": "60",
             "Job Security": "60",
@@ -666,7 +360,6 @@
             "Review": "You get the projects thats good but you dont get the projects that sucks if someone will go for only fiverr as his/her earning one day the projects will not be given and he she would have no else where to earn money"
         },
         "255": {
-            "Rating": "4",
             "Worklife Balance": "80",
             "Benefits": "80",
             "Job Security": "80",
@@ -677,67 +370,13 @@
             "Date": "December 17 2017",
             "Review": "Fiverr is a work for hire so you get what you give. I love the hustle of looking for people that need use of my abilities and it&#39;s fun to be creative/innovative.",
             "Pros": [
-=======
-        "225":{
-            "Rating":"3",
-            "Worklife Balance":"80",
-            "Benefits":"60",
-            "Job Security":"20",
-            "Management":"20",
-            "Culture":"60",
-            "Former Employee":"Current ",
-            "Location":" – Online –",
-            "Date":"November 11 2015",
-            "Review":"A microtasking environment can not be easily rated. It has both benefits and negatives. Being in control of my own time and schedule was the best aspect. Inconsistent posting of work was the biggest negative."
-        }
-    },
-    "Fiverr":{
-        "235":{
-            "Rating":"5",
-            "Worklife Balance":"100",
-            "Benefits":"80",
-            "Job Security":"80",
-            "Management":"80",
-            "Culture":"80",
-            "Former Employee":"Former ",
-            "Location":" – Remote –",
-            "Date":"December 20 2017",
-            "Review":"Low barrier to get your first freelancing gig as compared to other professional freelancing websites. Good income per month as one starts to earn reputation doing gigs on Fiverr."
-        },
-        "245":{
-            "Rating":"3",
-            "Worklife Balance":"80",
-            "Benefits":"60",
-            "Job Security":"60",
-            "Management":"100",
-            "Culture":"40",
-            "Former Employee":"Current ",
-            "Location":" – pakisan –",
-            "Date":"December 29 2017",
-            "Review":"You get the projects thats good but you dont get the projects that sucks if someone will go for only fiverr as his\/her earning one day the projects will not be given and he she would have no else where to earn money"
-        },
-        "255":{
-            "Rating":"4",
-            "Worklife Balance":"80",
-            "Benefits":"80",
-            "Job Security":"80",
-            "Management":"60",
-            "Culture":"60",
-            "Former Employee":"Current ",
-            "Location":" – Campbell Hall, NY –",
-            "Date":"December 17 2017",
-            "Review":"Fiverr is a work for hire so you get what you give. I love the hustle of looking for people that need use of my abilities and it's fun to be creative\/innovative.",
-            "Pros":[
->>>>>>> SP18
                 "Unlimited work time"
             ],
-            "Cons":[
+            "Cons": [
                 "Surcharges"
             ]
         },
-<<<<<<< HEAD
         "267": {
-            "Rating": "2",
             "Worklife Balance": "80",
             "Benefits": "20",
             "Job Security": "60",
@@ -749,7 +388,6 @@
             "Review": "I would say that fiverr is a freelancing site and there are no special benefits. If you do not meet a target, you could get no or little chance of success or earnings."
         },
         "277": {
-            "Rating": "1",
             "Worklife Balance": "60",
             "Benefits": "60",
             "Job Security": "40",
@@ -760,42 +398,14 @@
             "Date": "November 7 2017",
             "Review": "Fiverr is a great place for beginning entrepreneurs, but not for a full time job. My work consisted of only digital artwork and photo editing, so my days working were spent in front of a computer. My clients would message me, describing what they wanted and I would ask them any questions about details that I had. I needed to be very thorough with them in order to get the artwork as close to perfect as I I could. Many of my clients were extremely ",
             "Pros": [
-=======
-        "267":{
-            "Rating":"3",
-            "Worklife Balance":"80",
-            "Benefits":"20",
-            "Job Security":"60",
-            "Management":"80",
-            "Culture":"40",
-            "Former Employee":"Current ",
-            "Location":" – Freelancing –",
-            "Date":"November 14 2017",
-            "Review":"I would say that fiverr is a freelancing site and there are no special benefits. If you do not meet a target, you could get no or little chance of success or earnings."
-        },
-        "277":{
-            "Rating":"5",
-            "Worklife Balance":"60",
-            "Benefits":"60",
-            "Job Security":"40",
-            "Management":"60",
-            "Culture":"100",
-            "Former Employee":"Former ",
-            "Location":" – El Paso, TX –",
-            "Date":"November 7 2017",
-            "Review":"Fiverr is a great place for beginning entrepreneurs, but not for a full time job. My work consisted of only digital artwork and photo editing, so my days working were spent in front of a computer. My clients would message me, describing what they wanted and I would ask them any questions about details that I had. I needed to be very thorough with them in order to get the artwork as close to perfect as I I could. Many of my clients were extremely ",
-            "Pros":[
->>>>>>> SP18
                 "Great clients"
             ],
-            "Cons":[
+            "Cons": [
                 "Long hours",
                 "little pay"
             ]
         },
-<<<<<<< HEAD
         "289": {
-            "Rating": "1",
             "Worklife Balance": "40",
             "Benefits": "40",
             "Job Security": "40",
@@ -807,7 +417,6 @@
             "Review": "It&#39;s a platform for skill-based service seller.It&#39;s a good opportunity for most of the service provider.It&#39;s very competitive and it&#39;s cheap and fake service provider are available."
         },
         "299": {
-            "Rating": "1",
             "Worklife Balance": "100",
             "Benefits": "100",
             "Job Security": "100",
@@ -819,7 +428,6 @@
             "Review": "Fiverr provides freelancers for the tools necessary for finding and providing specialized products and services for clients. It is a very beneficial platform for freelancers to work off of."
         },
         "309": {
-            "Rating": "2",
             "Worklife Balance": "100",
             "Benefits": "100",
             "Job Security": "100",
@@ -830,53 +438,13 @@
             "Date": "September 10 2017",
             "Review": "A fun and professional experience, which helped me to increase my professionalism and the freelancer industry, and improve my artistic skills, and understand customers.",
             "Pros": [
-=======
-        "289":{
-            "Rating":"2",
-            "Worklife Balance":"40",
-            "Benefits":"40",
-            "Job Security":"40",
-            "Management":"40",
-            "Culture":"40",
-            "Former Employee":"Current ",
-            "Location":" – Online –",
-            "Date":"October 28 2017",
-            "Review":"It's a platform for skill-based service seller.It's a good opportunity for most of the service provider.It's very competitive and it's cheap and fake service provider are available."
-        },
-        "299":{
-            "Rating":"5",
-            "Worklife Balance":"100",
-            "Benefits":"100",
-            "Job Security":"100",
-            "Management":"100",
-            "Culture":"100",
-            "Former Employee":"Former ",
-            "Location":" – Virginia –",
-            "Date":"October 9 2017",
-            "Review":"Fiverr provides freelancers for the tools necessary for finding and providing specialized products and services for clients. It is a very beneficial platform for freelancers to work off of."
-        },
-        "309":{
-            "Rating":"5",
-            "Worklife Balance":"100",
-            "Benefits":"100",
-            "Job Security":"100",
-            "Management":"100",
-            "Culture":"100",
-            "Former Employee":"Former ",
-            "Location":" – Los Angeles, CA –",
-            "Date":"September 10 2017",
-            "Review":"A fun and professional experience, which helped me to increase my professionalism and the freelancer industry, and improve my artistic skills, and understand customers.",
-            "Pros":[
->>>>>>> SP18
                 "Work at home"
             ],
-            "Cons":[
+            "Cons": [
                 "A lot of competition"
             ]
         },
-<<<<<<< HEAD
         "321": {
-            "Rating": "3",
             "Worklife Balance": "100",
             "Benefits": "100",
             "Job Security": "100",
@@ -887,30 +455,14 @@
             "Date": "August 21 2017",
             "Review": "Every day is a new adventure for me with new clients.The hardest part is when you get too much orders and you should end them till the end of the day.The most enjoyable is when the clients are satisfied.",
             "Pros": [
-=======
-        "321":{
-            "Rating":"5",
-            "Worklife Balance":"100",
-            "Benefits":"100",
-            "Job Security":"100",
-            "Management":"100",
-            "Culture":"100",
-            "Former Employee":"Current ",
-            "Location":" – Ruse –",
-            "Date":"August 21 2017",
-            "Review":"Every day is a new adventure for me with new clients.The hardest part is when you get too much orders and you should end them till the end of the day.The most enjoyable is when the clients are satisfied.",
-            "Pros":[
->>>>>>> SP18
                 "freelance",
                 "good experience"
             ],
-            "Cons":[
+            "Cons": [
                 "small profit"
             ]
         },
-<<<<<<< HEAD
         "333": {
-            "Rating": "5",
             "Worklife Balance": "80",
             "Benefits": "80",
             "Job Security": "80",
@@ -922,7 +474,6 @@
             "Review": "Gives you an opportunity to work from home.Fiverr is a global online marketplace offering tasks and services, beginning at a cost of $5 per job performed, from which it gets its name. The site is primarily used by freelancers who use Fiverr to offer services to customers worldwide.[2] Currently, Fiverr lists more than three million services on the site that range between $5 and $500."
         },
         "343": {
-            "Rating": "4",
             "Worklife Balance": "100",
             "Benefits": "100",
             "Job Security": "100",
@@ -934,7 +485,6 @@
             "Review": "You get to meet great new people as you find new opportunities and just a great experience to have and get your negotiation skills from working with people there is great"
         },
         "353": {
-            "Rating": "3",
             "Worklife Balance": "80",
             "Benefits": "80",
             "Job Security": "80",
@@ -946,7 +496,6 @@
             "Review": "Since this is a freelance work, it helps me to gain extra money without leaving my house. Was able to meet different race of people and learned how to deal with them, and also how to adjust on their timeline."
         },
         "363": {
-            "Rating": "2",
             "Worklife Balance": "100",
             "Benefits": "40",
             "Job Security": "40",
@@ -964,7 +513,6 @@
             ]
         },
         "375": {
-            "Rating": "3",
             "Worklife Balance": "100",
             "Benefits": "80",
             "Job Security": "60",
@@ -975,83 +523,13 @@
             "Date": "June 6 2017",
             "Review": "I am a go- getter, and I would work for Fiverr again, as a side gig. I like the competitive environment, although if I were to do another gig for them I would consider their promotion options.",
             "Pros": [
-=======
-        "333":{
-            "Rating":"4",
-            "Worklife Balance":"80",
-            "Benefits":"80",
-            "Job Security":"80",
-            "Management":"80",
-            "Culture":"80",
-            "Former Employee":"Current ",
-            "Location":" – Online –",
-            "Date":"July 29 2017",
-            "Review":"Gives you an opportunity to work from home.Fiverr is a global online marketplace offering tasks and services, beginning at a cost of $5 per job performed, from which it gets its name. The site is primarily used by freelancers who use Fiverr to offer services to customers worldwide.[2] Currently, Fiverr lists more than three million services on the site that range between $5 and $500."
-        },
-        "343":{
-            "Rating":"5",
-            "Worklife Balance":"100",
-            "Benefits":"100",
-            "Job Security":"100",
-            "Management":"100",
-            "Culture":"100",
-            "Former Employee":"Former ",
-            "Location":" – Dallas, TX –",
-            "Date":"July 20 2017",
-            "Review":"You get to meet great new people as you find new opportunities and just a great experience to have and get your negotiation skills from working with people there is great"
-        },
-        "353":{
-            "Rating":"4",
-            "Worklife Balance":"80",
-            "Benefits":"80",
-            "Job Security":"80",
-            "Management":"80",
-            "Culture":"60",
-            "Former Employee":"Former ",
-            "Location":" – US Based company –",
-            "Date":"June 21 2017",
-            "Review":"Since this is a freelance work, it helps me to gain extra money without leaving my house. Was able to meet different race of people and learned how to deal with them, and also how to adjust on their timeline."
-        },
-        "363":{
-            "Rating":"5",
-            "Worklife Balance":"100",
-            "Benefits":"40",
-            "Job Security":"40",
-            "Management":"100",
-            "Culture":"100",
-            "Former Employee":"Current ",
-            "Location":" – online –",
-            "Date":"June 19 2017",
-            "Review":"Working in fiverr was really awesome because of my passion in producing music. I don't have to worry about the schedule because you can do your job anytime you want, anytime that you have a customer and you can even manipulate the price of the product, depending on the client's needs.",
-            "Pros":[
-                "Be able to work anytime you want"
-            ],
-            "Cons":[
-                "Clients aren't very often"
-            ]
-        },
-        "375":{
-            "Rating":"4",
-            "Worklife Balance":"100",
-            "Benefits":"80",
-            "Job Security":"60",
-            "Management":"80",
-            "Culture":"80",
-            "Former Employee":"Current ",
-            "Location":" – USA –",
-            "Date":"June 6 2017",
-            "Review":"I am a go- getter, and I would work for Fiverr again, as a side gig. I like the competitive environment, although if I were to do another gig for them I would consider their promotion options.",
-            "Pros":[
->>>>>>> SP18
                 "Set your own pay."
             ],
-            "Cons":[
+            "Cons": [
                 "0"
             ]
         },
-<<<<<<< HEAD
         "387": {
-            "Rating": "1",
             "Worklife Balance": "60",
             "Benefits": "40",
             "Job Security": "20",
@@ -1063,7 +541,6 @@
             "Review": "Freelance didn&#39;t work out for me. Hard to find real work and good pay. The whole Fiverr model is messed up, at least when I was there. Asking for essentially $3 for 500 words after fees is ridiculous"
         },
         "397": {
-            "Rating": "1",
             "Worklife Balance": "80",
             "Benefits": "80",
             "Job Security": "100",
@@ -1075,7 +552,6 @@
             "Review": "I am a professional writer with a passion for extensive writing. I have over 7years experience in helping companies and firms write highly SEO article"
         },
         "407": {
-            "Rating": "1",
             "Worklife Balance": "100",
             "Benefits": "20",
             "Job Security": "20",
@@ -1087,7 +563,6 @@
             "Review": "This is not a job for advancement but more a job for earning some cash on the side. It can be turned into a full-time job but would take great effort. There are many options of work to choose from"
         },
         "417": {
-            "Rating": "1",
             "Worklife Balance": "100",
             "Benefits": "60",
             "Job Security": "60",
@@ -1099,7 +574,6 @@
             "Review": "The freedom Fiverr gives you is really phenomenal. You can sell literally any services you would like, for whatever price you choose. The rating and review system is well thought out and implemented. Overall, a fantastic option for anyone with a desire to freelance"
         },
         "427": {
-            "Rating": "5",
             "Worklife Balance": "100",
             "Benefits": "100",
             "Job Security": "100",
@@ -1111,7 +585,6 @@
             "Review": "awesome experience...good platform to show your skills and earn money...nice experience...it was simply awesome to work with them...one could earn as much as one wanted,without nay limitations..."
         },
         "437": {
-            "Rating": "5",
             "Worklife Balance": "100",
             "Benefits": "100",
             "Job Security": "100",
@@ -1126,7 +599,6 @@
             ]
         },
         "448": {
-            "Rating": "5",
             "Worklife Balance": "100",
             "Benefits": "100",
             "Job Security": "100",
@@ -1137,106 +609,15 @@
             "Date": "October 3 2016",
             "Review": "working with fiverr always a great time to spend working with fiverr customer and providing them satisfactions from my work.",
             "Pros": [
-=======
-        "387":{
-            "Rating":"2",
-            "Worklife Balance":"60",
-            "Benefits":"40",
-            "Job Security":"20",
-            "Management":"20",
-            "Culture":"20",
-            "Former Employee":"Former ",
-            "Location":" – online –",
-            "Date":"June 6 2017",
-            "Review":"Freelance didn't work out for me. Hard to find real work and good pay. The whole Fiverr model is messed up, at least when I was there. Asking for essentially $3 for 500 words after fees is ridiculous"
-        },
-        "397":{
-            "Rating":"5",
-            "Worklife Balance":"80",
-            "Benefits":"80",
-            "Job Security":"100",
-            "Management":"100",
-            "Culture":"80",
-            "Former Employee":"Former ",
-            "Location":" – New York, NY –",
-            "Date":"April 22 2017",
-            "Review":"I am a professional writer with a passion for extensive writing. I have over 7years experience in helping companies and firms write highly SEO article"
-        },
-        "407":{
-            "Rating":"5",
-            "Worklife Balance":"100",
-            "Benefits":"20",
-            "Job Security":"20",
-            "Management":"20",
-            "Culture":"60",
-            "Former Employee":"Former ",
-            "Location":" – online –",
-            "Date":"February 8 2017",
-            "Review":"This is not a job for advancement but more a job for earning some cash on the side. It can be turned into a full-time job but would take great effort. There are many options of work to choose from"
-        },
-        "417":{
-            "Rating":"5",
-            "Worklife Balance":"100",
-            "Benefits":"60",
-            "Job Security":"60",
-            "Management":"60",
-            "Culture":"60",
-            "Former Employee":"Current ",
-            "Location":" – Utah –",
-            "Date":"December 19 2016",
-            "Review":"The freedom Fiverr gives you is really phenomenal. You can sell literally any services you would like, for whatever price you choose. The rating and review system is well thought out and implemented. Overall, a fantastic option for anyone with a desire to freelance"
-        },
-        "427":{
-            "Rating":"5",
-            "Worklife Balance":"100",
-            "Benefits":"100",
-            "Job Security":"100",
-            "Management":"100",
-            "Culture":"100",
-            "Former Employee":"Former ",
-            "Location":" – united states of america –",
-            "Date":"December 15 2016",
-            "Review":"awesome experience...good platform to show your skills and earn money...nice experience...it was simply awesome to work with them...one could earn as much as one wanted,without nay limitations..."
-        },
-        "437":{
-            "Rating":"5",
-            "Worklife Balance":"100",
-            "Benefits":"100",
-            "Job Security":"100",
-            "Management":"100",
-            "Culture":"100",
-            "Former Employee":"Current ",
-            "Location":" – Work at Home –",
-            "Date":"December 10 2016",
-            "Review":"Free working time",
-            "Pros":[
-                "decide your own working time)Work from the comfort of homeDecide you payBuilds commitment towards job completionHelps starters develop a good attitude to career building"
-            ]
-        },
-        "448":{
-            "Rating":"5",
-            "Worklife Balance":"100",
-            "Benefits":"100",
-            "Job Security":"100",
-            "Management":"100",
-            "Culture":"100",
-            "Former Employee":"Current ",
-            "Location":" – Work at Home –",
-            "Date":"October 3 2016",
-            "Review":"working with fiverr always a great time to spend working with fiverr customer and providing them satisfactions from my work.",
-            "Pros":[
->>>>>>> SP18
                 "good platform"
             ],
-            "Cons":[
+            "Cons": [
                 "good platform"
             ]
         }
     },
-<<<<<<< HEAD
     "Upwork": {
         "460": {
-            "Rating": "5",
             "Worklife Balance": "100",
             "Benefits": "100",
             "Job Security": "100",
@@ -1248,7 +629,6 @@
             "Review": "Typical day work is everyday and I work 40+ hours per week and The management system of Upwork is awesome there is no problem with money security and all the clients of upwork are honest and helpful and I always like to work with different clients come from different parts of the world."
         },
         "470": {
-            "Rating": "2",
             "Worklife Balance": "80",
             "Benefits": "80",
             "Job Security": "80",
@@ -1260,7 +640,6 @@
             "Review": "It was my first online job so I enjoyed it very much. It is a good and reliable platform for the beginners. I will enjoy working in upwork as a full-time worker in near future."
         },
         "480": {
-            "Rating": "2",
             "Worklife Balance": "100",
             "Benefits": "80",
             "Job Security": "60",
@@ -1271,52 +650,11 @@
             "Date": " &ndash;  Santa Clara County, CA &ndash;",
             "Review": "January 8 2018",
             "Pros": [
-=======
-    "Upwork":{
-        "460":{
-            "Rating":"5",
-            "Worklife Balance":"100",
-            "Benefits":"100",
-            "Job Security":"100",
-            "Management":"100",
-            "Culture":"100",
-            "Former Employee":"Current ",
-            "Location":" – San Francisco, CA –",
-            "Date":"June 10 2016",
-            "Review":"Typical day work is everyday and I work 40+ hours per week and The management system of Upwork is awesome there is no problem with money security and all the clients of upwork are honest and helpful and I always like to work with different clients come from different parts of the world."
-        },
-        "470":{
-            "Rating":"4",
-            "Worklife Balance":"80",
-            "Benefits":"80",
-            "Job Security":"80",
-            "Management":"80",
-            "Culture":"80",
-            "Former Employee":"Current ",
-            "Location":" – United States –",
-            "Date":"January 10 2018",
-            "Review":"It was my first online job so I enjoyed it very much. It is a good and reliable platform for the beginners. I will enjoy working in upwork as a full-time worker in near future."
-        },
-        "480":{
-            "Rating":"5",
-            "Worklife Balance":"100",
-            "Benefits":"80",
-            "Job Security":"60",
-            "Management":"60",
-            "Culture":"60",
-            "Former Employee":"Virtual Store Management) ",
-            "Location":"Former ",
-            "Date":" – Santa Clara County, CA –",
-            "Review":"January 8 2018",
-            "Pros":[
->>>>>>> SP18
                 "Your opportunity to earn more is unlimited but the job security is very low since it was freelancing. Your client can cancel your contract anytime",
                 "but the Upwork customer service are always there to help you."
             ]
         },
-<<<<<<< HEAD
         "491": {
-            "Rating": "2",
             "Worklife Balance": "100",
             "Benefits": "60",
             "Job Security": "60",
@@ -1327,30 +665,14 @@
             "Date": "January 6 2018",
             "Review": "I would recommend Upwork for someone who wants convenience ",
             "Pros": [
-=======
-        "491":{
-            "Rating":"4",
-            "Worklife Balance":"100",
-            "Benefits":"60",
-            "Job Security":"60",
-            "Management":"80",
-            "Culture":"80",
-            "Former Employee":"Current ",
-            "Location":" – Melbourne, FL –",
-            "Date":"January 6 2018",
-            "Review":"I would recommend Upwork for someone who wants convenience ",
-            "Pros":[
->>>>>>> SP18
                 "home-based)",
                 "flexible "
             ],
-            "Cons":[
+            "Cons": [
                 "set your availability) and stress-free "
             ]
         },
-<<<<<<< HEAD
         "503": {
-            "Rating": "5",
             "Worklife Balance": "0",
             "Benefits": "0",
             "Job Security": "0",
@@ -1362,7 +684,6 @@
             "Review": "It is very helpful and easy to use. It assists you in connecting with the people you need to. I enjoy being able to set my own hours and desired salvery."
         },
         "513": {
-            "Rating": "1",
             "Worklife Balance": "100",
             "Benefits": "100",
             "Job Security": "100",
@@ -1374,7 +695,6 @@
             "Review": "It is cool to work flexible as a freelancer, you can do what you want, you are the boss, but in my opinion it is better to work in the company to learn faster."
         },
         "523": {
-            "Rating": "4",
             "Worklife Balance": "100",
             "Benefits": "20",
             "Job Security": "60",
@@ -1385,53 +705,13 @@
             "Date": "January 4 2018",
             "Review": "Upwork is an online work site that allows you to freelance.  I like the jobs offered and the ease as which to apply.  Sometimes, though, I can go weeks without a contract.",
             "Pros": [
-=======
-        "503":{
-            "Rating":"5",
-            "Worklife Balance":"0",
-            "Benefits":"0",
-            "Job Security":"0",
-            "Management":"0",
-            "Culture":"0",
-            "Former Employee":"Current ",
-            "Location":" – Brentwood, CA –",
-            "Date":"January 5 2018",
-            "Review":"It is very helpful and easy to use. It assists you in connecting with the people you need to. I enjoy being able to set my own hours and desired salvery."
-        },
-        "513":{
-            "Rating":"5",
-            "Worklife Balance":"100",
-            "Benefits":"100",
-            "Job Security":"100",
-            "Management":"100",
-            "Culture":"100",
-            "Former Employee":"Former ",
-            "Location":" – Remote –",
-            "Date":"January 4 2018",
-            "Review":"It is cool to work flexible as a freelancer, you can do what you want, you are the boss, but in my opinion it is better to work in the company to learn faster."
-        },
-        "523":{
-            "Rating":"5",
-            "Worklife Balance":"100",
-            "Benefits":"20",
-            "Job Security":"60",
-            "Management":"80",
-            "Culture":"100",
-            "Former Employee":"Former ",
-            "Location":" – Wichita, KS –",
-            "Date":"January 4 2018",
-            "Review":"Upwork is an online work site that allows you to freelance. I like the jobs offered and the ease as which to apply. Sometimes, though, I can go weeks without a contract.",
-            "Pros":[
->>>>>>> SP18
                 "At-Work Home Environment"
             ],
-            "Cons":[
+            "Cons": [
                 "Competitive Job Applications"
             ]
         },
-<<<<<<< HEAD
         "535": {
-            "Rating": "4",
             "Worklife Balance": "100",
             "Benefits": "20",
             "Job Security": "100",
@@ -1442,30 +722,14 @@
             "Date": "December 27 2017",
             "Review": "Working from home, Waiting for a client to choose if they want to work with you makes you pretty anxious but, it&#39;s worth it. definitely a job for those who want something to do in their spare time",
             "Pros": [
-=======
-        "535":{
-            "Rating":"5",
-            "Worklife Balance":"100",
-            "Benefits":"20",
-            "Job Security":"100",
-            "Management":"100",
-            "Culture":"100",
-            "Former Employee":"Current ",
-            "Location":" – New York, NY –",
-            "Date":"December 27 2017",
-            "Review":"Working from home, Waiting for a client to choose if they want to work with you makes you pretty anxious but, it's worth it. definitely a job for those who want something to do in their spare time",
-            "Pros":[
->>>>>>> SP18
                 "Pay",
                 "Get to do what you love to do"
             ],
-            "Cons":[
+            "Cons": [
                 "clients can be pushy"
             ]
         },
-<<<<<<< HEAD
         "547": {
-            "Rating": "3",
             "Worklife Balance": "100",
             "Benefits": "100",
             "Job Security": "100",
@@ -1476,29 +740,13 @@
             "Date": "December 26 2017",
             "Review": "Provides good platform in acquiring online jobs that will support the employee and its family. I have learned a lot of new things most especially in Graphic Designing where I have molded my talent in such platform.",
             "Pros": [
-=======
-        "547":{
-            "Rating":"5",
-            "Worklife Balance":"100",
-            "Benefits":"100",
-            "Job Security":"100",
-            "Management":"100",
-            "Culture":"100",
-            "Former Employee":"Current ",
-            "Location":" – Online –",
-            "Date":"December 26 2017",
-            "Review":"Provides good platform in acquiring online jobs that will support the employee and its family. I have learned a lot of new things most especially in Graphic Designing where I have molded my talent in such platform.",
-            "Pros":[
->>>>>>> SP18
                 "Good Pay Rate"
             ],
-            "Cons":[
+            "Cons": [
                 "Limited Connects"
             ]
         },
-<<<<<<< HEAD
         "559": {
-            "Rating": "1",
             "Worklife Balance": "80",
             "Benefits": "80",
             "Job Security": "80",
@@ -1513,7 +761,6 @@
             ]
         },
         "570": {
-            "Rating": "3",
             "Worklife Balance": "80",
             "Benefits": "80",
             "Job Security": "80",
@@ -1524,44 +771,13 @@
             "Date": "December 14 2017",
             "Review": "0",
             "Pros": [
-=======
-        "559":{
-            "Rating":"4",
-            "Worklife Balance":"80",
-            "Benefits":"80",
-            "Job Security":"80",
-            "Management":"80",
-            "Culture":"80",
-            "Former Employee":"Current ",
-            "Location":" – Bridgeport, CT –",
-            "Date":"December 22 2017",
-            "Review":"As a side job, it was very good. When I had down time, I would pick up a job and keep myself busy on another task\/job. The clients I worked with were very good to, they knew exactly what they wanted.",
-            "Pros":[
-                "Unless you are constantly working\/applying your account goes private"
-            ]
-        },
-        "570":{
-            "Rating":"4",
-            "Worklife Balance":"80",
-            "Benefits":"80",
-            "Job Security":"80",
-            "Management":"0",
-            "Culture":"80",
-            "Former Employee":"Former ",
-            "Location":" – Santa Ana, CA –",
-            "Date":"December 14 2017",
-            "Review":"0",
-            "Pros":[
->>>>>>> SP18
                 "can get a real job"
             ],
-            "Cons":[
+            "Cons": [
                 "too high a percentage"
             ]
         },
-<<<<<<< HEAD
         "582": {
-            "Rating": "5",
             "Worklife Balance": "100",
             "Benefits": "20",
             "Job Security": "40",
@@ -1572,29 +788,13 @@
             "Date": "December 1 2017",
             "Review": "Fair enough.Worklifebalancesecured paymentwith options to withdraw or continue contract or projectcan work flexibleno boss physicallygreat fr those who have regular jobs",
             "Pros": [
-=======
-        "582":{
-            "Rating":"5",
-            "Worklife Balance":"100",
-            "Benefits":"20",
-            "Job Security":"40",
-            "Management":"100",
-            "Culture":"60",
-            "Former Employee":"Current ",
-            "Location":" – TX UK –",
-            "Date":"December 1 2017",
-            "Review":"Fair enough.Worklifebalancesecured paymentwith options to withdraw or continue contract or projectcan work flexibleno boss physicallygreat fr those who have regular jobs",
-            "Pros":[
->>>>>>> SP18
                 "Part time homebased"
             ],
-            "Cons":[
+            "Cons": [
                 "Fees are too high"
             ]
         },
-<<<<<<< HEAD
         "594": {
-            "Rating": "1",
             "Worklife Balance": "100",
             "Benefits": "20",
             "Job Security": "20",
@@ -1606,7 +806,6 @@
             "Review": "Upwork is a freelance organization that allows you to pick your own hours. It is very helpful for freelancers but it is also extremely competitive. It is tough to find clients at first but the more quality work you complete the better business gets."
         },
         "604": {
-            "Rating": "4",
             "Worklife Balance": "100",
             "Benefits": "100",
             "Job Security": "100",
@@ -1618,7 +817,6 @@
             "Review": "I am very happy to work with Upwork.com. Upwork is the very good marketplace. Their clients are very good and friendly behaviors. Upwork payment system also very good. I am appreciated."
         },
         "614": {
-            "Rating": "1",
             "Worklife Balance": "80",
             "Benefits": "80",
             "Job Security": "60",
@@ -1630,7 +828,6 @@
             "Review": "All an all it was awesome working for someone! I was working with a director, and the communication was crucial for the job success. We did that part smooth and it was fun"
         },
         "624": {
-            "Rating": "1",
             "Worklife Balance": "100",
             "Benefits": "100",
             "Job Security": "100",
@@ -1642,7 +839,6 @@
             "Review": "You can work any time you wont on project you think fit best to your skills. Great workspase to start growing yourself. Communicate with different professionals"
         },
         "634": {
-            "Rating": "3",
             "Worklife Balance": "100",
             "Benefits": "100",
             "Job Security": "100",
@@ -1654,7 +850,6 @@
             "Review": "It&#39;s basic freelance work. You source out a potential client, or are searched by. Your review the required work, if acceptable, you set some terms and a offered rate. If client accepts, you begin work as required. If work is acceptable, you received payment immediately. Very easy system with open communication. I highly recommend it."
         },
         "644": {
-            "Rating": "5",
             "Worklife Balance": "100",
             "Benefits": "100",
             "Job Security": "100",
@@ -1665,89 +860,13 @@
             "Date": "November 14 2017",
             "Review": "There are great opportunities to freelance but many people are using the service to hire at a lower rate and there are people willing to work for less money so it is hard to get a fair price for your work,",
             "Pros": [
-=======
-        "594":{
-            "Rating":"5",
-            "Worklife Balance":"100",
-            "Benefits":"20",
-            "Job Security":"20",
-            "Management":"20",
-            "Culture":"60",
-            "Former Employee":"Current ",
-            "Location":" – Chicago, IL –",
-            "Date":"November 30 2017",
-            "Review":"Upwork is a freelance organization that allows you to pick your own hours. It is very helpful for freelancers but it is also extremely competitive. It is tough to find clients at first but the more quality work you complete the better business gets."
-        },
-        "604":{
-            "Rating":"5",
-            "Worklife Balance":"100",
-            "Benefits":"100",
-            "Job Security":"100",
-            "Management":"100",
-            "Culture":"100",
-            "Former Employee":"Current ",
-            "Location":" – Dinajpur –",
-            "Date":"November 28 2017",
-            "Review":"I am very happy to work with Upwork.com. Upwork is the very good marketplace. Their clients are very good and friendly behaviors. Upwork payment system also very good. I am appreciated."
-        },
-        "614":{
-            "Rating":"5",
-            "Worklife Balance":"80",
-            "Benefits":"80",
-            "Job Security":"60",
-            "Management":"100",
-            "Culture":"80",
-            "Former Employee":"Former ",
-            "Location":" – Bitola –",
-            "Date":"November 27 2017",
-            "Review":"All an all it was awesome working for someone! I was working with a director, and the communication was crucial for the job success. We did that part smooth and it was fun"
-        },
-        "624":{
-            "Rating":"5",
-            "Worklife Balance":"100",
-            "Benefits":"100",
-            "Job Security":"100",
-            "Management":"100",
-            "Culture":"100",
-            "Former Employee":"Current ",
-            "Location":" – San Diego, CA –",
-            "Date":"November 25 2017",
-            "Review":"You can work any time you wont on project you think fit best to your skills. Great workspase to start growing yourself. Communicate with different professionals"
-        },
-        "634":{
-            "Rating":"5",
-            "Worklife Balance":"100",
-            "Benefits":"100",
-            "Job Security":"100",
-            "Management":"100",
-            "Culture":"100",
-            "Former Employee":"Current ",
-            "Location":" – Houston, TX –",
-            "Date":"November 15 2017",
-            "Review":"It's basic freelance work. You source out a potential client, or are searched by. Your review the required work, if acceptable, you set some terms and a offered rate. If client accepts, you begin work as required. If work is acceptable, you received payment immediately. Very easy system with open communication. I highly recommend it."
-        },
-        "644":{
-            "Rating":"5",
-            "Worklife Balance":"100",
-            "Benefits":"100",
-            "Job Security":"100",
-            "Management":"100",
-            "Culture":"100",
-            "Former Employee":"Current ",
-            "Location":" – Mullica Hill, NJ –",
-            "Date":"November 14 2017",
-            "Review":"There are great opportunities to freelance but many people are using the service to hire at a lower rate and there are people willing to work for less money so it is hard to get a fair price for your work,",
-            "Pros":[
->>>>>>> SP18
                 "Easy to start"
             ],
-            "Cons":[
+            "Cons": [
                 "Difficult to find clients willing to pay competitive price"
             ]
         },
-<<<<<<< HEAD
         "656": {
-            "Rating": "4",
             "Worklife Balance": "80",
             "Benefits": "80",
             "Job Security": "80",
@@ -1758,29 +877,13 @@
             "Date": "November 13 2017",
             "Review": "I can meet clients from different countries and a lot of projects in different stack.To meet US client and have long-term relation ship, this is one of the reasons I worked in Upwork and I am registering here.",
             "Pros": [
-=======
-        "656":{
-            "Rating":"4",
-            "Worklife Balance":"80",
-            "Benefits":"80",
-            "Job Security":"80",
-            "Management":"80",
-            "Culture":"80",
-            "Former Employee":"Former ",
-            "Location":" – Remote –",
-            "Date":"November 13 2017",
-            "Review":"I can meet clients from different countries and a lot of projects in different stack.To meet US client and have long-term relation ship, this is one of the reasons I worked in Upwork and I am registering here.",
-            "Pros":[
->>>>>>> SP18
                 "Lots of job postings"
             ],
-            "Cons":[
+            "Cons": [
                 "Fake clients"
             ]
         },
-<<<<<<< HEAD
         "668": {
-            "Rating": "3",
             "Worklife Balance": "20",
             "Benefits": "20",
             "Job Security": "20",
@@ -1791,29 +894,13 @@
             "Date": "November 11 2017",
             "Review": "0",
             "Pros": [
-=======
-        "668":{
-            "Rating":"1",
-            "Worklife Balance":"20",
-            "Benefits":"20",
-            "Job Security":"20",
-            "Management":"20",
-            "Culture":"20",
-            "Former Employee":"Former ",
-            "Location":" – San Francisco, CA –",
-            "Date":"November 11 2017",
-            "Review":"0",
-            "Pros":[
->>>>>>> SP18
                 "A way to find cheap work"
             ],
-            "Cons":[
+            "Cons": [
                 "A false promise of opportunity - run"
             ]
         },
-<<<<<<< HEAD
         "680": {
-            "Rating": "5",
             "Worklife Balance": "60",
             "Benefits": "80",
             "Job Security": "80",
@@ -1824,24 +911,10 @@
             "Date": "November 10 2017",
             "Review": "While I was sad to part ways, I will say that Upwork provided a great place for anyone to develop as a Customer Support Rep. The job was a bit fast paced but the staff is one of the most supportive staffs I have ever been apart of, specifically a manager I was under during my entire tenure with the company. I would recommend them to anyone who is serious about advancing in Customer Service and looking to enhance their support abilities.",
             "Pros": [
-=======
-        "680":{
-            "Rating":"4",
-            "Worklife Balance":"60",
-            "Benefits":"80",
-            "Job Security":"80",
-            "Management":"80",
-            "Culture":"80",
-            "Former Employee":"Former ",
-            "Location":" – Remote –",
-            "Date":"November 10 2017",
-            "Review":"While I was sad to part ways, I will say that Upwork provided a great place for anyone to develop as a Customer Support Rep. The job was a bit fast paced but the staff is one of the most supportive staffs I have ever been apart of, specifically a manager I was under during my entire tenure with the company. I would recommend them to anyone who is serious about advancing in Customer Service and looking to enhance their support abilities.",
-            "Pros":[
->>>>>>> SP18
                 "Great pay",
                 "Supportive enviornment"
             ],
-            "Cons":[
+            "Cons": [
                 "Time consuming",
                 "stressful"
             ]
