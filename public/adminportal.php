@@ -215,7 +215,7 @@
             float:left;
             overflow:hidden;
             cursor:pointer;
-            width:48%;
+            width:32%;
             height:auto;
         }
 
@@ -499,6 +499,9 @@
                                     for(var i = 0; i < selectedOpts.length; i++) {
                                         if(selectedOpts[i][1] === option) {
                                             selectedOpts.splice( i, 1 );
+                                            try{
+                                                $("#chart"+option+"Share".replace(/ /g, '')).remove();
+                                            } catch(e) {}
                                             $("#chart"+option.replace(/ /g, '')).remove();
                                             i--;
                                         }
@@ -618,6 +621,13 @@
 
             var i = 0;
             var q = 0;
+            var n = 0;
+
+            $.each(resultsArray, function (index, item) {
+                if(item.dataType === "Rating") {
+                    n++;
+                }
+            })
 
             $.each(resultsArray, function (index, item) {
 
@@ -731,17 +741,17 @@
 
                 
 
-                if(item.dataType === "Rating" && resultsArray.length >= 2) {
+                if(item.dataType === "Rating" && n >= 2) {
                     generatedGraphLabel8.push(item.result);
                     generatedBarLabel8 = item.dataType+"Share";
                     
-                    if(q <= resultsArray.length) {
+                    if(q <= n) {
                         itemShare.push(item.total);
                         nameShare.push(item.platformName);
                         q++;
                     }
 
-                    if(q === resultsArray.length) {
+                    if(q === n) {
                         generatedData8.push ({
                             label: nameShare,
                             backgroundColor: ['rgba(15,42,60,.7)','rgba(4,167,136,.7)','rgba(144,148,163,.7)',
@@ -752,6 +762,8 @@
                             data: itemShare
                         })
                         produceShareChart = true;
+                        q=0;
+                        n=0;
                     }
                 }
 
