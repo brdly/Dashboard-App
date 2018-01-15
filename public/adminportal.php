@@ -339,6 +339,33 @@
 
     </style>
 
+
+<script>
+        function Submit(path, params, method) {
+            method = method || "post";
+            var form = document.createElement("form");
+            form.setAttribute("method", method);
+            form.setAttribute("action", path);
+
+            for(var key in params) {
+                if(params.hasOwnProperty(key)) {
+                    var hiddenField = document.createElement("input");
+                    hiddenField.setAttribute("type", "hidden");
+                    hiddenField.setAttribute("name", key);
+                    hiddenField.setAttribute("value", params[key]);
+
+                    form.appendChild(hiddenField);
+                }
+            }
+
+            document.body.appendChild(form);
+            form.submit();
+        }
+        function clearUser(){
+            Submit("adminportal.php",{Logout: 1})
+        }
+    </script>
+
     <script>
 
     $( document ).ready(function() {
@@ -1530,47 +1557,7 @@
 <div id="navigationLeftSpacer"></div>
 
 <nav>
-<<<<<<< HEAD
 <section class="min hoverOff"> </section>
-=======
-
-    <section class="button hoverOff"> </section>
-    <section class="button menuOn">Overall Rating</section>
-    <section class="button">Work/Life Balance</section>
-    <section class="button">Worker Benefits</section>
-    <section class="button">Job Security</section>
-    <section class="button">Employee Status</section>
-    <section class="button">Countries</section>
-    <section class="button">Reviews</section>
-    <script>
-        function Submit(path, params, method) {
-            method = method || "post";
-            var form = document.createElement("form");
-            form.setAttribute("method", method);
-            form.setAttribute("action", path);
-
-            for(var key in params) {
-                if(params.hasOwnProperty(key)) {
-                    var hiddenField = document.createElement("input");
-                    hiddenField.setAttribute("type", "hidden");
-                    hiddenField.setAttribute("name", key);
-                    hiddenField.setAttribute("value", params[key]);
-
-                    form.appendChild(hiddenField);
-                }
-            }
-
-            document.body.appendChild(form);
-            form.submit();
-        }
-        function clearUser(){
-            Submit("adminportal.php",{Logout: 1})
-        }
-    </script>
-    <section class="button" onclick="clearUser()">LOGOUT</section> <!-- check this please thank you!-->
-    <section class="button" onclick="clearUser()">LOGOUT</section>
-
->>>>>>> database_and_login
 </nav>
 
 <div id="mainLeftSpacer"><div id="mainLeftSpacer2"></div></div>
@@ -1587,7 +1574,7 @@
 </main>
 
 <footer>
-    <img src="/SPATProject/public/build/img/logout.png" />
+    <img src="/SPATProject/public/build/img/logout.png" onclick="clearUser()" />
     <img src="/SPATProject/public/build/img/help.png" />
 </footer>
 
