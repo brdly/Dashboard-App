@@ -23,13 +23,13 @@
             font-weight: 100;
             height: 100vh;
             width: 100vw;
-            background-image: url(build/img/images7.jpg);
+             /*background-image: url(build/img/images7.jpg);
             background-size: auto auto;
             background-position: bottom right;
             background-repeat: no-repeat;
+            background-color: white; */
             margin: 0;
             padding: 0;
-            /* background-color: white; */
             color: white;
             font-family: 'BenchNine', sans-serif;
             font-size: 16px;
@@ -212,13 +212,16 @@
         }
 
         .chart{
+            float:left;
             overflow:hidden;
             cursor:pointer;
+            width:48%;
+            height:auto;
         }
 
         .chartBig {
             margin-left:10%;
-            width:70%!important;
+            width:80%!important;
             height:auto!important;
         }
 
@@ -270,14 +273,20 @@
         //selectedData is all the data from the DB for the chosen platforms
         var selectedOpts = []; //if the above updates, reload the selected opts for all chosen platforms
         //selectedOpts is what the charts should pull their data from
+        var resultsArray = []; //once above completes an update, rerun the loadchartdata function
+        //contains calculated chart data, like overall ratings for worklife balance etc
         var oldestDate;
         var newestDate;
         var option;
         var platform;
+        var min;
+        var max;
         var menuAction = "disable";
 
         $("#slider").bind("valuesChanged", function(e, data){
-            console.log("Values just changed. min: " + data.values.min + " max: " + data.values.max);
+            min = data.values.min;
+            max = data.values.max;
+            loadChartData(selectedOpts);
         });
 
         $( ".chart" ).click(function() {
@@ -310,7 +319,13 @@
             });
 
             $.each(data.form_fields, function (index, value) {
-                $( "nav" ).append( '<section id="'+value.replace(/ /g, '')+'" title="'+value+'" class="button2">'+value+'</section>' );
+                if(value === "Former Employee") {
+                    $( "nav" ).append( '<section id="'+value.replace(/ /g, '')+'" title="'+value+'" class="button2">Employee Status</section>' );
+                } else if(value === "Review") {
+                    $( "nav" ).append( '<section id="'+value.replace(/ /g, '')+'" title="'+value+'" class="button2">Reviews</section>' );
+                } else {
+                    $( "nav" ).append( '<section id="'+value.replace(/ /g, '')+'" title="'+value+'" class="button2">'+value+'</section>' );
+                }
             });
             //$.each(data.platforms, function (index, name) {
             //    var meep = data[name];
@@ -356,7 +371,7 @@
                                             newArr1.push(platform_data[0],option[1]);
                                             $.each(platform_data[1], function (index, value) {
                                                 var newArr2 = [];
-                                                newArr2.push(index, value[option[1]]);
+                                                newArr2.push(index, value[option[1]],value["Date"],value["Former Employee"]);
                                                 newArr1.push(newArr2);
                                             })
                                             var isDuplicate = false;
@@ -368,9 +383,9 @@
                                             });
                                         if(isDuplicate === false) selectedOpts.push(newArr1);
                                         })
-                                        
                                 }
                             })
+                            loadChartData(selectedOpts);
                         } else { 
                             //please choose a platform 
                         }
@@ -387,6 +402,8 @@
                                             i--;
                                         }
                                     }
+                                    if(selectedOpts.length === 0) { $("#charts").html(""); } else {
+                                    loadChartData(selectedOpts);}
                             }
                         } catch(e) {
                             //no platforms selected
@@ -418,10 +435,10 @@
                     defaultValues:{
                             min:  oldestDate,
                             max: newestDate
-                        },
-                        valueLabels:"change",
-                        delayOut: 4000
+                        }
                     });
+                    min = oldestDate;
+                    max = newestDate;
                     loadTimeBar();
                 });
 
@@ -464,13 +481,17 @@
                                     newArr1.push(platform_data[0],option);
                                     $.each(platform_data[1], function (index, value) {
                                         var newArr2 = [];
-                                        newArr2.push(index, value[option]);
+                                        if(option === "Former Employee") { 
+                                            newArr2.push(index, value["Rating"],value["Date"],value["Former Employee"]);
+                                        } else {
+                                            newArr2.push(index, value[option],value["Date"],value["Former Employee"]);
+                                        }
                                         newArr1.push(newArr2);
                                     })
                                         selectedOpts.push(newArr1);
                                 })
                             } else { 
-                                //please choose a platform 
+                                 //please choose a platform 
                             }
                         } else {
                             if(selectedOpts) {
@@ -478,6 +499,7 @@
                                     for(var i = 0; i < selectedOpts.length; i++) {
                                         if(selectedOpts[i][1] === option) {
                                             selectedOpts.splice( i, 1 );
+                                            $("#chart"+option.replace(/ /g, '')).remove();
                                             i--;
                                         }
                                     }
@@ -487,14 +509,727 @@
                             }
                         }
                     
-                        console.log(selectedOpts.toString())
                     } else {
                         alert("please choose a platform first");
                     }
+                    loadChartData(selectedOpts);
                  }); 
         });
 
-        
+        function loadChartData(selectedOpts) {
+            resultsArray = [];
+            var timeStart = min;
+            var timeEnd = max;
+            for(var i = 0; i < selectedOpts.length; i++) {
+                
+                var platformName = selectedOpts[i]["0"];
+                var dataType = selectedOpts[i]["1"];
+                var total = 0;
+                var minInt = 100;
+                var maxInt = 0;
+                var former = 0;
+                var current = 0;
+                var count = 0;
+                var countF = 0;
+                var countC = 0;
+
+
+                if(dataType === "Rating" || dataType === "Worklife Balance" || dataType === "Benefits" || dataType === "Job Security" || dataType === "Management" || dataType === "Culture") {
+                    $.each(selectedOpts[i], function (index, numbers) {
+                        var incomingNumber = parseInt(numbers[1]);
+                        if( incomingNumber ) {
+                            var resultDate = new Date(numbers[2]);
+                            if(resultDate >= timeStart && resultDate <= timeEnd) {
+                                if(incomingNumber >= maxInt) { maxInt = incomingNumber;}
+                                if(incomingNumber <= minInt) { minInt = incomingNumber;}
+                                total = total + incomingNumber;
+                                count++;
+                            }
+                        }
+                    })
+                        var result = parseFloat(Math.round(total/count * 100) / 100).toFixed(2);
+                        resultsArray.push({platformName,dataType,maxInt,minInt,result,total});
+                }
+
+                if(dataType === "Former Employee") {
+                    $.each(selectedOpts[i], function (index, numbers) {
+                        var incomingNumber = parseInt(numbers[1]);
+                        if( incomingNumber ) {
+                            var resultDate = new Date(numbers[2]);
+                            if(resultDate >= timeStart && resultDate <= timeEnd) {
+                                if(incomingNumber >= maxInt) { maxInt = incomingNumber;}
+                                if(incomingNumber <= minInt) { minInt = incomingNumber;}
+                                total = total + incomingNumber;
+                                count++;
+                                if(numbers[3] === "Current ") {
+                                    current = current + incomingNumber;
+                                    countC++;
+                                } else {
+                                    former = former + incomingNumber;
+                                    countF++;
+                                }
+                            }
+                        }
+                    })
+                        var result = parseFloat(Math.round(total/count * 100) / 100).toFixed(2);
+                        var formerRating = parseFloat(Math.round(former/countF * 100) / 100).toFixed(2);
+                        var currentRating = parseFloat(Math.round(current/countC * 100) / 100).toFixed(2);
+                        resultsArray.push({platformName,dataType,currentRating,formerRating,result});
+                }
+
+            }
+            loadBarChart(resultsArray);
+        }
+
+        function loadBarChart(resultsArray) {
+            //$("#charts").html("");
+            var generatedGraphLabel1 = [];var generatedGraphLabel2 = [];var generatedGraphLabel3 = [];var generatedGraphLabel4 = [];
+            var generatedGraphLabel5 = [];var generatedGraphLabel6 = [];var generatedGraphLabel7 = [];var generatedGraphLabel8 = [];var generatedGraphLabel9 = [];
+            var generatedRadarLabel1 = [];var generatedRadarLabel2 = [];
+            var generatedRadarLabel3 = [];var generatedStatusLabel1 = [];var generatedStackLabel1 = [];
+
+            var produceRatingChart = false;var produceBalanceChart = false;var produceRadarChart = false;var produceBenefitsChart = false;var produceShareChart = false;
+            var produceSecurityChart = false;var produceManagementChart = false;var produceCultureChart = false;var produceStatusChart = false;var produceStackChart = false;
+
+            var generatedBarLabel1 = "";var generatedBarLabel2 = "";var generatedBarLabel3 = "";var generatedBarLabel4 = "";var generatedBarLabel5 = "";
+            var generatedBarLabel6 = "";var generatedBarLabel7 = "";var generatedBarLabel8 = "";var generatedBarLabel9 = "";
+
+            var generatedRadarXLabel1 = "";var generatedRadarXLabel2 = "";
+            var generatedRadarXLabel3 = "";var generatedStatusXLabel1 = "";var generatedStackXLabel1 = "";
+
+            var generatedData1 = [];var generatedData2 = [];var generatedData3 = [];var generatedData4 = [];var generatedData5 = [];var generatedData6 = [];
+            var generatedData7 = [];var generatedData8 = [];var generatedData9 = [];var generatedData10 = [];var generatedData11 = [];var generatedData12 = [];var generatedData13 = [];
+
+            var currentChart = "";
+            var nameShare = [];
+            var itemShare = [];
+
+            var colourArray = [
+                'rgba(15,42,60,.7)','rgba(4,167,136,.7)','rgba(144,148,163,.7)',
+                'rgba(25,52,70,.9)','rgba(14,177,146,.9)','rgba(154,158,173,.9)',
+                'rgba(45,62,80,.7)','rgba(24,187,156,.7)','rgba(164,168,183,.7)',
+                'rgba(55,72,90,.8)','rgba(34,197,166,.8)','rgba(174,178,193,.8)',
+                'rgba(65,82,100,.7)','rgba(44,207,176,.7)','rgba(184,188,203,.7)',
+                'rgba(85,92,110,.6)','rgba(54,217,186,.6)','rgba(194,198,213,.6)',
+                'rgba(95,102,120,.8)','rgba(64,227,196,.8)','rgba(204,208,223,.8)',
+                'rgba(105,112,130,.9)','rgba(74,237,206,.9)','rgba(214,218,233,.9)',
+                'rgba(115,122,140,.7)','rgba(84,247,216,.7)','rgba(224,228,243,.7)',
+                ];
+
+            var i = 0;
+            var q = 0;
+
+            $.each(resultsArray, function (index, item) {
+
+                if(item.dataType === "Rating") {
+                    generatedGraphLabel1.push(item.result);
+                    generatedBarLabel1 = item.dataType;
+                    
+                    generatedData1.push ({
+                        label:item.platformName,
+                        backgroundColor: colourArray[i],
+                        borderColor:colourArray[i],
+                        borderWidth: 2,
+                        data: [item.maxInt,item.minInt,item.result]
+                    })
+                    produceRatingChart = true;
+                }
+
+                if(item.dataType === "Worklife Balance") {
+                    generatedGraphLabel2.push(item.result);
+                    generatedBarLabel2 = item.dataType;
+                    
+                    generatedData2.push ({
+                        label:item.platformName,
+                        backgroundColor: colourArray[i],
+                        borderColor:colourArray[i],
+                        borderWidth: 2,
+                        data: [item.maxInt,item.minInt,item.result]
+                    })
+                    produceBalanceChart = true;
+                }
+
+                
+
+                if(item.dataType === "Benefits") {
+                    generatedGraphLabel3.push(item.result);
+                    generatedBarLabel3 = item.dataType;
+                    
+                    generatedData3.push ({
+                        label:item.platformName,
+                        backgroundColor: colourArray[i],
+                        borderColor:colourArray[i],
+                        borderWidth: 2,
+                        data: [item.maxInt,item.minInt,item.result]
+                    })
+                    produceBenefitsChart = true;
+                }
+
+                
+
+                if(item.dataType === "Job Security") {
+                    generatedGraphLabel4.push(item.result);
+                    generatedBarLabel4 = item.dataType;
+                    
+                    generatedData4.push ({
+                        label:item.platformName,
+                        backgroundColor: colourArray[i],
+                        borderColor:colourArray[i],
+                        borderWidth: 2,
+                        data: [item.maxInt,item.minInt,item.result]
+                    })
+                    produceSecurityChart = true;
+                }
+
+                
+
+                if(item.dataType === "Management") {
+                    generatedGraphLabel5.push(item.result);
+                    generatedBarLabel5 = item.dataType;
+                    
+                    generatedData5.push ({
+                        label:item.platformName,
+                        backgroundColor: colourArray[i],
+                        borderColor:colourArray[i],
+                        borderWidth: 2,
+                        data: [item.maxInt,item.minInt,item.result]
+                    })
+                    produceManagementChart = true;
+                }
+
+                
+
+                if(item.dataType === "Culture") {
+                    generatedGraphLabel6.push(item.result);
+                    generatedBarLabel6 = item.dataType;
+                    
+                    generatedData6.push ({
+                        label:item.platformName,
+                        backgroundColor: colourArray[i],
+                        borderColor:colourArray[i],
+                        borderWidth: 2,
+                        data: [item.maxInt,item.minInt,item.result]
+                    })
+                    produceCultureChart = true;
+                }
+
+                
+
+                if(item.dataType === "Former Employee") {
+                    generatedGraphLabel7.push(item.result);
+                    generatedBarLabel7 = item.dataType;
+                    
+                    generatedData7.push ({
+                        label:item.platformName,
+                        backgroundColor: colourArray[i],
+                        borderColor:colourArray[i],
+                        borderWidth: 2,
+                        data: [item.currentRating,item.formerRating,item.result]
+                    })
+                    produceStatusChart = true;
+                }
+
+                
+
+                if(item.dataType === "Rating" && resultsArray.length >= 2) {
+                    generatedGraphLabel8.push(item.result);
+                    generatedBarLabel8 = item.dataType+"Share";
+                    
+                    if(q <= resultsArray.length) {
+                        itemShare.push(item.total);
+                        nameShare.push(item.platformName);
+                        q++;
+                    }
+
+                    if(q === resultsArray.length) {
+                        generatedData8.push ({
+                            label: nameShare,
+                            backgroundColor: ['rgba(15,42,60,.7)','rgba(4,167,136,.7)','rgba(144,148,163,.7)',
+                'rgba(25,52,70,.9)','rgba(14,177,146,.9)','rgba(154,158,173,.9)'],
+                            borderColor: ['rgba(15,42,60,.7)','rgba(4,167,136,.7)','rgba(144,148,163,.7)',
+                'rgba(25,52,70,.9)','rgba(14,177,146,.9)','rgba(154,158,173,.9)'],
+                            borderWidth: 2,
+                            data: itemShare
+                        })
+                        produceShareChart = true;
+                    }
+                }
+
+                i++;
+                
+            })
+            
+            if(produceRatingChart === true) {
+                if(document.getElementById("chart"+generatedBarLabel1.replace(/ /g, '')) === null) {
+                    $("#charts").append(' <section id="chart'+generatedBarLabel1.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel1.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                } else {
+                    $("#chart"+generatedBarLabel1.replace(/ /g, '')).remove();
+                    $("#charts").append(' <section id="chart'+generatedBarLabel1.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel1.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                }
+            
+                const CHART = document.getElementById("barChart"+generatedBarLabel1.replace(/ /g, ''));
+                Chart.defaults.scale.ticks.beginAtZero = true;
+
+                let barChart = new Chart(CHART,{
+                    type: 'bar',
+                    data: {
+                        labels: ["High", "Low", "Average"],
+                        datasets: generatedData1
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            scaleLabel: "<%= ' ' + value%>",
+                        xAxes: [{
+                                display: true,
+                                scaleLabel: {
+                                    display: false,
+                                    labelString:  generatedBarLabel1
+                                },
+                                ticks: {
+                                    max: 3
+                                }
+                            }],
+                        yAxes: [{
+                                display: true,
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                    },
+                    title: {
+                        display: true,
+                        text: generatedBarLabel1
+                    },
+                    layout: {
+                        padding: {
+                            left: 10
+                        }
+                    }
+                    }
+                });
+
+            }
+
+            if(produceBalanceChart === true) {
+                if(document.getElementById("chart"+generatedBarLabel2.replace(/ /g, '')) === null) {
+                    $("#charts").append(' <section id="chart'+generatedBarLabel2.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel2.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                } else {
+                    $("#chart"+generatedBarLabel2.replace(/ /g, '')).remove();
+                    $("#charts").append(' <section id="chart'+generatedBarLabel2.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel2.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                }
+            
+                const CHART = document.getElementById("barChart"+generatedBarLabel2.replace(/ /g, ''));
+                Chart.defaults.scale.ticks.beginAtZero = true;
+
+                let barChart = new Chart(CHART,{
+                    type: 'bar',
+                    data: {
+                        labels: ["High", "Low", "Average"],
+                        datasets: generatedData2
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                        xAxes: [{
+                                display: true,
+                                scaleLabel: {
+                                    display: false,
+                                    labelString:  generatedBarLabel2
+                                },
+                                ticks: {
+                                    max: 3
+                                }
+                            }],
+                        yAxes: [{
+                                display: true,
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                    },
+                    title: {
+                        display: true,
+                        text: generatedBarLabel2
+                    }
+                    }
+                });
+
+            }
+
+            if(produceBenefitsChart === true) {
+                if(document.getElementById("chart"+generatedBarLabel3.replace(/ /g, '')) === null) {
+                    $("#charts").append(' <section id="chart'+generatedBarLabel3.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel3.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                } else {
+                    $("#chart"+generatedBarLabel3.replace(/ /g, '')).remove();
+                    $("#charts").append(' <section id="chart'+generatedBarLabel3.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel3.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                }
+            
+                const CHART = document.getElementById("barChart"+generatedBarLabel3.replace(/ /g, ''));
+                Chart.defaults.scale.ticks.beginAtZero = true;
+
+                let barChart = new Chart(CHART,{
+                    type: 'bar',
+                    data: {
+                        labels: ["High", "Low", "Average"],
+                        datasets: generatedData3
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                        xAxes: [{
+                                display: true,
+                                scaleLabel: {
+                                    display: false,
+                                    labelString:  generatedBarLabel3
+                                },
+                                ticks: {
+                                    max: 3
+                                }
+                            }],
+                        yAxes: [{
+                                display: true,
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                    },
+                    title: {
+                        display: true,
+                        text: generatedBarLabel3
+                    }
+                    }
+                });
+
+            }
+
+            if(produceSecurityChart === true) {
+                if(document.getElementById("chart"+generatedBarLabel4.replace(/ /g, '')) === null) {
+                    $("#charts").append(' <section id="chart'+generatedBarLabel4.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel4.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                } else {
+                    $("#chart"+generatedBarLabel4.replace(/ /g, '')).remove();
+                    $("#charts").append(' <section id="chart'+generatedBarLabel4.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel4.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                }
+            
+                const CHART = document.getElementById("barChart"+generatedBarLabel4.replace(/ /g, ''));
+                Chart.defaults.scale.ticks.beginAtZero = true;
+
+                let barChart = new Chart(CHART,{
+                    type: 'bar',
+                    data: {
+                        labels: ["High", "Low", "Average"],
+                        datasets: generatedData4
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                        xAxes: [{
+                                display: true,
+                                scaleLabel: {
+                                    display: false,
+                                    labelString:  generatedBarLabel4
+                                },
+                                ticks: {
+                                    max: 3
+                                }
+                            }],
+                        yAxes: [{
+                                display: true,
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                    },
+                    title: {
+                        display: true,
+                        text: generatedBarLabel4
+                    }
+                    }
+                });
+
+            }
+
+            if(produceManagementChart === true) {
+                if(document.getElementById("chart"+generatedBarLabel5.replace(/ /g, '')) === null) {
+                    $("#charts").append(' <section id="chart'+generatedBarLabel5.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel5.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                } else {
+                    $("#chart"+generatedBarLabel5.replace(/ /g, '')).remove();
+                    $("#charts").append(' <section id="chart'+generatedBarLabel5.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel5.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                }
+            
+                const CHART = document.getElementById("barChart"+generatedBarLabel5.replace(/ /g, ''));
+                Chart.defaults.scale.ticks.beginAtZero = true;
+
+                let barChart = new Chart(CHART,{
+                    type: 'bar',
+                    data: {
+                        labels: ["High", "Low", "Average"],
+                        datasets: generatedData5
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                        xAxes: [{
+                                display: true,
+                                scaleLabel: {
+                                    display: false,
+                                    labelString:  generatedBarLabel5
+                                },
+                                ticks: {
+                                    max: 3
+                                }
+                            }],
+                        yAxes: [{
+                                display: true,
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                    },
+                    title: {
+                        display: true,
+                        text: generatedBarLabel5
+                    }
+                    }
+                });
+
+            }
+
+            if(produceCultureChart === true) {
+                if(document.getElementById("chart"+generatedBarLabel6.replace(/ /g, '')) === null) {
+                    $("#charts").append(' <section id="chart'+generatedBarLabel6.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel6.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                } else {
+                    $("#chart"+generatedBarLabel6.replace(/ /g, '')).remove();
+                    $("#charts").append(' <section id="chart'+generatedBarLabel6.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel6.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                }
+            
+                const CHART = document.getElementById("barChart"+generatedBarLabel6.replace(/ /g, ''));
+                Chart.defaults.scale.ticks.beginAtZero = true;
+
+                let barChart = new Chart(CHART,{
+                    type: 'bar',
+                    data: {
+                        labels: ["High", "Low", "Average"],
+                        datasets: generatedData6
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                        xAxes: [{
+                                display: true,
+                                scaleLabel: {
+                                    display: false,
+                                    labelString:  generatedBarLabel6
+                                },
+                                ticks: {
+                                    max: 3
+                                }
+                            }],
+                        yAxes: [{
+                                display: true,
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                    },
+                    title: {
+                        display: true,
+                        text: generatedBarLabel6
+                    }
+                    }
+                });
+
+            }   
+
+            if(produceStatusChart === true) {
+                if(document.getElementById("chart"+generatedBarLabel7.replace(/ /g, '')) === null) {
+                    $("#charts").append(' <section id="chart'+generatedBarLabel7.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel7.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                } else {
+                    $("#chart"+generatedBarLabel7.replace(/ /g, '')).remove();
+                    $("#charts").append(' <section id="chart'+generatedBarLabel7.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel7.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                }
+            
+                const CHART = document.getElementById("barChart"+generatedBarLabel7.replace(/ /g, ''));
+                Chart.defaults.scale.ticks.beginAtZero = true;
+
+                let barChart = new Chart(CHART,{
+                    type: 'bar',
+                    data: {
+                        labels: ["Current", "Former", "Average"],
+                        datasets: generatedData7
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                        xAxes: [{
+                                display: true,
+                                scaleLabel: {
+                                    display: false,
+                                    labelString:  generatedBarLabel7
+                                },
+                                ticks: {
+                                    max: 3
+                                }
+                            }],
+                        yAxes: [{
+                                display: true,
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                    },
+                    title: {
+                        display: true,
+                        text: "Rating by Status of Employee"
+                    }
+                    }
+                });
+
+            }   
+
+            if(produceShareChart === true) {
+                if(document.getElementById("chart"+generatedBarLabel8.replace(/ /g, '')) === null) {
+                    $("#charts").append(' <section id="chart'+generatedBarLabel8.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel8.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                } else {
+                    $("#chart"+generatedBarLabel8.replace(/ /g, '')).remove();
+                    $("#charts").append(' <section id="chart'+generatedBarLabel8.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel8.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                }
+            
+                const CHART = document.getElementById("barChart"+generatedBarLabel8.replace(/ /g, ''));
+                Chart.defaults.scale.ticks.beginAtZero = true;
+
+                let barChart = new Chart(CHART,{
+                    type: 'pie',
+                    data: {
+                        labels: nameShare,
+                        datasets: generatedData8
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                        xAxes: [{
+                                display: false,
+                                scaleLabel: {
+                                    display: false,
+                                    labelString:  generatedBarLabel8
+                                },
+                                ticks: {
+                                    max: 3
+                                }
+                            }],
+                        yAxes: [{
+                                display: false,
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                    },
+                    title: {
+                        display: true,
+                        text: "Estimated Market Share"
+                    }
+                    }
+                });
+
+            } 
+
+            if(produceRadarChart === true) {
+                if(document.getElementById("chart"+generatedRadarLabel1.replace(/ /g, '')) === null) {
+                    $("#charts").append(' <section id="chart'+generatedRadarLabel1.replace(/ /g, '')+'" class="chart chartBig ">   <canvas id="barChart'+generatedRadarLabel1.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                } else {
+                    $("#chart"+generatedRadarLabel1.replace(/ /g, '')).remove();
+                    $("#charts").append(' <section id="chart'+generatedRadarLabel1.replace(/ /g, '')+'" class="chart chartBig ">   <canvas id="barChart'+generatedRadarLabel1.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                }
+                const CHART = document.getElementById("barChart"+generatedRadarLabel1.replace(/ /g, ''));
+                Chart.defaults.scale.ticks.beginAtZero = true;
+
+                let barChart = new Chart(CHART,{
+                    type: 'radar',
+                    data: {
+                        labels: ["High", "Low", "Average"],
+                        datasets: generatedData3,
+                        fill: '-1'
+                    },
+                    options: {
+                        datasetFill: false,
+                        responsive: true,
+                        scales: {
+                        xAxes: [{
+                                display: true,
+                                scaleLabel: {
+                                    display: false,
+                                    labelString:  generatedRadarLabel1
+                                },
+                                ticks: {
+                                    max: 3
+                                }
+                            }],
+                        yAxes: [{
+                                display: true,
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                    },
+                    title: {
+                        display: true,
+                        text: generatedRadarLabel1
+                    }
+                    }
+                });
+
+            }
+
+            if(produceStackChart === true) {
+                if(document.getElementById("chart"+generatedStackLabel1.replace(/ /g, '')) === null) {
+                    $("#charts").append(' <section id="chart'+generatedStackLabel1.replace(/ /g, '')+'" class="chart chartBig ">   <canvas id="barChart'+generatedStackLabel1.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                } else {
+                    $("#chart"+generatedStackLabel1.replace(/ /g, '')).remove();
+                    $("#charts").append(' <section id="chart'+generatedStackLabel1.replace(/ /g, '')+'" class="chart chartBig ">   <canvas id="barChart'+generatedStackLabel1.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                }
+                const CHART = document.getElementById("barChart"+generatedStackLabel1.replace(/ /g, ''));
+                Chart.defaults.scale.ticks.beginAtZero = true;
+
+                let barChart = new Chart(CHART,{
+                    type: 'radar',
+                    data: {
+                        labels: ["High", "Low", "Average"],
+                        datasets: generatedData7,
+                        fill: '-1'
+                    },
+                    options: {
+                        datasetFill: false,
+                        responsive: true,
+                        scales: {
+                        xAxes: [{
+                                stacked:true,
+                                display: true,
+                                scaleLabel: {
+                                    display: false,
+                                    labelString:  generatedStackLabel1
+                                },
+                                ticks: {
+                                    max: 3
+                                }
+                            }],
+                        yAxes: [{
+                                stacked:true,
+                                display: true,
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                    },
+                    title: {
+                        display: true,
+                        text: generatedStackLabel1
+                    }
+                    }
+                });
+
+            }
+
+        }
 
     })
     </script>
@@ -506,48 +1241,25 @@
 <div id="headerLeftSpacer"></div>
 
 <header>
-
-<!--
-    <section class="floatLeft hoverOff titlebox">ADMIN<br/>PORTAL</section>
-    <section id="at" class="menuOn button">Amazon Turk</section>
-    <section id="cf" class="button">CrowdFlower</section>
-    <section id="cw" class="button">ClickWorker</section>
-    <section id="cc" class="button">CloudCrowd</section>
-    <section id="fv" class="button">Fiverr</section>
-    <section id="up" class="button">Upwork</section>
-//-->
-
 </header>
 
 <div id="navigationLeftSpacer"></div>
 
 <nav>
 <section class="min hoverOff"> </section>
-<!--
-    <section class="hoverOff"> </section>
-    <section class="button menuOn">Overall Rating</section>
-    <section class="button">Work/Life Balance</section>
-    <section class="button">Worker Benefits</section>
-    <section class="button">Job Security</section>
-    <section class="button">Employee Status</section>
-    <section class="button">Countries</section>
-    <section class="button">Reviews</section>
-    <section class="button">LOGOUT</section>
-    //-->
-
 </nav>
 
 <div id="mainLeftSpacer"><div id="mainLeftSpacer2"></div></div>
 <div id="mainTopSpacer"></div>
 
 <main>
-
     <div id="slider" class="hide"></div>
+    <div id="charts"> </div>
 
-    <section id="chartOne" class="chart chartBig ">  <?php include_once("barMagic.php"); ?> </section>
-    <section id="chartTwo" class="chart hide"> <?php include_once("lineMagic.php");  ?> </section>
-    <section id="chartThree" class="chart hide"> <?php include_once("doughnutMagic.php");  ?> </section>
-
+    <!-- 
+    <section id="chartddd" class="chart chartBig ">   <canvas id="barChart" height="auto" width="auto"> <?php include_once("barMagic.php"); ?></canvas>  </section>
+      -->
+      
 </main>
 
 <footer>
