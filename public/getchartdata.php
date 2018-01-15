@@ -13,6 +13,8 @@ require_once $ROOT . "/../config.php";
 use SPATApp\App\DatabaseHelper;
 use SPATApp\Config;
 
+// Create a DB connection and initialise the array.
+
 $dbh = DatabaseHelper::databaseConnection();
 
 $dataArray = array(
@@ -21,6 +23,8 @@ $dataArray = array(
     "form_fields" => array()
 );
 
+// Get platforms from the DB, loop through them and push to Array
+
 $platforms = DatabaseHelper::getPlatforms($dbh);
 
 foreach ($platforms as $platform)
@@ -28,12 +32,16 @@ foreach ($platforms as $platform)
     array_push($dataArray["platforms"], $platform["name"]);
 }
 
+// Get form fields from the DB, loop through them and push to Array
+
 $formFields = DatabaseHelper::getFormFields($dbh);
 
 foreach ($formFields as $formField)
 {
     array_push($dataArray["form_fields"], ucwords(str_replace("_", " ", $formField["name"])));
 }
+
+// Loop through each platform, get the name of the platform and get the review IDs for that platform.
 
 foreach ($platforms as $platform)
 {
@@ -45,6 +53,8 @@ foreach ($platforms as $platform)
 
     $reviewIDs = DatabaseHelper::getUniqueReviewIDsFromPlatform($dbh, $platformID);
 
+    // Loop through each review ID and get the review from the ID
+
     foreach ($reviewIDs as $reviewID)
     {
         $reviewArray = array();
@@ -52,6 +62,9 @@ foreach ($platforms as $platform)
         if ($reviewID["idReview"] != null)
         {
             $review = DatabaseHelper::getReviewFromReviewID($dbh, (int)$reviewID["idReview"]);
+
+            // Loop though each item in the review and explode the pros and cons to turn them into an array and push the
+            // review elements to the array.
 
             for ($i = 0; $i < count($review); $i++)
             {
@@ -66,9 +79,14 @@ foreach ($platforms as $platform)
                 $reviewArray[$dataArray["form_fields"][$review[$i]["idFormField"]-1]] = $dataToAdd;
             }
 
+            // Push the completed review to the platform array
+
             $platformArray[$reviewID["idReview"]] = $reviewArray;
         }
     }
+
+    // Push the platform array with each review to the main array.
+
     $dataArray[$platform["name"]] = $platformArray;
 }
 
