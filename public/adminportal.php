@@ -211,13 +211,23 @@
 
         }
 
+
+        .chartHalf {
+            float:left!important;
+            width:50%!important;
+        }
+        .chartDar {
+            float:left!important;
+            width:45%!important;
+        }
         .chart{
-            float:left;
+            float:right;
             overflow:hidden;
             cursor:pointer;
             width:32%;
             height:auto;
             min-width:320px;
+            min-height:200px;
         }
 
         .chartBig {
@@ -382,7 +392,11 @@
                                             newArr1.push(platform_data[0],option[1]);
                                             $.each(platform_data[1], function (index, value) {
                                                 var newArr2 = [];
-                                                newArr2.push(index, value[option[1]],value["Date"],value["Former Employee"]);
+                                                if(option[1] === "Former Employee") {
+                                                    newArr2.push(index, value["Rating"],value["Date"],value["Former Employee"]);
+                                                } else {
+                                                    newArr2.push(index, value[option[1]],value["Date"],value["Former Employee"]);
+                                                }
                                                 newArr1.push(newArr2);
                                             })
                                             var isDuplicate = false;
@@ -600,7 +614,9 @@
                         var result = parseFloat(Math.round(total/count * 100) / 100).toFixed(2);
                         var formerRating = parseFloat(Math.round(former/countF * 100) / 100).toFixed(2);
                         var currentRating = parseFloat(Math.round(current/countC * 100) / 100).toFixed(2);
-                        resultsArray.push({platformName,dataType,currentRating,formerRating,result});
+                        if(!isNaN(formerRating)) {
+                            resultsArray.push({platformName,dataType,currentRating,formerRating,result});
+                        }
                 }
 
             }
@@ -624,7 +640,7 @@
             var generatedRadarXLabel3 = "";var generatedStatusXLabel1 = "";var generatedStackXLabel1 = "";
 
             var generatedData1 = [];var generatedData2 = [];var generatedData3 = [];var generatedData4 = [];var generatedData5 = [];var generatedData6 = [];
-            var generatedData7 = [];var generatedData8 = [];var generatedData9 = [];var generatedData10 = [];var generatedData11 = [];var generatedData12 = [];var generatedData13 = [];
+            var generatedData77 = [];var generatedData8 = [];var generatedData9 = [];var generatedData10 = [];var generatedData11 = [];var generatedData12 = [];var generatedData13 = [];
 
             var currentChart = "";
             var nameShare = [];
@@ -783,7 +799,7 @@
                     generatedGraphLabel7.push(item.result);
                     generatedBarLabel7 = item.dataType;
                     
-                    generatedData7.push ({
+                    generatedData77.push ({
                         label:item.platformName,
                         backgroundColor: colourArray[i],
                         borderColor:colourArray[i],
@@ -1191,7 +1207,7 @@
                     type: 'bar',
                     data: {
                         labels: ["Current", "Former", "Average"],
-                        datasets: generatedData7
+                        datasets: generatedData77
                     },
                     options: {
                         responsive: true,
@@ -1270,10 +1286,10 @@
 
             if(produceRadarChart === true) {
                 if(document.getElementById("chartRadar") === null) {
-                    $("#charts").append(' <section id="chartRadar" class="chart chartBig ">   <canvas id="barChartRadar" height="auto" width="auto"></canvas>  </section>')
+                    $("#charts").append(' <section id="chartRadar" class="chart chartDar">   <canvas id="barChartRadar" height="auto" width="auto"></canvas>  </section>')
                 } else {
                     $("#chartRadar").remove();
-                    $("#charts").append(' <section id="chartRadar" class="chart chartBig ">   <canvas id="barChartRadar" height="auto" width="auto"></canvas>  </section>')
+                    $("#charts").append(' <section id="chartRadar" class="chart chartDar">   <canvas id="barChartRadar" height="auto" width="auto"></canvas>  </section>')
                 }
                 const CHART = document.getElementById("barChartRadar");
                 Chart.defaults.scale.ticks.beginAtZero = true;
@@ -1366,10 +1382,10 @@
 
             if(produceRatingTimeChart === true) {
                 if(document.getElementById("chartTime"+generatedBarLabel9.replace(/ /g, '')) === null) {
-                    $("#charts").append(' <section id="chartTime'+generatedBarLabel9.replace(/ /g, '')+'" class="chart ">   <canvas id="barChartTime'+generatedBarLabel9.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                    $("#charts").append(' <section id="chartTime'+generatedBarLabel9.replace(/ /g, '')+'" class="chart chartHalf">   <canvas id="barChartTime'+generatedBarLabel9.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
                 } else {
                     $("#chartTime"+generatedBarLabel9.replace(/ /g, '')).remove();
-                    $("#charts").append(' <section id="chartTime'+generatedBarLabel9.replace(/ /g, '')+'" class="chart ">   <canvas id="barChartTime'+generatedBarLabel9.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                    $("#charts").append(' <section id="chartTime'+generatedBarLabel9.replace(/ /g, '')+'" class="chart chartHalf">   <canvas id="barChartTime'+generatedBarLabel9.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
                 }
                 SortByDate();
                 var finalDates = []
