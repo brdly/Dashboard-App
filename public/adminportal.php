@@ -217,6 +217,7 @@
             cursor:pointer;
             width:32%;
             height:auto;
+            min-width:320px;
         }
 
         .chartBig {
@@ -281,7 +282,17 @@
         var platform;
         var min;
         var max;
+        var seriesDates = [];
         var menuAction = "disable";
+
+        function SortByDate(){
+            seriesDates.sort(function(a,b){
+                var da = new Date(a).getTime();
+                var db = new Date(b).getTime();
+                
+                return da < db ? -1 : da > db ? 1 : 0
+              });
+        }
 
         $("#slider").bind("valuesChanged", function(e, data){
             min = data.values.min;
@@ -520,6 +531,7 @@
         });
 
         function loadChartData(selectedOpts) {
+            seriesDates = [];
             resultsArray = [];
             var timeStart = min;
             var timeEnd = max;
@@ -535,14 +547,24 @@
                 var count = 0;
                 var countF = 0;
                 var countC = 0;
-
+                var prevDate;
+                var seriesData = [];
 
                 if(dataType === "Rating" || dataType === "Worklife Balance" || dataType === "Benefits" || dataType === "Job Security" || dataType === "Management" || dataType === "Culture") {
                     $.each(selectedOpts[i], function (index, numbers) {
                         var incomingNumber = parseInt(numbers[1]);
-                        if( incomingNumber ) {
+                        if( incomingNumber % 1 === 0 ) {
+                            seriesData.push(incomingNumber);
                             var resultDate = new Date(numbers[2]);
+                            if(!!prevDate) {
+                                if(prevDate > resultDate) {
+                                    seriesData.push(null);
+                                }
+                            }
+                            
+                            prevDate = new Date(numbers[2]);
                             if(resultDate >= timeStart && resultDate <= timeEnd) {
+                                seriesDates.push(resultDate.toLocaleDateString("en-US"));
                                 if(incomingNumber >= maxInt) { maxInt = incomingNumber;}
                                 if(incomingNumber <= minInt) { minInt = incomingNumber;}
                                 total = total + incomingNumber;
@@ -551,9 +573,10 @@
                         }
                     })
                         var result = parseFloat(Math.round(total/count * 100) / 100).toFixed(2);
-                        resultsArray.push({platformName,dataType,maxInt,minInt,result,total});
+                        resultsArray.push({platformName,dataType,maxInt,minInt,result,total,seriesData,seriesDates});
                 }
 
+                
                 if(dataType === "Former Employee") {
                     $.each(selectedOpts[i], function (index, numbers) {
                         var incomingNumber = parseInt(numbers[1]);
@@ -591,13 +614,13 @@
             var generatedRadarLabel1 = [];var generatedRadarLabel2 = [];
             var generatedRadarLabel3 = [];var generatedStatusLabel1 = [];var generatedStackLabel1 = [];
 
-            var produceRatingChart = false;var produceBalanceChart = false;var produceRadarChart = false;var produceBenefitsChart = false;var produceShareChart = false;
+            var produceRatingChart = false;var produceBalanceChart = false;var produceRadarChart = false;var produceBenefitsChart = false;var produceShareChart = false;var produceRatingTimeChart = false;
             var produceSecurityChart = false;var produceManagementChart = false;var produceCultureChart = false;var produceStatusChart = false;var produceStackChart = false;
 
             var generatedBarLabel1 = "";var generatedBarLabel2 = "";var generatedBarLabel3 = "";var generatedBarLabel4 = "";var generatedBarLabel5 = "";
             var generatedBarLabel6 = "";var generatedBarLabel7 = "";var generatedBarLabel8 = "";var generatedBarLabel9 = "";
 
-            var generatedRadarXLabel1 = "";var generatedRadarXLabel2 = "";
+            var generatedRadarXLabel1 = []; var generatedRadarXPlats1 = []; var generatedRadarXLabel2 = ""; var generatedRadarXVals1 = [];
             var generatedRadarXLabel3 = "";var generatedStatusXLabel1 = "";var generatedStackXLabel1 = "";
 
             var generatedData1 = [];var generatedData2 = [];var generatedData3 = [];var generatedData4 = [];var generatedData5 = [];var generatedData6 = [];
@@ -606,7 +629,7 @@
             var currentChart = "";
             var nameShare = [];
             var itemShare = [];
-
+            var colourArray2 = [ 'red','green','blue']
             var colourArray = [
                 'rgba(15,42,60,.7)','rgba(4,167,136,.7)','rgba(144,148,163,.7)',
                 'rgba(25,52,70,.9)','rgba(14,177,146,.9)','rgba(154,158,173,.9)',
@@ -622,6 +645,18 @@
             var i = 0;
             var q = 0;
             var n = 0;
+            var radarCounter = 0;
+
+            $( ".button2" ).each(function( index, data ) {
+                if(data.id === "WorklifeBalance" && data.className === "button2 menuOn" ||
+                data.id === "Culture" && data.className === "button2 menuOn" ||
+                data.id === "Management" && data.className === "button2 menuOn" ||
+                data.id === "JobSecurity" && data.className === "button2 menuOn" ||
+                data.id === "Benefits" && data.className === "button2 menuOn" ) {
+                    radarCounter++;
+                }
+
+            })
 
             $.each(resultsArray, function (index, item) {
                 if(item.dataType === "Rating") {
@@ -629,11 +664,18 @@
                 }
             })
 
+            
+
+            var cc = 0;
+
             $.each(resultsArray, function (index, item) {
 
                 if(item.dataType === "Rating") {
                     generatedGraphLabel1.push(item.result);
                     generatedBarLabel1 = item.dataType;
+                    generatedGraphLabel9.push(item.result);
+                    generatedBarLabel9 = item.dataType;
+                    
                     
                     generatedData1.push ({
                         label:item.platformName,
@@ -642,10 +684,22 @@
                         borderWidth: 2,
                         data: [item.maxInt,item.minInt,item.result]
                     })
+                    
+                    generatedData10.push ({
+                        label:item.platformName,
+                        backgroundColor: 'rgba(0,0,0,0)',
+                        borderColor:colourArray[i],
+                        spanGaps: true,
+                        borderWidth: 3,
+                        type: 'line',
+                        data: item.seriesData.reverse()
+                    })
+
                     produceRatingChart = true;
+                    produceRatingTimeChart = true;
                 }
 
-                if(item.dataType === "Worklife Balance") {
+                if(item.dataType === "Worklife Balance" && radarCounter <= 2) {
                     generatedGraphLabel2.push(item.result);
                     generatedBarLabel2 = item.dataType;
                     
@@ -661,7 +715,7 @@
 
                 
 
-                if(item.dataType === "Benefits") {
+                if(item.dataType === "Benefits" && radarCounter <= 2) {
                     generatedGraphLabel3.push(item.result);
                     generatedBarLabel3 = item.dataType;
                     
@@ -677,7 +731,7 @@
 
                 
 
-                if(item.dataType === "Job Security") {
+                if(item.dataType === "Job Security" && radarCounter <= 2) {
                     generatedGraphLabel4.push(item.result);
                     generatedBarLabel4 = item.dataType;
                     
@@ -693,7 +747,7 @@
 
                 
 
-                if(item.dataType === "Management") {
+                if(item.dataType === "Management" && radarCounter <= 2) {
                     generatedGraphLabel5.push(item.result);
                     generatedBarLabel5 = item.dataType;
                     
@@ -709,7 +763,7 @@
 
                 
 
-                if(item.dataType === "Culture") {
+                if(item.dataType === "Culture" && radarCounter <= 2) {
                     generatedGraphLabel6.push(item.result);
                     generatedBarLabel6 = item.dataType;
                     
@@ -739,6 +793,77 @@
                     produceStatusChart = true;
                 }
 
+
+                if(radarCounter > 2) {
+
+                    if(item.dataType === "Worklife Balance" || item.dataType === "Culture" || item.dataType === "Benefits" || item.dataType === "Management" || item.dataType === "Job Security") {
+                        
+                        $("#chart"+item.dataType.replace(/ /g, '')).remove();
+                        generatedRadarXLabel1.push(item.dataType);
+                        generatedRadarXPlats1.push(item.platformName);
+                        generatedRadarXVals1.push(item.result);
+                        
+                    }
+                    cc++
+                    if(resultsArray.length === cc) {
+                            var colCount = 0;
+                            var uniqueGeneratedRadarXLabel1 = [];
+                            var uniqueGeneratedRadarXPlats1 = [];
+                            $.each(generatedRadarXLabel1, function(i, el){
+                                if($.inArray(el, uniqueGeneratedRadarXLabel1) === -1) uniqueGeneratedRadarXLabel1.push(el);
+                            });
+                            $.each(generatedRadarXPlats1, function(i, el){
+                                if($.inArray(el, uniqueGeneratedRadarXPlats1) === -1) uniqueGeneratedRadarXPlats1.push(el);
+                            });
+                            generatedRadarXLabel1 = uniqueGeneratedRadarXLabel1;
+                            generatedRadarXPlats1 = uniqueGeneratedRadarXPlats1;
+
+                            $( generatedRadarXPlats1 ).each(function( index, data ) {
+                                if(!!data) {
+
+                                    var colour = colourArray[colCount];
+
+                                    if(radarCounter === 3) {
+                                        if(colCount === 0) {
+                                            var values = [generatedRadarXVals1[0],generatedRadarXVals1[1],generatedRadarXVals1[2]];
+                                        } else if(colCount === 1) {
+                                            var values = [generatedRadarXVals1[3],generatedRadarXVals1[4],generatedRadarXVals1[5]];
+                                        } else {
+                                            var values = [generatedRadarXVals1[6],generatedRadarXVals1[7],generatedRadarXVals1[8]];
+                                        }
+                                    } else if(radarCounter === 4) {
+                                        if(colCount === 0) {
+                                            var values = [generatedRadarXVals1[0],generatedRadarXVals1[1],generatedRadarXVals1[2],generatedRadarXVals1[3]];
+                                        } else if(colCount === 1) {
+                                            var values = [generatedRadarXVals1[4],generatedRadarXVals1[5],generatedRadarXVals1[6],generatedRadarXVals1[7]];
+                                        } else {
+                                            var values = [generatedRadarXVals1[8],generatedRadarXVals1[9],generatedRadarXVals1[10],generatedRadarXVals1[11]];
+                                        }
+                                    } else if(radarCounter === 5) {
+                                        if(colCount === 0) {
+                                            var values = [generatedRadarXVals1[0],generatedRadarXVals1[1],generatedRadarXVals1[2],generatedRadarXVals1[3],generatedRadarXVals1[4]];
+                                        } else if(colCount === 1) {
+                                            var values = [generatedRadarXVals1[5],generatedRadarXVals1[6],generatedRadarXVals1[7],generatedRadarXVals1[8],generatedRadarXVals1[9]];
+                                        } else {
+                                            var values = [generatedRadarXVals1[10],generatedRadarXVals1[11],generatedRadarXVals1[12],generatedRadarXVals1[13],generatedRadarXVals1[14]];
+                                        }
+                                    }
+                                    
+                                    generatedData9.push ({
+                                        label:data,
+                                        backgroundColor: "rgba(0,0,0,0)",
+                                        borderColor: colour,
+                                        borderWidth: 4,
+                                        data: values
+                                    })
+                                    colCount++;
+                                }
+                            })
+                        produceRadarChart = true;
+                    }
+                } else {
+                    try{$("#chartRadar").remove();}catch(e){}
+                }
                 
 
                 if(item.dataType === "Rating" && n >= 2) {
@@ -754,10 +879,8 @@
                     if(q === n) {
                         generatedData8.push ({
                             label: nameShare,
-                            backgroundColor: ['rgba(15,42,60,.7)','rgba(4,167,136,.7)','rgba(144,148,163,.7)',
-                'rgba(25,52,70,.9)','rgba(14,177,146,.9)','rgba(154,158,173,.9)'],
-                            borderColor: ['rgba(15,42,60,.7)','rgba(4,167,136,.7)','rgba(144,148,163,.7)',
-                'rgba(25,52,70,.9)','rgba(14,177,146,.9)','rgba(154,158,173,.9)'],
+                            backgroundColor: ['rgba(15,42,60,.7)','rgba(4,167,136,.7)','rgba(144,148,163,.7)','rgba(25,52,70,.9)','rgba(14,177,146,.9)','rgba(154,158,173,.9)'],
+                            borderColor: ['rgba(15,42,60,.7)','rgba(4,167,136,.7)','rgba(144,148,163,.7)','rgba(25,52,70,.9)','rgba(14,177,146,.9)','rgba(154,158,173,.9)'],
                             borderWidth: 2,
                             data: itemShare
                         })
@@ -1146,20 +1269,20 @@
             } 
 
             if(produceRadarChart === true) {
-                if(document.getElementById("chart"+generatedRadarLabel1.replace(/ /g, '')) === null) {
-                    $("#charts").append(' <section id="chart'+generatedRadarLabel1.replace(/ /g, '')+'" class="chart chartBig ">   <canvas id="barChart'+generatedRadarLabel1.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                if(document.getElementById("chartRadar") === null) {
+                    $("#charts").append(' <section id="chartRadar" class="chart chartBig ">   <canvas id="barChartRadar" height="auto" width="auto"></canvas>  </section>')
                 } else {
-                    $("#chart"+generatedRadarLabel1.replace(/ /g, '')).remove();
-                    $("#charts").append(' <section id="chart'+generatedRadarLabel1.replace(/ /g, '')+'" class="chart chartBig ">   <canvas id="barChart'+generatedRadarLabel1.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                    $("#chartRadar").remove();
+                    $("#charts").append(' <section id="chartRadar" class="chart chartBig ">   <canvas id="barChartRadar" height="auto" width="auto"></canvas>  </section>')
                 }
-                const CHART = document.getElementById("barChart"+generatedRadarLabel1.replace(/ /g, ''));
+                const CHART = document.getElementById("barChartRadar");
                 Chart.defaults.scale.ticks.beginAtZero = true;
 
                 let barChart = new Chart(CHART,{
                     type: 'radar',
                     data: {
-                        labels: ["High", "Low", "Average"],
-                        datasets: generatedData3,
+                        labels: generatedRadarXLabel1,
+                        datasets: generatedData9,
                         fill: '-1'
                     },
                     options: {
@@ -1167,17 +1290,17 @@
                         responsive: true,
                         scales: {
                         xAxes: [{
-                                display: true,
+                                display: false,
                                 scaleLabel: {
                                     display: false,
-                                    labelString:  generatedRadarLabel1
+                                    labelString:  "Radar"
                                 },
                                 ticks: {
                                     max: 3
                                 }
                             }],
                         yAxes: [{
-                                display: true,
+                                display: false,
                                 ticks: {
                                     beginAtZero: true
                                 }
@@ -1185,7 +1308,7 @@
                     },
                     title: {
                         display: true,
-                        text: generatedRadarLabel1
+                        text: "Comparison via Radar Chart"
                     }
                     }
                 });
@@ -1235,6 +1358,75 @@
                     title: {
                         display: true,
                         text: generatedStackLabel1
+                    }
+                    }
+                });
+
+            }
+
+            if(produceRatingTimeChart === true) {
+                if(document.getElementById("chartTime"+generatedBarLabel9.replace(/ /g, '')) === null) {
+                    $("#charts").append(' <section id="chartTime'+generatedBarLabel9.replace(/ /g, '')+'" class="chart ">   <canvas id="barChartTime'+generatedBarLabel9.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                } else {
+                    $("#chartTime"+generatedBarLabel9.replace(/ /g, '')).remove();
+                    $("#charts").append(' <section id="chartTime'+generatedBarLabel9.replace(/ /g, '')+'" class="chart ">   <canvas id="barChartTime'+generatedBarLabel9.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                }
+                SortByDate();
+                var finalDates = []
+                $.each(seriesDates, function(i, el){
+                    if($.inArray(el, finalDates) === -1) finalDates.push(el);
+                });
+                
+                $.each(generatedData10, function(i, d){
+                    if(finalDates.length>d.data.length) {
+                        var distance = finalDates.length - d.data.length;
+                    }
+                    if(distance > 5) {
+                        finalDates = finalDates.slice(0, finalDates.length - distance);
+                    }
+                })
+            
+                const CHART = document.getElementById("barChartTime"+generatedBarLabel9.replace(/ /g, ''));
+                Chart.defaults.scale.ticks.beginAtZero = true;
+
+                let barChart = new Chart(CHART,{
+                    type: 'bar',
+                    data: {
+                        labels: finalDates,
+                        datasets: generatedData10
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            scaleLabel: "<%= ' ' + value%>",
+                        xAxes: [{
+                                display: true,
+                                scaleLabel: {
+                                    display: true,
+                                    distribution: 'series',
+                                    labelString:  generatedBarLabel9
+                                },
+                                ticks: {
+                                    max: 1
+                                }
+                            }],
+                        yAxes: [{
+                                display: true,
+                                ticks: {
+                                    beginAtZero: true,
+                                    max: 6
+                                }
+                            }]
+                    },
+                    title: {
+                        display: true,
+                        text: generatedBarLabel9
+                    },
+                    layout: {
+                        padding: {
+                            left: 10,
+                            top:10
+                        }
                     }
                     }
                 });
