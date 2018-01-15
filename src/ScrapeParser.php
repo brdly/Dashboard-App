@@ -141,11 +141,9 @@ class ScrapeParser
 
             $company = $data["company"];
             $country = $data["country"];
-            echo "company: ".$company;
             $platform_index = DatabaseHelper::findPlatformID($database,$company);
             if (sizeof($platform_index) == 0) {
                 DatabaseHelper::addPlatform($database, $company);
-                echo "added platform " . $company;
                 $platform_index = DatabaseHelper::findPlatformID($database,$company);
             }
             $platform_index_real = $platform_index[0];
@@ -155,18 +153,16 @@ class ScrapeParser
 
             $index=null;
             foreach ($this->FIELDS as $field_name){
-                echo "field name".$field_name;
-                echo "</br>";
+
                 $field_index = DatabaseHelper::findFieldID($database,$field_name);
                 if (sizeof($field_index) == 0){
                     $database = DatabaseHelper::databaseConnection();
                     DatabaseHelper::addField($database,$field_name);
-                    echo "added field :".$field_name;
                     $field_index = DatabaseHelper::findFieldID($database,$field_name);
-                    echo "</br>";
+
                     var_dump($field_index);
                 }
-                echo "</br>";
+
                 $target = $data[$field_name];
                 if ($target != null){
                     $field_index_real = $field_index[0];
@@ -174,19 +170,6 @@ class ScrapeParser
                         $field_index_real = $field_index_real["id"];
                     }
 
-                    //debug
-
-                    echo "</br>";
-                    echo "field index".$field_index_real;
-                    echo "</br>";
-                    echo "plat_index ".$platform_index_real;
-                    echo "</br>";
-                    echo "target".$target;
-                    echo "</br>";
-                    echo "index".$index;
-                    echo "</br>";
-                    echo "exec";
-                    echo "</br>";
                     //
                     //addData($dbh, $formFieldID, $platformID, $reviewID, $dataItem)
                     $result = DatabaseHelper::addData($database,$field_index_real,$platform_index_real,$index,$target);
