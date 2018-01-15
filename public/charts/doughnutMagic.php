@@ -6,13 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <base href="">
   <meta charset="utf-8">
-  <title>Doughnut Chart - Group 4</title>
+  <title>Current/Former worker feedback - Group 4</title>
   <meta name="description" content="Doughnut Chart for SPAT Task - Group 4.">
 
 </head>
 <body>
   <div>
-    <canvas id="doughnut" height="45%" width="80%"></canvas>
+    <canvas id="doughnut" height="100%" width="100%"></canvas>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 
