@@ -1,5 +1,5 @@
 <?php
-    function checkLogin($username,$password,$hashed){
+   /*  function checkLogin($username,$password,$hashed){
         if (htmlentities($username) == "adam"){
             if ($hashed){
                 //$hashedpass =  password_hash("password",PASSWORD_BCRYPT);
@@ -60,7 +60,7 @@
         //header("Location: login&form/loginBasic.php");
         //exit();
     }
-
+*/
 ?>
 <!DOCTYPE html>
 <html>
@@ -73,11 +73,16 @@
     <title>Admin Portal - Group 4</title>
     <meta name="description" content="Admin Portal for SPAT Task - Group 4.">
 
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="http://d3js.org/topojson.v1.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=BenchNine:700" rel="stylesheet">
+    <link href="/SPATProject/public/build/css/jqcloud.css" rel="stylesheet">
     <link href="/SPATProject/public/build/js/slider/demo/style.css" rel="stylesheet">
     <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="http://datamaps.github.io/scripts/datamaps.world.min.js?v=1"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
     <script src="/SPATProject/public/build/js/slider/jQDateRangeSlider-min.js"></script>
+    <script src="/SPATProject/public/build/js/jqcloud-1.0.4.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 
     <style>
@@ -285,7 +290,7 @@
             width:45%!important;
         }
         .chart{
-            float:right;
+            float:left;
             overflow:hidden;
             cursor:pointer;
             width:32%;
@@ -341,6 +346,7 @@
 
 
 <script>
+    $( document ).ready(function() {
         function Submit(path, params, method) {
             method = method || "post";
             var form = document.createElement("form");
@@ -364,9 +370,10 @@
         function clearUser(){
             Submit("adminportal.php",{Logout: 1})
         }
-    </script>
+    })
+</script>
 
-    <script>
+<script>
 
     $( document ).ready(function() {
 
@@ -383,6 +390,7 @@
         var platform;
         var min;
         var max;
+        var generatedWords = [];
         var seriesDates = [];
         var menuAction = "disable";
 
@@ -399,6 +407,7 @@
             min = data.values.min;
             max = data.values.max;
             loadChartData(selectedOpts);
+            createWordBubble("wordBubble","wordBubble",generatedWords);
         });
 
         $( ".chart" ).click(function() {
@@ -434,8 +443,16 @@
                 if(value === "Former Employee") {
                     $( "nav" ).append( '<section id="'+value.replace(/ /g, '')+'" title="'+value+'" class="button2">Employee Status</section>' );
                 } else if(value === "Review") {
-                    $( "nav" ).append( '<section id="'+value.replace(/ /g, '')+'" title="'+value+'" class="button2">Reviews</section>' );
-                } else {
+                    $( "nav" ).append( '<section id="'+value.replace(/ /g, '')+'" title="'+value+'" class="button2">Sentiment</section>' );
+                } else if(value === "Pros") {
+                    
+                } else if(value === "Date") {
+                    $( "nav" ).append( '<section id="'+value.replace(/ /g, '')+'" title="'+value+'" class="button2">Timeline</section>' );
+                } else if(value === "Location") {
+                    $( "nav" ).append( '<section id="'+value.replace(/ /g, '')+'" title="'+value+'" class="button2">Countries</section>' );
+                } else if(value === "Cons") {
+                    
+                }else {
                     $( "nav" ).append( '<section id="'+value.replace(/ /g, '')+'" title="'+value+'" class="button2">'+value+'</section>' );
                 }
             });
@@ -483,7 +500,7 @@
                                             newArr1.push(platform_data[0],option[1]);
                                             $.each(platform_data[1], function (index, value) {
                                                 var newArr2 = [];
-                                                if(option[1] === "Former Employee") {
+                                                if(option[1] === "Former Employee" || option[1] === "Date") {
                                                     newArr2.push(index, value["Rating"],value["Date"],value["Former Employee"]);
                                                 } else {
                                                     newArr2.push(index, value[option[1]],value["Date"],value["Former Employee"]);
@@ -576,6 +593,7 @@
                 }
 
                 $( ".button2" ).click(function() { 
+                    
                     var counter = 0;
                     $( ".button" ).each(function( index, data ) {
                         if(data.className.indexOf("menuOn") != -1)
@@ -591,13 +609,22 @@
                         } else { menuAction = "disable"; };
 
                         if(menuAction == "enable") { 
+                            var wordArrayOpts = []
                             if(selectedData) {
                                 $.each(selectedData, function (index, platform_data) {
                                     var newArr1 = [];
                                     newArr1.push(platform_data[0],option);
+                                    wordArrayOpts.push(platform_data[0],option);
                                     $.each(platform_data[1], function (index, value) {
                                         var newArr2 = [];
-                                        if(option === "Former Employee") { 
+                                           if(option === "Location") {  createMap(); } 
+                                        if(option === "Pros" || option === "Cons" || option === "Review") {     
+                                                var dt = new Date(value.Date); 
+                                                try{generatedWords.push({text: value.Pros["0"], weight: 0, date: dt});}catch(e){}
+                                                try{generatedWords.push({text: value.Cons["0"], weight: 0, date: dt});}catch(e){}
+                                                try{generatedWords.push({text: value.Review["0"], weight: 0, date: dt});}catch(e){}
+                                        }
+                                        if(option === "Former Employee" || option === "Date") { 
                                             newArr2.push(index, value["Rating"],value["Date"],value["Former Employee"]);
                                         } else {
                                             newArr2.push(index, value[option],value["Date"],value["Former Employee"]);
@@ -606,10 +633,12 @@
                                     })
                                         selectedOpts.push(newArr1);
                                 })
+                                createWordBubble("wordBubble","wordBubble",generatedWords);
                             } else { 
                                  //please choose a platform 
                             }
                         } else {
+                            if(option === "Location") { $("#mapbar").css('display','none'); mapMade=false; $("#container1").html('<div id="mapbar" style="display:none"><img src="/SPATProject/public/build/img/mapbar.png" /></div>'); }
                             if(selectedOpts) {
                                 try{
                                     for(var i = 0; i < selectedOpts.length; i++) {
@@ -635,6 +664,54 @@
                  }); 
         });
 
+        function createWordBubble(platform, positivity, wordlist) {
+            var timeStart = min;
+            var timeEnd = max;
+            //
+            
+            var newWordWeightedArray = [];
+            var newWordArray = [];
+            $.each(wordlist, function (index, sentence) {
+                if(sentence.date >= timeStart && sentence.date <= timeEnd) {
+                    try{var split = sentence.text.split(" ");
+                    $.each(split, function (index, word) {
+                        newWordArray.push(word)
+                    })}catch(e){} 
+                }
+            })
+            $.each(newWordArray, function (index, word) {
+                if("theofandtoainforisonthatbythiswithiyouitnotorbearefromatasyourallhavenewit'stoomakehowyet".indexOf(word) === -1) {
+                    if(word.length < 3) {} else {
+                        var meep = 0;
+                        if(newWordWeightedArray.length === 0) { 
+
+                            newWordWeightedArray.push({text: word.toLowerCase(), weight: 1}); 
+
+                        } else {
+                            
+                            for(var i = 0, len = newWordWeightedArray.length; i < len; i++) {
+                                
+                                if (newWordWeightedArray[i]['text'] === word.toLowerCase()) { 
+                                    newWordWeightedArray[i].weight = newWordWeightedArray[i].weight + 1;
+                                    meep++;
+                                } 
+                                
+                            }
+                            if(meep === 0 ) {
+                                newWordWeightedArray.push({text: word.toLowerCase(), weight: 1});
+                            }
+                        }
+                    }
+                }
+            })
+            if(newWordWeightedArray.length !== 0) { 
+                $("#bubble"+positivity).remove();
+                $("#charts").append(' <div id="bubble'+positivity+'" style="float:left;width: calc(100vw - 250px); height: 300px;margin-left:50px; border: 0px solid #ccc;" ></div> ');
+                $("#bubble"+positivity).jQCloud(newWordWeightedArray);
+            }
+
+        }
+
         function loadChartData(selectedOpts) {
             seriesDates = [];
             resultsArray = [];
@@ -655,7 +732,7 @@
                 var prevDate;
                 var seriesData = [];
 
-                if(dataType === "Rating" || dataType === "Worklife Balance" || dataType === "Benefits" || dataType === "Job Security" || dataType === "Management" || dataType === "Culture") {
+                if(dataType === "Rating" || dataType === "Date" || dataType === "Worklife Balance" || dataType === "Benefits" || dataType === "Job Security" || dataType === "Management" || dataType === "Culture") {
                     $.each(selectedOpts[i], function (index, numbers) {
                         var incomingNumber = parseInt(numbers[1]);
                         if( incomingNumber % 1 === 0 ) {
@@ -680,6 +757,8 @@
                         var result = parseFloat(Math.round(total/count * 100) / 100).toFixed(2);
                         resultsArray.push({platformName,dataType,maxInt,minInt,result,total,seriesData,seriesDates});
                 }
+
+                
 
                 
                 if(dataType === "Former Employee") {
@@ -780,8 +859,6 @@
                 if(item.dataType === "Rating") {
                     generatedGraphLabel1.push(item.result);
                     generatedBarLabel1 = item.dataType;
-                    generatedGraphLabel9.push(item.result);
-                    generatedBarLabel9 = item.dataType;
                     
                     
                     generatedData1.push ({
@@ -791,6 +868,14 @@
                         borderWidth: 2,
                         data: [item.maxInt,item.minInt,item.result]
                     })
+
+                    produceRatingChart = true;
+                }
+
+                if(item.dataType === "Date") {
+                    generatedGraphLabel9.push(item.result);
+                    generatedBarLabel9 = item.dataType;
+                    
                     
                     generatedData10.push ({
                         label:item.platformName,
@@ -802,7 +887,6 @@
                         data: item.seriesData.reverse()
                     })
 
-                    produceRatingChart = true;
                     produceRatingTimeChart = true;
                 }
 
@@ -1093,6 +1177,11 @@
                     title: {
                         display: true,
                         text: generatedBarLabel2
+                    },
+                    layout: {
+                        padding: {
+                            left: 10
+                        }
                     }
                     }
                 });
@@ -1139,6 +1228,11 @@
                     title: {
                         display: true,
                         text: generatedBarLabel3
+                    },
+                    layout: {
+                        padding: {
+                            left: 10
+                        }
                     }
                     }
                 });
@@ -1185,6 +1279,11 @@
                     title: {
                         display: true,
                         text: generatedBarLabel4
+                    },
+                    layout: {
+                        padding: {
+                            left: 10
+                        }
                     }
                     }
                 });
@@ -1231,6 +1330,11 @@
                     title: {
                         display: true,
                         text: generatedBarLabel5
+                    },
+                    layout: {
+                        padding: {
+                            left: 10
+                        }
                     }
                     }
                 });
@@ -1277,6 +1381,11 @@
                     title: {
                         display: true,
                         text: generatedBarLabel6
+                    },
+                    layout: {
+                        padding: {
+                            left: 10
+                        }
                     }
                     }
                 });
@@ -1323,6 +1432,11 @@
                     title: {
                         display: true,
                         text: "Rating by Status of Employee"
+                    },
+                    layout: {
+                        padding: {
+                            left: 10
+                        }
                     }
                     }
                 });
@@ -1416,6 +1530,11 @@
                     title: {
                         display: true,
                         text: "Comparison via Radar Chart"
+                    },
+                    layout: {
+                        padding: {
+                            left: 10
+                        }
                     }
                     }
                 });
@@ -1465,6 +1584,11 @@
                     title: {
                         display: true,
                         text: generatedStackLabel1
+                    },
+                    layout: {
+                        padding: {
+                            left: 10
+                        }
                     }
                     }
                 });
@@ -1541,11 +1665,54 @@
             }
 
         }
+        
+        var mapMade = false;
+        function createMap() {
+            if(mapMade === false) {
+                mapMade = true;
+                $("#mapbar").css('display','block');
+                var map = new Datamap({
+                    scope: 'world',
+                    element: document.getElementById('container1'),
+                    projection: 'mercator',
+                    height: 500,
+                    fills: {
+                    defaultFill: '#e8e9ec',
+                    usa: '#2d3e50',
+                    ind: '#18bb9c',
+                    can: '#b1b4be',
+                    },
+                    geographyConfig: {
+                        highlightOnHover: false,
+                        popupOnHover: false
+                    },
+                    data: {
+                    USA: {fillKey: 'usa' },
+                    GBR: {fillKey: 'usa' },
+                    FRA: {fillKey: 'usa' },
+                    RUS: {fillKey: 'lt50' },
+                    CAN: {fillKey: 'can' },
+                    BRA: {fillKey: 'gt50' },
+                    ARG: {fillKey: 'gt50'},
+                    COL: {fillKey: 'gt50' },
+                    AUS: {fillKey: 'gt50' },
+                    IND: {fillKey: 'ind' },
+                    PAK: {fillKey: 'ind' },
+                    BRA: {fillKey: 'can' },
+                    ZAF: {fillKey: 'gt50' },
+                    MAD: {fillKey: 'gt50' }       
+                    }
+                })
+            }
+            // <div id="container1" style="position: relative; width: 80%; max-height: 450px;"></div>
+        }
 
     })
-    </script>
+
+</script>
 
 </head>
+
 <body>
 
 <div id="headerTopSpacer"></div>
@@ -1566,7 +1733,9 @@
 <main>
     <div id="slider" class="hide"></div>
     <div id="charts"> </div>
-
+    <div id="container1" style="float:left;margin-left:2.5%; width: 45%; max-height: 550px;">
+        <div id="mapbar" style="display:none"><img src="/SPATProject/public/build/img/mapbar.png" /></div>
+    </div>
     <!-- 
     <section id="chartddd" class="chart chartBig ">   <canvas id="barChart" height="auto" width="auto"> <?php include_once("barMagic.php"); ?></canvas>  </section>
       -->
