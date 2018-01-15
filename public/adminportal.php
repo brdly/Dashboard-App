@@ -342,12 +342,94 @@
             padding-right:5px;
         }
 
+        @media screen and (max-width: 320px) {
+            nav {
+                display:none;
+            }
+            #mainLeftSpacer2{
+                display:none;
+            }
+
+            #AmazonMechanicalTurk {
+                background-image: url(build/img/amt.png);
+                background-repeat: no-repeat;
+                background-size: 20px auto;
+                background-position: 5px 9px;
+                padding-right: 5px;
+            }
+
+            .titlebox {
+                padding-left: 0px;
+                margin-left: 0px;
+                background-image: url(build/img/menu.png);
+                background-repeat: no-repeat;
+                background-position: center center;
+                background-size: contain;
+                font-size: 20px;
+                margin-top: 13px;
+                color: rgb(24,187,156);
+                line-height: 150px;
+                overflow:hidden;
+                cursor:pointer;
+                color: rgb(24,187,156);
+            }
+
+            #Upwork {
+                background-image: url(build/img/upwork.png);
+                background-repeat: no-repeat;
+                background-size: 20px auto;
+                background-position: 2px center;
+            }
+
+            #Fiverr {
+                background-image: url(build/img/fiverr.png);
+                background-repeat: no-repeat;
+                background-size: 20px auto;
+                background-position: 4px center;
+                padding-right: 0px;
+            }
+
+            header > section {
+                margin: 0px;
+                padding: 4px;
+                height: 22px;
+                margin-right: 3px;
+                min-width:50px;
+                width: 80px;
+                line-height: 22px;
+                font-size: 18px;
+            }
+
+            .min{
+                height:5px;
+            }
+
+            main {
+                float: left;
+                width: calc(100vw - 20px);
+                height: calc(100vh - 71px);
+                overflow: auto;
+            }
+            #slider {
+                float: left;
+                width: calc(100vw - 30px);
+                margin-left: 5px;
+                margin-bottom: 2px;
+                height: 40px;
+            }
+        }
+
     </style>
 
-
 <script>
+
     $( document ).ready(function() {
-        function Submit(path, params, method) {
+
+        $(document).on('click', '.titlebox', function () {
+            $("nav").animate({width:'toggle'},400);
+        });
+
+          function Submit(path, params, method) {
             method = method || "post";
             var form = document.createElement("form");
             form.setAttribute("method", method);
@@ -370,12 +452,6 @@
         function clearUser(){
             Submit("adminportal.php",{Logout: 1})
         }
-    })
-</script>
-
-<script>
-
-    $( document ).ready(function() {
 
         var allData;
         var selectedData = []; //for chosen platforms, auto-update the data on a timer
@@ -1736,9 +1812,6 @@
     <div id="container1" style="float:left;margin-left:2.5%; width: 45%; max-height: 550px;">
         <div id="mapbar" style="display:none"><img src="/SPATProject/public/build/img/mapbar.png" /></div>
     </div>
-    <!-- 
-    <section id="chartddd" class="chart chartBig ">   <canvas id="barChart" height="auto" width="auto"> <?php include_once("barMagic.php"); ?></canvas>  </section>
-      -->
       
 </main>
 
