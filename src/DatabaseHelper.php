@@ -13,10 +13,10 @@ use SPATApp\Config;
 
 class DatabaseHelper
 {
-    private static function databaseConnection()
+    public static function databaseConnection()
     {
-        $dsn      = "mysql:dbname=" . Config::$dbName . ";host=" . Config::$dbHost;
-        $user     = Config::$dbUsername;
+        $dsn = "mysql:dbname=" . Config::$dbName . ";host=" . Config::$dbHost;
+        $user = Config::$dbUsername;
         $password = Config::$dbPassword;
         try {
             return new PDO($dsn, $user, $password);
@@ -27,33 +27,45 @@ class DatabaseHelper
         return null;
     }
 
-    public static function addField($formField)
+    public static function addField($dbh, $formField)
     {
-        $dbh = self::databaseConnection();
-
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
         $sth = $dbh->prepare("INSERT INTO FormFields VALUES (DEFAULT, :formField, DEFAULT)", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
-        return $sth->execute(array(':formField' => $formField));
+        $result = $sth->execute(array(':formField' => $formField));
+
+        if (!$result){
+            echo $sth->errorInfo();
+        }
+
+        return $result;
     }
 
-    public static function addData($formField, $dataItem)
+    public static function addPlatform($dbh, $platform)
     {
-        $dbh = self::databaseConnection();
+        $sth = $dbh->prepare("INSERT INTO Platforms VALUES (DEFAULT, :platform, DEFAULT)", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
-        $sth = $dbh->prepare("INSERT INTO FormData VALUES (DEFAULT, :formField, :dataItem, DEFAULT)", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-
-        return $sth->execute(array(':formField' => $formField, ':dataItem' => $dataItem));
+        return $sth->execute(array(':platform' => $platform));
     }
 
-    public static function edit($table, $id, $data)
+    public static function addData($dbh, $formField, $platformID, $reviewID, $dataItem)
+    {
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+        $sth = $dbh->prepare("INSERT INTO FormData VALUES (DEFAULT, :formField, :platformID, :reviewID, :dataItem, DEFAULT)", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+        $result =$sth->execute(array(':formField' => $formField, ':platformID' => $platformID, ':reviewID' => $reviewID, ':dataItem' => $dataItem));
+        if (!$result){
+            echo $sth->errorInfo();
+        }
+        return $result;
+    }
+
+    public static function edit($dbh, $table, $id, $data)
     {
         //
     }
 
-    public static function delete($tableName, $id)
+    public static function delete($dbh, $tableName, $id)
     {
-        $dbh = self::databaseConnection();
-
         $tableName = \htmlspecialchars($tableName);
 
         $sth = $dbh->prepare("UPDATE $tableName SET `deleted` = 1 WHERE `id` = :fieldID", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
@@ -61,35 +73,105 @@ class DatabaseHelper
         return $sth->execute(array(':fieldID' => $id));
     }
 
-    public static function get($tableName, $id)
+    public static function get($dbh, $tableName, $id)
     {
-        $dbh = self::databaseConnection();
-
         $tableName = \htmlspecialchars($tableName);
 
-        $sth = $dbh->prepare("SELECT `fieldName` FROM $tableName WHERE `id` = :fieldID AND `deleted` = 0", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+        $sth = $dbh->prepare("SELECT `name` FROM $tableName WHERE `id` = :fieldID AND `deleted` = 0", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
         $sth->execute(array(':fieldID' => $id));
 
         return $sth->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function findFieldID($stringData)
+    public static function findFieldID($dbh, $stringData)
     {
-        $dbh = self::databaseConnection();
-
-        $sth = $dbh->prepare("SELECT `id` FROM `FormFields` WHERE `fieldName` = :fieldString AND `deleted` = 0", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+        $sth = $dbh->prepare("SELECT `id` FROM `FormFields` WHERE `name` = :fieldString AND `deleted` = 0", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
         $sth->execute(array(':fieldString' => $stringData));
 
         return $sth->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function getFormDataFromField($id, $limit)
+    public static function findPlatformID($dbh, $stringData)
     {
-        $dbh = self::databaseConnection();
+        $sth = $dbh->prepare("SELECT `id` FROM `Platforms` WHERE `name` = :fieldString AND `deleted` = 0", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
-        $sth = $dbh->prepare("SELECT `formData` FROM FormData WHERE `idFormField` = :fieldID AND `deleted` = 0 AND (SElECT `deleted` FROM FormFields WHERE `id` = :fieldID) = 0", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+        $sth->execute(array(':fieldString' => $stringData));
+
+        return $sth->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function getFormDataFromField($dbh, $id)
+    {
+        $sth = $dbh->prepare("SELECT * FROM FormData WHERE `idFormField` = :fieldID AND `deleted` = 0 AND (SElECT `deleted` FROM FormFields WHERE `id` = :fieldID) = 0", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $sth->execute(array(':fieldID' => $id));
+
+        return $sth->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function getAllFormData($dbh)
+    {
+        $sth = $dbh->prepare("SELECT * FROM FormData WHERE `deleted` = 0", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $sth->execute();
+
+        return $sth->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function getFormDataFromPlatform($dbh, $id)
+    {
+        $sth = $dbh->prepare("SELECT * FROM FormData WHERE `idPlatform` = :fieldID AND `deleted` = 0 AND (SElECT `deleted` FROM Platforms WHERE `id` = :fieldID) = 0", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $sth->execute(array(':fieldID' => $id));
+
+        return $sth->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function getPlatforms($dbh)
+    {
+        $sth = $dbh->prepare("SELECT `name` FROM Platforms WHERE `deleted` = 0", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $sth->execute();
+
+        return $sth->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function getFormFields($dbh)
+    {
+        $sth = $dbh->prepare("SELECT `name` FROM FormFields WHERE `deleted` = 0", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $sth->execute();
+
+        return $sth->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function getNextUniqueIndex($dbh, $tableName)
+    {
+        $tableName = \htmlspecialchars($tableName);
+
+        $sth = $dbh->prepare("SELECT COUNT('id') FROM $tableName", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $sth->execute();
+
+        $response = $sth->fetchAll(PDO::FETCH_ASSOC);
+        $response = $response[0]["COUNT('id')"];
+        return $response + 1;
+    }
+
+    public static function getUniqueReviewIDsFromPlatform($dbh, $id)
+    {
+        $sth = $dbh->prepare("SELECT DISTINCT `idReview` FROM FormData WHERE `deleted` = 0 AND `idPlatform` = :fieldID", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $sth->execute(array(':fieldID' => $id));
+
+        return $sth->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function getReviewFromReviewID($dbh, $id)
+    {
+        $sth = $dbh->prepare("SELECT * FROM FormData WHERE `deleted` = 0 AND `idReview` = :fieldID", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
         $sth->execute(array(':fieldID' => $id));
 
