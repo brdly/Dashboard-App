@@ -17,7 +17,9 @@
         "Date",
         "Review",
         "Pros",
-        "Cons"
+        "Cons",
+        "Wage",
+        "Hours"
     ],
     "Amazon Mechanical Turk":{
         "1":{
@@ -31,6 +33,7 @@
             "Location":" – San Francisco, CA –",
             "Date":"June 24 2016",
             "Review":"I get to set my own schedule, and work wherever I want with no supervision. I am entirely responsible for my workday. The only downfalls are that I don't get benefits, or retirement. Also, it's not quite as reliable a paycheck as I would like. I'm looking for something I can settle into for the next 25 years.",
+            
             "Pros":[
                 "Total Freedom",
                 "Setting my own schedule",
@@ -43,7 +46,9 @@
                 "unreliable compensation",
                 "no benefits",
                 "no retirement"
-            ]
+            ],
+            "Wage":"7",
+            "Hours":"5"
         },
         "13":{
             "Rating":"5",
@@ -61,7 +66,9 @@
             ],
             "Cons":[
                 "Work at Home"
-            ]
+            ],
+            "Wage":"7",
+            "Hours":"5"
         },
         "25":{
             "Rating":"5",
@@ -79,7 +86,9 @@
             ],
             "Cons":[
                 "No benefits"
-            ]
+            ],
+            "Wage":"7",
+            "Hours":"5"
         },
         "37":{
             "Rating":"4",
@@ -91,7 +100,9 @@
             "Former Employee":"Current ",
             "Location":" – Anywhere –",
             "Date":"November 26 2017",
-            "Review":"turking is easy work to do while sitting at home, it is basically a part time thing for pocket change ,BUT if you work alot and build up hits you can make 300-500 a week earning a basic paycheck"
+            "Review":"turking is easy work to do while sitting at home, it is basically a part time thing for pocket change ,BUT if you work alot and build up hits you can make 300-500 a week earning a basic paycheck",
+            "Wage":"7",
+            "Hours":"5"
         },
         "47":{
             "Rating":"3",
@@ -109,7 +120,9 @@
             ],
             "Cons":[
                 "pay"
-            ]
+            ],
+            "Wage":"7",
+            "Hours":"5"
         },
         "59":{
             "Rating":"5",
@@ -118,6 +131,8 @@
             "Job Security":"20",
             "Management":"100",
             "Culture":"100",
+            "Wage":"7",
+            "Hours":"5",
             "Former Employee":"Current ",
             "Location":" – at home –",
             "Date":"October 30 2017",
@@ -133,6 +148,8 @@
             "Former Employee":"Current ",
             "Location":" – Internet –",
             "Date":"September 25 2017",
+            "Wage":"7",
+            "Hours":"5",
             "Review":"better requester and pay needed, good for extra pocket money, not to live on. there are hundreds of jobs available, but the pay is merely a couple of cents per hour."
         },
         "79":{
@@ -145,6 +162,8 @@
             "Former Employee":"Current ",
             "Location":" – Seattle, WA –",
             "Date":"August 27 2017",
+            "Wage":"7",
+            "Hours":"5",
             "Review":"Amazon Mechanical Turk is a pay per HIT, like finding an email, writing a web description. So don't expect big bucks, just nice pocket money. HITS start as low as a penny and go all the way up to $10+."
         },
         "89":{
@@ -166,7 +185,9 @@
                 "Very low pay",
                 "no social environment",
                 "no promotions"
-            ]
+            ],
+            "Wage":"7",
+            "Hours":"5"
         },
         "101":{
             "Rating":"5",
@@ -185,7 +206,9 @@
             ],
             "Cons":[
                 "Some HIT's are very low pay"
-            ]
+            ],
+            "Wage":"7",
+            "Hours":"5"
         },
         "113":{
             "Rating":"3",
@@ -197,6 +220,8 @@
             "Former Employee":"Current ",
             "Location":" – Work at home –",
             "Date":"August 2 2017",
+            "Wage":"7",
+            "Hours":"5",
             "Review":"Never managed to invest enough time, find the right group of hits, much less get a Master's rating with possibly the first reason why, but doing online tasks has paid for a phone, tablet and several PC upgrades."
         },
         "123":{
@@ -215,7 +240,9 @@
             ],
             "Cons":[
                 "Does not compensate well"
-            ]
+            ],
+            "Wage":"7",
+            "Hours":"5"
         },
         "135":{
             "Rating":"1",
@@ -233,7 +260,9 @@
             ],
             "Cons":[
                 "You barely make any progress."
-            ]
+            ],
+            "Wage":"7",
+            "Hours":"5"
         },
         "147":{
             "Rating":"5",
@@ -245,6 +274,8 @@
             "Former Employee":"Current ",
             "Location":" – Home Based –",
             "Date":"June 14 2017",
+            "Wage":"7",
+            "Hours":"5",
             "Review":"Very convenient and pleasant work environment. Great work from home opportunities. Must be willing to put in the work to earn qualifications and advance."
         },
         "157":{
@@ -257,6 +288,8 @@
             "Former Employee":"Current ",
             "Location":" – At home. –",
             "Date":"May 30 2017",
+            "Wage":"7",
+            "Hours":"5",
             "Review":"Amazon Mechanical Turk has been helpful in having some legit extra cash coming in. There are so many scam websites and some take a long time to cashout. With Mechanical Turk, they do pay right away and there is usually something to do, to earn.",
             "Pros":[
                 "Is 24 X 7 and they pay reliably."
@@ -281,7 +314,9 @@
             ],
             "Cons":[
                 "Inconsistent pay."
-            ]
+            ],
+            "Wage":"7",
+            "Hours":"5"
         },
         "181":{
             "Rating":"3",
@@ -292,6 +327,8 @@
             "Culture":"60",
             "Former Employee":"Former ",
             "Location":" – Home –",
+            "Wage":"7",
+            "Hours":"5",
             "Date":"March 16 2017",
             "Review":"Was a great way to instantly get work from home. Setup an account and was able to get to work. There's thousands of small job listings each day that you can pick and choose from. No boss. No face to face customer support. Carried a ton of perks with working from home with the flexibility along with the downsides of inconstant earnings from month to month."
         },
@@ -302,6 +339,8 @@
             "Job Security":"0",
             "Management":"0",
             "Culture":"0",
+            "Wage":"7",
+            "Hours":"5",
             "Former Employee":"Current ",
             "Location":" – Seattle, WA –",
             "Date":"March 16 2017",
@@ -323,7 +362,9 @@
             ],
             "Cons":[
                 "some tasks are too hard to qualify for"
-            ]
+            ],
+            "Wage":"7",
+            "Hours":"5"
         },
         "213":{
             "Rating":"5",
@@ -342,7 +383,9 @@
             ],
             "Cons":[
                 "No guaranteed money. Competing with others for the same jobs."
-            ]
+            ],
+            "Wage":"7",
+            "Hours":"5"
         },
         "225":{
             "Rating":"3",
@@ -351,6 +394,8 @@
             "Job Security":"20",
             "Management":"20",
             "Culture":"60",
+            "Wage":"7",
+            "Hours":"5",
             "Former Employee":"Current ",
             "Location":" – Online –",
             "Date":"November 11 2015",
@@ -365,6 +410,8 @@
             "Job Security":"80",
             "Management":"80",
             "Culture":"80",
+            "Wage":"7",
+            "Hours":"5",
             "Former Employee":"Former ",
             "Location":" – Remote –",
             "Date":"December 20 2017",
@@ -377,6 +424,8 @@
             "Job Security":"60",
             "Management":"100",
             "Culture":"40",
+            "Wage":"7",
+            "Hours":"5",
             "Former Employee":"Current ",
             "Location":" – pakisan –",
             "Date":"December 29 2017",
@@ -398,7 +447,9 @@
             ],
             "Cons":[
                 "Surcharges"
-            ]
+            ],
+            "Wage":"7",
+            "Hours":"5"
         },
         "267":{
             "Rating":"3",
@@ -410,6 +461,8 @@
             "Former Employee":"Current ",
             "Location":" – Freelancing –",
             "Date":"November 14 2017",
+            "Wage":"7",
+            "Hours":"5",
             "Review":"I would say that fiverr is a freelancing site and there are no special benefits. If you do not meet a target, you could get no or little chance of success or earnings."
         },
         "277":{
@@ -429,7 +482,9 @@
             "Cons":[
                 "Long hours",
                 "little pay"
-            ]
+            ],
+            "Wage":"7",
+            "Hours":"5"
         },
         "289":{
             "Rating":"2",
@@ -441,6 +496,8 @@
             "Former Employee":"Current ",
             "Location":" – Online –",
             "Date":"October 28 2017",
+            "Wage":"7",
+            "Hours":"5",
             "Review":"It's a platform for skill-based service seller.It's a good opportunity for most of the service provider.It's very competitive and it's cheap and fake service provider are available."
         },
         "299":{
@@ -450,6 +507,8 @@
             "Job Security":"100",
             "Management":"100",
             "Culture":"100",
+            "Wage":"7",
+            "Hours":"5",
             "Former Employee":"Former ",
             "Location":" – Virginia –",
             "Date":"October 9 2017",
@@ -471,7 +530,9 @@
             ],
             "Cons":[
                 "A lot of competition"
-            ]
+            ],
+            "Wage":"7",
+            "Hours":"5"
         },
         "321":{
             "Rating":"5",
@@ -490,7 +551,9 @@
             ],
             "Cons":[
                 "small profit"
-            ]
+            ],
+            "Wage":"7",
+            "Hours":"5"
         },
         "333":{
             "Rating":"4",
@@ -502,6 +565,8 @@
             "Former Employee":"Current ",
             "Location":" – Online –",
             "Date":"July 29 2017",
+            "Wage":"7",
+            "Hours":"5",
             "Review":"Gives you an opportunity to work from home.Fiverr is a global online marketplace offering tasks and services, beginning at a cost of $5 per job performed, from which it gets its name. The site is primarily used by freelancers who use Fiverr to offer services to customers worldwide.[2] Currently, Fiverr lists more than three million services on the site that range between $5 and $500."
         },
         "343":{
@@ -523,6 +588,8 @@
             "Job Security":"80",
             "Management":"80",
             "Culture":"60",
+            "Wage":"7",
+            "Hours":"5",
             "Former Employee":"Former ",
             "Location":" – US Based company –",
             "Date":"June 21 2017",
@@ -544,7 +611,9 @@
             ],
             "Cons":[
                 "Clients aren't very often"
-            ]
+            ],
+            "Wage":"7",
+            "Hours":"5"
         },
         "375":{
             "Rating":"4",
@@ -562,7 +631,9 @@
             ],
             "Cons":[
                 "0"
-            ]
+            ],
+            "Wage":"7",
+            "Hours":"5"
         },
         "387":{
             "Rating":"2",
@@ -574,6 +645,8 @@
             "Former Employee":"Former ",
             "Location":" – online –",
             "Date":"June 6 2017",
+            "Wage":"7",
+            "Hours":"5",
             "Review":"Freelance didn't work out for me. Hard to find real work and good pay. The whole Fiverr model is messed up, at least when I was there. Asking for essentially $3 for 500 words after fees is ridiculous"
         },
         "397":{
@@ -586,6 +659,8 @@
             "Former Employee":"Former ",
             "Location":" – New York, NY –",
             "Date":"April 22 2017",
+            "Wage":"7",
+            "Hours":"5",
             "Review":"I am a professional writer with a passion for extensive writing. I have over 7years experience in helping companies and firms write highly SEO article"
         },
         "407":{
@@ -595,6 +670,8 @@
             "Job Security":"20",
             "Management":"20",
             "Culture":"60",
+            "Wage":"7",
+            "Hours":"5",
             "Former Employee":"Former ",
             "Location":" – online –",
             "Date":"February 8 2017",
@@ -607,6 +684,8 @@
             "Job Security":"60",
             "Management":"60",
             "Culture":"60",
+            "Wage":"7",
+            "Hours":"5",
             "Former Employee":"Current ",
             "Location":" – Utah –",
             "Date":"December 19 2016",
@@ -619,6 +698,8 @@
             "Job Security":"100",
             "Management":"100",
             "Culture":"100",
+            "Wage":"7",
+            "Hours":"5",
             "Former Employee":"Former ",
             "Location":" – united states of america –",
             "Date":"December 15 2016",
@@ -631,6 +712,8 @@
             "Job Security":"100",
             "Management":"100",
             "Culture":"100",
+            "Wage":"7",
+            "Hours":"5",
             "Former Employee":"Current ",
             "Location":" – Work at Home –",
             "Date":"December 10 2016",
@@ -646,6 +729,8 @@
             "Job Security":"100",
             "Management":"100",
             "Culture":"100",
+            "Wage":"7",
+            "Hours":"5",
             "Former Employee":"Current ",
             "Location":" – Work at Home –",
             "Date":"October 3 2016",
@@ -666,6 +751,8 @@
             "Job Security":"100",
             "Management":"100",
             "Culture":"100",
+            "Wage":"7",
+            "Hours":"5",
             "Former Employee":"Current ",
             "Location":" – San Francisco, CA –",
             "Date":"June 10 2016",
@@ -678,6 +765,8 @@
             "Job Security":"80",
             "Management":"80",
             "Culture":"80",
+            "Wage":"7",
+            "Hours":"5",
             "Former Employee":"Current ",
             "Location":" – United States –",
             "Date":"January 10 2018",
@@ -697,7 +786,9 @@
             "Pros":[
                 "Your opportunity to earn more is unlimited but the job security is very low since it was freelancing. Your client can cancel your contract anytime",
                 "but the Upwork customer service are always there to help you."
-            ]
+            ],
+            "Wage":"7",
+            "Hours":"5"
         },
         "491":{
             "Rating":"4",
@@ -716,7 +807,9 @@
             ],
             "Cons":[
                 "set your availability) and stress-free "
-            ]
+            ],
+            "Wage":"7",
+            "Hours":"5"
         },
         "503":{
             "Rating":"5",
@@ -728,6 +821,8 @@
             "Former Employee":"Current ",
             "Location":" – Brentwood, CA –",
             "Date":"January 5 2018",
+            "Wage":"7",
+            "Hours":"5",
             "Review":"It is very helpful and easy to use. It assists you in connecting with the people you need to. I enjoy being able to set my own hours and desired salvery."
         },
         "513":{
@@ -758,7 +853,9 @@
             ],
             "Cons":[
                 "Competitive Job Applications"
-            ]
+            ],
+            "Wage":"7",
+            "Hours":"5"
         },
         "535":{
             "Rating":"5",
@@ -777,7 +874,9 @@
             ],
             "Cons":[
                 "clients can be pushy"
-            ]
+            ],
+            "Wage":"7",
+            "Hours":"5"
         },
         "547":{
             "Rating":"5",
@@ -795,7 +894,9 @@
             ],
             "Cons":[
                 "Limited Connects"
-            ]
+            ],
+            "Wage":"7",
+            "Hours":"5"
         },
         "559":{
             "Rating":"4",
@@ -810,7 +911,9 @@
             "Review":"As a side job, it was very good. When I had down time, I would pick up a job and keep myself busy on another task\/job. The clients I worked with were very good to, they knew exactly what they wanted.",
             "Pros":[
                 "Unless you are constantly working\/applying your account goes private"
-            ]
+            ],
+            "Wage":"7",
+            "Hours":"5"
         },
         "570":{
             "Rating":"4",
@@ -828,7 +931,9 @@
             ],
             "Cons":[
                 "too high a percentage"
-            ]
+            ],
+            "Wage":"7",
+            "Hours":"5"
         },
         "582":{
             "Rating":"5",
@@ -846,7 +951,9 @@
             ],
             "Cons":[
                 "Fees are too high"
-            ]
+            ],
+            "Wage":"7",
+            "Hours":"5"
         },
         "594":{
             "Rating":"5",
@@ -858,6 +965,8 @@
             "Former Employee":"Current ",
             "Location":" – Chicago, IL –",
             "Date":"November 30 2017",
+            "Wage":"7",
+            "Hours":"5",
             "Review":"Upwork is a freelance organization that allows you to pick your own hours. It is very helpful for freelancers but it is also extremely competitive. It is tough to find clients at first but the more quality work you complete the better business gets."
         },
         "604":{
@@ -870,6 +979,8 @@
             "Former Employee":"Current ",
             "Location":" – Dinajpur –",
             "Date":"November 28 2017",
+            "Wage":"7",
+            "Hours":"5",
             "Review":"I am very happy to work with Upwork.com. Upwork is the very good marketplace. Their clients are very good and friendly behaviors. Upwork payment system also very good. I am appreciated."
         },
         "614":{
@@ -882,6 +993,8 @@
             "Former Employee":"Former ",
             "Location":" – Bitola –",
             "Date":"November 27 2017",
+            "Wage":"7",
+            "Hours":"5",
             "Review":"All an all it was awesome working for someone! I was working with a director, and the communication was crucial for the job success. We did that part smooth and it was fun"
         },
         "624":{
@@ -894,6 +1007,8 @@
             "Former Employee":"Current ",
             "Location":" – San Diego, CA –",
             "Date":"November 25 2017",
+            "Wage":"7",
+            "Hours":"5",
             "Review":"You can work any time you wont on project you think fit best to your skills. Great workspase to start growing yourself. Communicate with different professionals"
         },
         "634":{
@@ -906,6 +1021,8 @@
             "Former Employee":"Current ",
             "Location":" – Houston, TX –",
             "Date":"November 15 2017",
+            "Wage":"7",
+            "Hours":"5",
             "Review":"It's basic freelance work. You source out a potential client, or are searched by. Your review the required work, if acceptable, you set some terms and a offered rate. If client accepts, you begin work as required. If work is acceptable, you received payment immediately. Very easy system with open communication. I highly recommend it."
         },
         "644":{
@@ -924,7 +1041,9 @@
             ],
             "Cons":[
                 "Difficult to find clients willing to pay competitive price"
-            ]
+            ],
+            "Wage":"7",
+            "Hours":"5"
         },
         "656":{
             "Rating":"4",
@@ -942,7 +1061,9 @@
             ],
             "Cons":[
                 "Fake clients"
-            ]
+            ],
+            "Wage":"7",
+            "Hours":"5"
         },
         "668":{
             "Rating":"1",
@@ -960,7 +1081,9 @@
             ],
             "Cons":[
                 "A false promise of opportunity - run"
-            ]
+            ],
+            "Wage":"7",
+            "Hours":"5"
         },
         "680":{
             "Rating":"4",
@@ -980,7 +1103,9 @@
             "Cons":[
                 "Time consuming",
                 "stressful"
-            ]
+            ],
+            "Wage":"7",
+            "Hours":"5"
         }
     }
 }
