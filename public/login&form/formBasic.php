@@ -42,7 +42,7 @@
         {
             background-color:rgb(45,62,80);
             width: 6%;
-            height: 2100px;
+            height: 2300px;
             float: left;
             margin-top: -500px;
         }
@@ -61,14 +61,19 @@
     <form name="form1" method="post" action="../../public/passingdata.php">
         <h1>Please fill out the form:</h1>
         <div id="formFields">
-
             <label>What Platform are you reviewing? </label>
             <select name = "platform" required>
                 <option value="Fiverr">Fiverr</option>
                 <option value="Upwork">Upwork</option>
-                <option value="AMT">AMT</option>
-                <option value="CrowdFlower">CrowdFlower</option>
-                <option value="ClickWorker">ClickWorker</option>
+                <option value="Amazon Mechanical Turk">AMT</option>
+            </select>
+            <label>What is your overall review </label>
+            <select name = "rating" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
             </select>
             <label>How would you rate the work / life balance? </label>
             <select name = "worklife_balance" required>
@@ -119,17 +124,17 @@
                 <option value="Current">current</option>
                 <option value="Former">former</option>
             </select>
-            <label>Please write your review here </label>
-            <textarea name="review" rows="20" cols="80">
+            <label>Please write your review here: </label>
+            <textarea  maxlength="425" name="review" rows="20" cols="80">
 
             </textarea>
 
             <label>Pros? </label>
-            <textarea name="pros" rows="10" cols="80">
+            <textarea maxlength="50" name="pros" rows="10" cols="80">
 
             </textarea>
             <label>Cons?</label>
-            <textarea name="cons" rows="10" cols="80">
+            <textarea maxlength="50" name="cons" rows="10" cols="80">
 
             </textarea>
         </div>
