@@ -239,7 +239,7 @@
 
         #slider {
             float:left;
-            width:calc(100vw - 320px);
+            width:calc(100vw - 400px);
             margin-left:50px;
             margin-bottom:10px;
             height:40px;
@@ -280,10 +280,9 @@
 
         }
 
-
         .chartHalf {
             float:left!important;
-            width:50%!important;
+            width:40%!important;
         }
         .chartDar {
             float:left!important;
@@ -293,7 +292,9 @@
             float:left;
             overflow:hidden;
             cursor:pointer;
-            width:32%;
+            width:44%;
+            margin-left:3%;
+            margin-bottom:40px;
             height:auto;
             min-width:320px;
             min-height:200px;
@@ -340,6 +341,25 @@
             background-size: 45px auto;
             background-position: 10px 5px;
             padding-right:5px;
+        }
+
+        #helpTips{
+            display:none;
+            position: fixed;
+            bottom: 0px;
+            right: 0;
+            width: calc(100vw - 179px);
+            height: 24px;
+            font-size: 20px;
+            line-height: 24px;
+            background-color: rgb(45,62,80);
+            border-top: 1px rgb(24,187,156) solid;
+            color: white;
+        }
+
+        .helpOn {
+            background-color: rgb(24,187,156);
+            border-radius: 12px;
         }
 
         @media screen and (max-width: 320px) {
@@ -453,6 +473,47 @@
             Submit("adminportal.php",{Logout: 1})
         }
 
+        $( "#helper" ).click(function() {
+            $( this ).toggleClass( "helpOn" );
+            if($( this ).hasClass( "helpOn" )) {
+                $( "#helpTips" ).show("slow");
+                $( "#helpTips" ).slideDown();
+            } else {
+                $( "#helpTips" ).hide("slow");
+                $( "#helpTips" ).slideUp();
+            }
+        })
+
+        function loadHelperTips(content) {
+            if($( "#helper" ).hasClass( "helpOn" )) {
+                if(content.textContent === "Rating") {
+                    $( "#helpTips" ).html("Rating: Overall rating voted by the the users for the platform(s)");
+                } else if(content.textContent === "Worklife Balance") {
+                    $( "#helpTips" ).html("Worklife Balance: How easy the worker finds it to separate their life from their work");
+                } else if(content.textContent === "Benefits") {
+                    $( "#helpTips" ).html("Benefits: The benefits felt by the worker in this job role");
+                } else if(content.textContent === "Job Security") {
+                    $( "#helpTips" ).html("Job Security: How secure the worker feels in this job and it's future");
+                } else if(content.textContent === "Support") {
+                    $( "#helpTips" ).html("Support: The support structure accessible to the worker");
+                } else if(content.textContent === "Relationship") {
+                    $( "#helpTips" ).html("Relationship: The relations between the worker and the platform they use");
+                } else if(content.textContent === "Status") {
+                    $( "#helpTips" ).html("Status: Whether the worker is a currently working for this platform or not");
+                } else if(content.textContent === "Countries") {
+                    $( "#helpTips" ).html("World Map: Country where the worker resides");
+                } else if(content.textContent === "Timeline") {
+                    $( "#helpTips" ).html("Timeline Chart: Overall platform rating over a specific time period");
+                } else if(content.textContent === "Sentiment") {
+                    $( "#helpTips" ).html("Sentiment Bubble: Words most frequently used in reviews of a platform");
+                } else if(content.textContent === "Wage") {
+                    $( "#helpTips" ).html("Wage Chart: The wage (in dollars) a worker gets on average from their platform");
+                } else if(content.textContent === "Hours") {
+                    $( "#helpTips" ).html("Hours Chart: The amount of hours a worker will generally spend per day on the platform");
+                }
+            }
+        }
+
         var allData;
         var selectedData = []; //for chosen platforms, auto-update the data on a timer
         //selectedData is all the data from the DB for the chosen platforms
@@ -517,9 +578,13 @@
 
             $.each(data.form_fields, function (index, value) {
                 if(value === "Former Employee") {
-                    $( "nav" ).append( '<section id="'+value.replace(/ /g, '')+'" title="'+value+'" class="button2">Employee Status</section>' );
+                    $( "nav" ).append( '<section id="'+value.replace(/ /g, '')+'" title="'+value+'" class="button2">Status</section>' );
                 } else if(value === "Review") {
                     $( "nav" ).append( '<section id="'+value.replace(/ /g, '')+'" title="'+value+'" class="button2">Sentiment</section>' );
+                } else if(value === "Management") {
+                    $( "nav" ).append( '<section id="'+value.replace(/ /g, '')+'" title="'+value+'" class="button2">Support</section>' );
+                }  else if(value === "Culture") {
+                    $( "nav" ).append( '<section id="'+value.replace(/ /g, '')+'" title="'+value+'" class="button2">Relationship</section>' );
                 } else if(value === "Pros") {
                     
                 } else if(value === "Date") {
@@ -541,6 +606,7 @@
 
                 if($( this ).hasClass( "menuOn" )) {
                     menuAction = "enable";
+                    createWordBubble("wordBubble","wordBubble",generatedWords);
                 } else { 
                     var counter = 0;
                     $( ".button" ).each(function( index, data ) {
@@ -551,6 +617,10 @@
                         $( ".button2" ).each(function( index, data ) {
                             $( this ).removeClass( "menuOn" );
                         })
+                        generatedWords = [];
+                        $("#mapbar").css('display','none'); mapMade=false; $("#container1").html('<div id="mapbar" style="display:none"><img src="/SPATProject/public/build/img/mapbar.png" /></div>');
+                    } else if(counter <= 1) {  $("#chartRatingShare".replace(/ /g, '')).remove(); } {
+                        createWordBubble("wordBubble","wordBubble",generatedWords);
                     }
                     menuAction = "disable"; 
                 };
@@ -669,6 +739,8 @@
                 }
 
                 $( ".button2" ).click(function() { 
+
+                    loadHelperTips(this);
                     
                     var counter = 0;
                     $( ".button" ).each(function( index, data ) {
@@ -697,8 +769,16 @@
                                         if(option === "Pros" || option === "Cons" || option === "Review") {     
                                                 var dt = new Date(value.Date); 
                                                 try{generatedWords.push({text: value.Pros["0"], weight: 0, date: dt});}catch(e){}
+                                                try{generatedWords.push({text: value.Pros["1"], weight: 0, date: dt});}catch(e){}
+                                                try{generatedWords.push({text: value.Pros["2"], weight: 0, date: dt});}catch(e){}
+                                                try{generatedWords.push({text: value.Pros["3"], weight: 0, date: dt});}catch(e){}
+                                                try{generatedWords.push({text: value.Pros["4"], weight: 0, date: dt});}catch(e){}
                                                 try{generatedWords.push({text: value.Cons["0"], weight: 0, date: dt});}catch(e){}
-                                                try{generatedWords.push({text: value.Review["0"], weight: 0, date: dt});}catch(e){}
+                                                try{generatedWords.push({text: value.Cons["1"], weight: 0, date: dt});}catch(e){}
+                                                try{generatedWords.push({text: value.Cons["2"], weight: 0, date: dt});}catch(e){}
+                                                try{generatedWords.push({text: value.Cons["3"], weight: 0, date: dt});}catch(e){}
+                                                try{generatedWords.push({text: value.Cons["4"], weight: 0, date: dt});}catch(e){}
+                                                try{generatedWords.push({text: value.Review, weight: 0, date: dt});}catch(e){}
                                         }
                                         if(option === "Former Employee" || option === "Date") { 
                                             newArr2.push(index, value["Rating"],value["Date"],value["Former Employee"]);
@@ -715,6 +795,8 @@
                             }
                         } else {
                             if(option === "Location") { $("#mapbar").css('display','none'); mapMade=false; $("#container1").html('<div id="mapbar" style="display:none"><img src="/SPATProject/public/build/img/mapbar.png" /></div>'); }
+                            if(option === "Review") { $("#bubblewordBubble").remove(); generatedWords=[]; }
+                            if(option === "Date") {  $("#chartTime"+option.replace(/ /g, '')).remove(); }
                             if(selectedOpts) {
                                 try{
                                     for(var i = 0; i < selectedOpts.length; i++) {
@@ -741,51 +823,57 @@
         });
 
         function createWordBubble(platform, positivity, wordlist) {
-            var timeStart = min;
-            var timeEnd = max;
-            //
             
-            var newWordWeightedArray = [];
-            var newWordArray = [];
-            $.each(wordlist, function (index, sentence) {
-                if(sentence.date >= timeStart && sentence.date <= timeEnd) {
-                    try{var split = sentence.text.split(" ");
-                    $.each(split, function (index, word) {
-                        newWordArray.push(word)
-                    })}catch(e){} 
-                }
-            })
-            $.each(newWordArray, function (index, word) {
-                if("theofandtoainforisonthatbythiswithiyouitnotorbearefromatasyourallhavenewit'stoomakehowyet".indexOf(word) === -1) {
-                    if(word.length < 3) {} else {
-                        var meep = 0;
-                        if(newWordWeightedArray.length === 0) { 
+            $("#bubblewordBubble").remove();
+            if(wordlist.length !== 0) {
+                var timeStart = min;
+                var timeEnd = max;
+                //
+                
+                var newWordWeightedArray = [];
+                var newWordArray = [];
+                $.each(wordlist, function (index, sentence) {
+                    if(sentence.date >= timeStart && sentence.date <= timeEnd) {
+                        try{
+                            var split = sentence.text.split(" ");
+                            $.each(split, function (index, word) {
+                                var meep = word.replace(/[^a-zA-Z ]/g, "");
+                                newWordArray.push(meep);
+                            })
+                        }catch(e){} 
+                    }
+                })
+                $.each(newWordArray, function (index, word) {
+                    if("theofandtoainforisonthatbythiswithiyouitnotorbearefromatasyourallhavenewit'stoomakehowyet".indexOf(word) === -1) {
+                        if(word.length < 3) {} else {
+                            var meep = 0;
+                            if(newWordWeightedArray.length === 0) { 
 
-                            newWordWeightedArray.push({text: word.toLowerCase(), weight: 1}); 
+                                newWordWeightedArray.push({text: word.toLowerCase(), weight: 1}); 
 
-                        } else {
-                            
-                            for(var i = 0, len = newWordWeightedArray.length; i < len; i++) {
+                            } else {
                                 
-                                if (newWordWeightedArray[i]['text'] === word.toLowerCase()) { 
-                                    newWordWeightedArray[i].weight = newWordWeightedArray[i].weight + 1;
-                                    meep++;
-                                } 
-                                
-                            }
-                            if(meep === 0 ) {
-                                newWordWeightedArray.push({text: word.toLowerCase(), weight: 1});
+                                for(var i = 0, len = newWordWeightedArray.length; i < len; i++) {
+                                    
+                                    if (newWordWeightedArray[i]['text'] === word.toLowerCase()) { 
+                                        newWordWeightedArray[i].weight = newWordWeightedArray[i].weight + 1;
+                                        meep++;
+                                    } 
+                                    
+                                }
+                                if(meep === 0 ) {
+                                    newWordWeightedArray.push({text: word.toLowerCase(), weight: 1});
+                                }
                             }
                         }
                     }
+                })
+                if(newWordWeightedArray.length !== 0) { 
+                    $("#bubbleWord"+positivity).remove();
+                    $("#charts").append(' <div id="bubble'+positivity+'" style="float:left;width: calc(100vw - 350px); height: 300px;margin-left:50px; border: 0px solid #ccc;" ></div> ');
+                    $("#bubble"+positivity).jQCloud(newWordWeightedArray);
                 }
-            })
-            if(newWordWeightedArray.length !== 0) { 
-                $("#bubble"+positivity).remove();
-                $("#charts").append(' <div id="bubble'+positivity+'" style="float:left;width: calc(100vw - 250px); height: 300px;margin-left:50px; border: 0px solid #ccc;" ></div> ');
-                $("#bubble"+positivity).jQCloud(newWordWeightedArray);
             }
-
         }
 
         function loadChartData(selectedOpts) {
@@ -808,7 +896,7 @@
                 var prevDate;
                 var seriesData = [];
 
-                if(dataType === "Rating" || dataType === "Date" || dataType === "Worklife Balance" || dataType === "Benefits" || dataType === "Job Security" || dataType === "Management" || dataType === "Culture") {
+                if(dataType === "Rating" || dataType === "Date" || dataType === "Worklife Balance" || dataType === "Wage" || dataType === "Hours" || dataType === "Benefits" || dataType === "Job Security" || dataType === "Management" || dataType === "Culture") {
                     $.each(selectedOpts[i], function (index, numbers) {
                         var incomingNumber = parseInt(numbers[1]);
                         if( incomingNumber % 1 === 0 ) {
@@ -866,26 +954,29 @@
                 }
 
             }
-            loadBarChart(resultsArray);
+            setTimeout(function(){
+                loadBarChart(resultsArray);
+             }, 280);
         }
 
         function loadBarChart(resultsArray) {
             //$("#charts").html("");
-            var generatedGraphLabel1 = [];var generatedGraphLabel2 = [];var generatedGraphLabel3 = [];var generatedGraphLabel4 = [];
+            var generatedGraphLabel1 = [];var generatedGraphLabel1x = [];var generatedGraphLabel1y = [];var generatedGraphLabel2 = [];var generatedGraphLabel3 = [];var generatedGraphLabel4 = [];
             var generatedGraphLabel5 = [];var generatedGraphLabel6 = [];var generatedGraphLabel7 = [];var generatedGraphLabel8 = [];var generatedGraphLabel9 = [];
             var generatedRadarLabel1 = [];var generatedRadarLabel2 = [];
             var generatedRadarLabel3 = [];var generatedStatusLabel1 = [];var generatedStackLabel1 = [];
 
             var produceRatingChart = false;var produceBalanceChart = false;var produceRadarChart = false;var produceBenefitsChart = false;var produceShareChart = false;var produceRatingTimeChart = false;
             var produceSecurityChart = false;var produceManagementChart = false;var produceCultureChart = false;var produceStatusChart = false;var produceStackChart = false;
+            var produceHoursChart = false;var produceWageChart = false;
 
-            var generatedBarLabel1 = "";var generatedBarLabel2 = "";var generatedBarLabel3 = "";var generatedBarLabel4 = "";var generatedBarLabel5 = "";
+            var generatedBarLabel1 = "";var generatedBarLabel1x = "";var generatedBarLabel1y = "";var generatedBarLabel2 = "";var generatedBarLabel3 = "";var generatedBarLabel4 = "";var generatedBarLabel5 = "";
             var generatedBarLabel6 = "";var generatedBarLabel7 = "";var generatedBarLabel8 = "";var generatedBarLabel9 = "";
 
             var generatedRadarXLabel1 = []; var generatedRadarXPlats1 = []; var generatedRadarXLabel2 = ""; var generatedRadarXVals1 = [];
             var generatedRadarXLabel3 = "";var generatedStatusXLabel1 = "";var generatedStackXLabel1 = "";
 
-            var generatedData1 = [];var generatedData2 = [];var generatedData3 = [];var generatedData4 = [];var generatedData5 = [];var generatedData6 = [];
+            var generatedData1 = [];var generatedData1x = [];var generatedData1y = [];var generatedData2 = [];var generatedData3 = [];var generatedData4 = [];var generatedData5 = [];var generatedData6 = [];
             var generatedData77 = [];var generatedData8 = [];var generatedData9 = [];var generatedData10 = [];var generatedData11 = [];var generatedData12 = [];var generatedData13 = [];
 
             var currentChart = "";
@@ -902,6 +993,12 @@
                 'rgba(95,102,120,.8)','rgba(64,227,196,.8)','rgba(204,208,223,.8)',
                 'rgba(105,112,130,.9)','rgba(74,237,206,.9)','rgba(214,218,233,.9)',
                 'rgba(115,122,140,.7)','rgba(84,247,216,.7)','rgba(224,228,243,.7)',
+                'rgba(95,102,120,.8)','rgba(64,227,196,.8)','rgba(204,208,223,.8)',
+                'rgba(105,112,130,.9)','rgba(74,237,206,.9)','rgba(214,218,233,.9)',
+                'rgba(115,122,140,.7)','rgba(84,247,216,.7)','rgba(224,228,243,.7)',
+                'rgba(45,62,80,.7)','rgba(24,187,156,.7)','rgba(164,168,183,.7)',
+                'rgba(55,72,90,.8)','rgba(34,197,166,.8)','rgba(174,178,193,.8)',
+                'rgba(65,82,100,.7)','rgba(44,207,176,.7)','rgba(184,188,203,.7)'
                 ];
 
             var i = 0;
@@ -946,6 +1043,38 @@
                     })
 
                     produceRatingChart = true;
+                }
+
+                if(item.dataType === "Hours") {
+                    generatedGraphLabel1x.push(item.result);
+                    generatedBarLabel1x = item.dataType;
+                    
+                    
+                    generatedData1x.push ({
+                        label:item.platformName,
+                        backgroundColor: colourArray[i],
+                        borderColor:colourArray[i],
+                        borderWidth: 2,
+                        data: [item.maxInt,item.minInt,item.result]
+                    })
+
+                    produceHoursChart = true;
+                }
+
+                if(item.dataType === "Wage") {
+                    generatedGraphLabel1y.push(item.result);
+                    generatedBarLabel1y = item.dataType;
+                    
+                    
+                    generatedData1y.push ({
+                        label:item.platformName,
+                        backgroundColor: colourArray[i],
+                        borderColor:colourArray[i],
+                        borderWidth: 2,
+                        data: [item.maxInt,item.minInt,item.result]
+                    })
+
+                    produceWageChart = true;
                 }
 
                 if(item.dataType === "Date") {
@@ -1016,7 +1145,7 @@
 
                 if(item.dataType === "Management" && radarCounter <= 2) {
                     generatedGraphLabel5.push(item.result);
-                    generatedBarLabel5 = item.dataType;
+                    generatedBarLabel5 = "Support";
                     
                     generatedData5.push ({
                         label:item.platformName,
@@ -1032,7 +1161,7 @@
 
                 if(item.dataType === "Culture" && radarCounter <= 2) {
                     generatedGraphLabel6.push(item.result);
-                    generatedBarLabel6 = item.dataType;
+                    generatedBarLabel6 = "Relationship";
                     
                     generatedData6.push ({
                         label:item.platformName,
@@ -1200,8 +1329,115 @@
                             }]
                     },
                     title: {
+                        fontSize: 26,
                         display: true,
                         text: generatedBarLabel1
+                    },
+                    layout: {
+                        padding: {
+                            left: 10
+                        }
+                    }
+                    }
+                });
+
+            }
+
+            if(produceHoursChart === true) {
+                if(document.getElementById("chart"+generatedBarLabel1x.replace(/ /g, '')) === null) {
+                    $("#charts").append(' <section id="chart'+generatedBarLabel1x.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel1x.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                } else {
+                    $("#chart"+generatedBarLabel1x.replace(/ /g, '')).remove();
+                    $("#charts").append(' <section id="chart'+generatedBarLabel1x.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel1x.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                }
+            
+                const CHART = document.getElementById("barChart"+generatedBarLabel1x.replace(/ /g, ''));
+                Chart.defaults.scale.ticks.beginAtZero = true;
+
+                let barChart = new Chart(CHART,{
+                    type: 'bar',
+                    data: {
+                        labels: ["Highest", "Lowest", "Average"],
+                        datasets: generatedData1x
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            scaleLabel: "<%= ' ' + value%>",
+                        xAxes: [{
+                                display: true,
+                                scaleLabel: {
+                                    display: false,
+                                    labelString:  generatedBarLabel1x
+                                },
+                                ticks: {
+                                    max: 3
+                                }
+                            }],
+                        yAxes: [{
+                                display: true,
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                    },
+                    title: {
+                        fontSize: 26,
+                        display: true,
+                        text: "Hours Worked Daily"
+                    },
+                    layout: {
+                        padding: {
+                            left: 10
+                        }
+                    }
+                    }
+                });
+
+            }
+
+            if(produceWageChart === true) {
+                if(document.getElementById("chart"+generatedBarLabel1y.replace(/ /g, '')) === null) {
+                    $("#charts").append(' <section id="chart'+generatedBarLabel1y.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel1y.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                } else {
+                    $("#chart"+generatedBarLabel1y.replace(/ /g, '')).remove();
+                    $("#charts").append(' <section id="chart'+generatedBarLabel1y.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel1y.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                }
+            
+                const CHART = document.getElementById("barChart"+generatedBarLabel1y.replace(/ /g, ''));
+                Chart.defaults.scale.ticks.beginAtZero = true;
+
+                let barChart = new Chart(CHART,{
+                    type: 'bar',
+                    data: {
+                        labels: ["Most", "Minimum", "Average"],
+                        datasets: generatedData1y
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            scaleLabel: "<%= ' ' + value%>",
+                        xAxes: [{
+                                display: true,
+                                scaleLabel: {
+                                    display: false,
+                                    labelString:  generatedBarLabel1y
+                                },
+                                ticks: {
+                                    max: 3
+                                }
+                            }],
+                        yAxes: [{
+                                display: true,
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                    },
+                    title: {
+                        fontSize: 26,
+                        display: true,
+                        text: "Hourly Wage ($)"
                     },
                     layout: {
                         padding: {
@@ -1251,6 +1487,7 @@
                             }]
                     },
                     title: {
+                        fontSize: 26,
                         display: true,
                         text: generatedBarLabel2
                     },
@@ -1302,6 +1539,7 @@
                             }]
                     },
                     title: {
+                        fontSize: 26,
                         display: true,
                         text: generatedBarLabel3
                     },
@@ -1353,6 +1591,7 @@
                             }]
                     },
                     title: {
+                        fontSize: 26,
                         display: true,
                         text: generatedBarLabel4
                     },
@@ -1367,14 +1606,14 @@
             }
 
             if(produceManagementChart === true) {
-                if(document.getElementById("chart"+generatedBarLabel5.replace(/ /g, '')) === null) {
-                    $("#charts").append(' <section id="chart'+generatedBarLabel5.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel5.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                if(document.getElementById("barChartManagement") === null) {
+                    $("#charts").append(' <section id="chartManagement" class="chart ">   <canvas id="barChartManagement" height="auto" width="auto"></canvas>  </section>')
                 } else {
                     $("#chart"+generatedBarLabel5.replace(/ /g, '')).remove();
-                    $("#charts").append(' <section id="chart'+generatedBarLabel5.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel5.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                    $("#charts").append(' <section id="chartManagement" class="chart ">   <canvas id="barChartManagement" height="auto" width="auto"></canvas>  </section>')
                 }
             
-                const CHART = document.getElementById("barChart"+generatedBarLabel5.replace(/ /g, ''));
+                const CHART = document.getElementById("barChartManagement");
                 Chart.defaults.scale.ticks.beginAtZero = true;
 
                 let barChart = new Chart(CHART,{
@@ -1404,6 +1643,7 @@
                             }]
                     },
                     title: {
+                        fontSize: 26,
                         display: true,
                         text: generatedBarLabel5
                     },
@@ -1418,14 +1658,14 @@
             }
 
             if(produceCultureChart === true) {
-                if(document.getElementById("chart"+generatedBarLabel6.replace(/ /g, '')) === null) {
-                    $("#charts").append(' <section id="chart'+generatedBarLabel6.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel6.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                if(document.getElementById("chartCulture") === null) {
+                    $("#charts").append(' <section id="chartCulture" class="chart ">   <canvas id="barChartCulture" height="auto" width="auto"></canvas>  </section>')
                 } else {
                     $("#chart"+generatedBarLabel6.replace(/ /g, '')).remove();
-                    $("#charts").append(' <section id="chart'+generatedBarLabel6.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel6.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                    $("#charts").append(' <section id="chartCulture" class="chart ">   <canvas id="barChartCulture" height="auto" width="auto"></canvas>  </section>')
                 }
             
-                const CHART = document.getElementById("barChart"+generatedBarLabel6.replace(/ /g, ''));
+                const CHART = document.getElementById("barChartCulture");
                 Chart.defaults.scale.ticks.beginAtZero = true;
 
                 let barChart = new Chart(CHART,{
@@ -1455,6 +1695,7 @@
                             }]
                     },
                     title: {
+                        fontSize: 26,
                         display: true,
                         text: generatedBarLabel6
                     },
@@ -1506,8 +1747,9 @@
                             }]
                     },
                     title: {
+                        fontSize: 26,
                         display: true,
-                        text: "Rating by Status of Employee"
+                        text: "Rating By Employee Status"
                     },
                     layout: {
                         padding: {
@@ -1519,6 +1761,137 @@
 
             }   
 
+
+        
+
+            if(produceStackChart === true) {
+                if(document.getElementById("chart"+generatedStackLabel1.replace(/ /g, '')) === null) {
+                    $("#charts").append(' <section id="chart'+generatedStackLabel1.replace(/ /g, '')+'" class="chart chartBig ">   <canvas id="barChart'+generatedStackLabel1.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                } else {
+                    $("#chart"+generatedStackLabel1.replace(/ /g, '')).remove();
+                    $("#charts").append(' <section id="chart'+generatedStackLabel1.replace(/ /g, '')+'" class="chart chartBig ">   <canvas id="barChart'+generatedStackLabel1.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                }
+                const CHART = document.getElementById("barChart"+generatedStackLabel1.replace(/ /g, ''));
+                Chart.defaults.scale.ticks.beginAtZero = true;
+
+                let barChart = new Chart(CHART,{
+                    type: 'radar',
+                    data: {
+                        labels: ["High", "Low", "Average"],
+                        datasets: generatedData7,
+                        fill: '-1'
+                    },
+                    options: {
+                        datasetFill: false,
+                        responsive: true,
+                        scales: {
+                        xAxes: [{
+                                stacked:true,
+                                display: true,
+                                scaleLabel: {
+                                    display: false,
+                                    labelString:  generatedStackLabel1
+                                },
+                                ticks: {
+                                    max: 3
+                                }
+                            }],
+                        yAxes: [{
+                                stacked:true,
+                                display: true,
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                    },
+                    title: {
+                        fontSize: 26,
+                        display: true,
+                        text: generatedStackLabel1
+                    },
+                    layout: {
+                        padding: {
+                            left: 10
+                        }
+                    }
+                    }
+                });
+
+            }
+
+            if(produceRatingTimeChart === true) {
+                if(document.getElementById("chartTime"+generatedBarLabel9.replace(/ /g, '')) === null) {
+                    $("#charts").append(' <section id="chartTime'+generatedBarLabel9.replace(/ /g, '')+'" class="chart chartHalf">   <canvas id="barChartTime'+generatedBarLabel9.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                } else {
+                    $("#chartTime"+generatedBarLabel9.replace(/ /g, '')).remove();
+                    $("#charts").append(' <section id="chartTime'+generatedBarLabel9.replace(/ /g, '')+'" class="chart chartHalf">   <canvas id="barChartTime'+generatedBarLabel9.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                }
+                SortByDate();
+                var finalDates = []
+                $.each(seriesDates, function(i, el){
+                    if($.inArray(el, finalDates) === -1) finalDates.push(el);
+                });
+                
+                $.each(generatedData10, function(i, d){
+                    if(finalDates.length>45) {
+                        if(finalDates.length>d.data.length) {
+                            var distance = finalDates.length - d.data.length;
+                        }
+                        if(distance > 5) {
+                            finalDates = finalDates.slice(0, finalDates.length - distance);
+                        }
+                    }
+                })
+            
+                const CHART = document.getElementById("barChartTime"+generatedBarLabel9.replace(/ /g, ''));
+                Chart.defaults.scale.ticks.beginAtZero = true;
+
+                let barChart = new Chart(CHART,{
+                    type: 'bar',
+                    data: {
+                        labels: finalDates,
+                        datasets: generatedData10
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            scaleLabel: "<%= ' ' + value%>",
+                        xAxes: [{
+                                display: true,
+                                scaleLabel: {
+                                    display: true,
+                                    distribution: 'series',
+                                    labelString:  generatedBarLabel9
+                                },
+                                ticks: {
+                                    max: 1
+                                }
+                            }],
+                        yAxes: [{
+                                display: true,
+                                ticks: {
+                                    beginAtZero: true,
+                                    max: 6
+                                }
+                            }]
+                    },
+                    title: {
+                        fontSize: 26,
+                        display: true,
+                        text: "Rating Over Time"
+                    },
+                    layout: {
+                        padding: {
+                            left: 10,
+                            top:10
+                        }
+                    }
+                    }
+                });
+
+            }
+
+            
             if(produceShareChart === true) {
                 if(document.getElementById("chart"+generatedBarLabel8.replace(/ /g, '')) === null) {
                     $("#charts").append(' <section id="chart'+generatedBarLabel8.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel8.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
@@ -1557,6 +1930,7 @@
                             }]
                     },
                     title: {
+                        fontSize: 26,
                         display: true,
                         text: "Estimated Market Share"
                     }
@@ -1604,135 +1978,13 @@
                             }]
                     },
                     title: {
+                        fontSize: 26,
                         display: true,
                         text: "Comparison via Radar Chart"
                     },
                     layout: {
                         padding: {
                             left: 10
-                        }
-                    }
-                    }
-                });
-
-            }
-
-            if(produceStackChart === true) {
-                if(document.getElementById("chart"+generatedStackLabel1.replace(/ /g, '')) === null) {
-                    $("#charts").append(' <section id="chart'+generatedStackLabel1.replace(/ /g, '')+'" class="chart chartBig ">   <canvas id="barChart'+generatedStackLabel1.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
-                } else {
-                    $("#chart"+generatedStackLabel1.replace(/ /g, '')).remove();
-                    $("#charts").append(' <section id="chart'+generatedStackLabel1.replace(/ /g, '')+'" class="chart chartBig ">   <canvas id="barChart'+generatedStackLabel1.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
-                }
-                const CHART = document.getElementById("barChart"+generatedStackLabel1.replace(/ /g, ''));
-                Chart.defaults.scale.ticks.beginAtZero = true;
-
-                let barChart = new Chart(CHART,{
-                    type: 'radar',
-                    data: {
-                        labels: ["High", "Low", "Average"],
-                        datasets: generatedData7,
-                        fill: '-1'
-                    },
-                    options: {
-                        datasetFill: false,
-                        responsive: true,
-                        scales: {
-                        xAxes: [{
-                                stacked:true,
-                                display: true,
-                                scaleLabel: {
-                                    display: false,
-                                    labelString:  generatedStackLabel1
-                                },
-                                ticks: {
-                                    max: 3
-                                }
-                            }],
-                        yAxes: [{
-                                stacked:true,
-                                display: true,
-                                ticks: {
-                                    beginAtZero: true
-                                }
-                            }]
-                    },
-                    title: {
-                        display: true,
-                        text: generatedStackLabel1
-                    },
-                    layout: {
-                        padding: {
-                            left: 10
-                        }
-                    }
-                    }
-                });
-
-            }
-
-            if(produceRatingTimeChart === true) {
-                if(document.getElementById("chartTime"+generatedBarLabel9.replace(/ /g, '')) === null) {
-                    $("#charts").append(' <section id="chartTime'+generatedBarLabel9.replace(/ /g, '')+'" class="chart chartHalf">   <canvas id="barChartTime'+generatedBarLabel9.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
-                } else {
-                    $("#chartTime"+generatedBarLabel9.replace(/ /g, '')).remove();
-                    $("#charts").append(' <section id="chartTime'+generatedBarLabel9.replace(/ /g, '')+'" class="chart chartHalf">   <canvas id="barChartTime'+generatedBarLabel9.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
-                }
-                SortByDate();
-                var finalDates = []
-                $.each(seriesDates, function(i, el){
-                    if($.inArray(el, finalDates) === -1) finalDates.push(el);
-                });
-                
-                $.each(generatedData10, function(i, d){
-                    if(finalDates.length>d.data.length) {
-                        var distance = finalDates.length - d.data.length;
-                    }
-                    if(distance > 5) {
-                        finalDates = finalDates.slice(0, finalDates.length - distance);
-                    }
-                })
-            
-                const CHART = document.getElementById("barChartTime"+generatedBarLabel9.replace(/ /g, ''));
-                Chart.defaults.scale.ticks.beginAtZero = true;
-
-                let barChart = new Chart(CHART,{
-                    type: 'bar',
-                    data: {
-                        labels: finalDates,
-                        datasets: generatedData10
-                    },
-                    options: {
-                        responsive: true,
-                        scales: {
-                            scaleLabel: "<%= ' ' + value%>",
-                        xAxes: [{
-                                display: true,
-                                scaleLabel: {
-                                    display: true,
-                                    distribution: 'series',
-                                    labelString:  generatedBarLabel9
-                                },
-                                ticks: {
-                                    max: 1
-                                }
-                            }],
-                        yAxes: [{
-                                display: true,
-                                ticks: {
-                                    beginAtZero: true,
-                                    max: 6
-                                }
-                            }]
-                    },
-                    title: {
-                        display: true,
-                        text: generatedBarLabel9
-                    },
-                    layout: {
-                        padding: {
-                            left: 10,
-                            top:10
                         }
                     }
                     }
@@ -1817,8 +2069,10 @@
 
 <footer>
     <img src="/SPATProject/public/build/img/logout.png" onclick="clearUser()" />
-    <img src="/SPATProject/public/build/img/help.png" />
+    <img id="helper" src="/SPATProject/public/build/img/help.png" />
 </footer>
+
+<div id="helpTips"></div>
 
 </body>
 </html>
