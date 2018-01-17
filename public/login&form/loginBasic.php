@@ -1,3 +1,8 @@
+<?php
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -250,15 +255,20 @@
 <div id="mainTopSpacer"></div>
 
 <div id="loginForm">
-
-    <form name="form1" method="post" action="passingdata.php">
+    <form name="form1" method="post" action="../../public/adminportal.php">
         <div id="loginInfo">
             <p id="infoRequest"><strong>Please enter your username and password:</strong></p>
+            <?php
+            if (isset($_SESSION['login'])){
+                echo "<p id='loginForm_failed'>".$_SESSION['login']."</p>";
+                $_SESSION['login'] = null;
+            }
+            ?>
             <label><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="uname" required>
+            <input type="text" placeholder="Enter Username" name="Username" required>
 
             <label><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
+            <input type="password" placeholder="Enter Password" name="Password" required>
 
             <button type="submit">Login</button>
 
