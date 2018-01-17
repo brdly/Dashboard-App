@@ -1,5 +1,5 @@
 <?php
-     function checkLogin($username,$password,$hashed){
+    /* function checkLogin($username,$password,$hashed){
         if (htmlentities($username) == "adam"){
             if ($hashed){
                 //$hashedpass =  password_hash("password",PASSWORD_BCRYPT);
@@ -61,6 +61,8 @@
         //exit();
     }
 
+     */
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -97,6 +99,13 @@
             background-position: bottom right;
             background-repeat: no-repeat;
             background-color: white; */
+            -webkit-touch-callout: none; /* iOS Safari */
+            -webkit-user-select: none; /* Safari */
+            -khtml-user-select: none; /* Konqueror HTML */
+            -moz-user-select: none; /* Firefox */
+                -ms-user-select: none; /* Internet Explorer/Edge */
+                    user-select: none; /* Non-prefixed version, currently
+                                        supported by Chrome and Opera */
             margin: 0;
             padding: 0;
             color: white;
@@ -187,13 +196,13 @@
         nav > section {
             float:left;
             background-color:rgb(45,62,80);
-            height:36px;
-            width:158px;
-            margin-left:6px;
-            margin-bottom:7px;
-            line-height:36px;
-            cursor:pointer;
-            border-radius:3px;
+            height: 30px;
+            width: 158px;
+            margin-left: 6px;
+            margin-bottom: 4px;
+            line-height: 30px;
+            cursor: pointer;
+            border-radius: 3px;
             font-size: 22px;
             border-bottom: 1px solid rgba(24,187,156,0.3);
         }
@@ -237,13 +246,15 @@
             cursor:pointer;
         }
 
-        ui-rangeSlider-label{
-            min-width:90px!important;
-        }ui-rangeSlider-label-value{
-            min-width:90px!important;
+        .ui-rangeSlider-label {
+            padding: 0px 5px;
+            bottom: 50px;
+            min-width:80px!important;
+        }.ui-rangeSlider-label-value{
+            min-width:80px!important;
         }
-        ui-rangeSlider-leftLabel{
-            min-width:90px!important;
+        .ui-rangeSlider-leftLabel{
+            min-width:80px!important;
         }
 
         #slider {
@@ -522,6 +533,16 @@ function Submit(path, params, method) {
                     $( "#helpTips" ).html("Wage Chart: The wage (in dollars) a worker gets on average from their platform");
                 } else if(content.textContent === "Hours") {
                     $( "#helpTips" ).html("Hours Chart: The amount of hours a worker will generally spend per day on the platform");
+                } else if(content.textContent === "Platforms") {
+                    $( "#helpTips" ).html("Platforms Chart: ");
+                }else if(content.textContent === "Period") {
+                    $( "#helpTips" ).html("Period Chart: ");
+                }else if(content.textContent === "Age") {
+                    $( "#helpTips" ).html("Age Chart: ");
+                }else if(content.textContent === "Gender") {
+                    $( "#helpTips" ).html("Gender Chart: ");
+                }else if(content.textContent === "Interest") {
+                    $( "#helpTips" ).html("Interest Chart: ");
                 }
             }
         }
@@ -908,7 +929,7 @@ function Submit(path, params, method) {
                 var prevDate;
                 var seriesData = [];
 
-                if(dataType === "Rating" || dataType === "Date" || dataType === "Worklife Balance" || dataType === "Wage" || dataType === "Hours" || dataType === "Benefits" || dataType === "Job Security" || dataType === "Management" || dataType === "Culture") {
+                if(dataType === "Rating" || dataType === "Date" || dataType === "Platforms" || dataType === "Period" || dataType === "Age" || dataType === "Interest" || dataType === "Worklife Balance" || dataType === "Wage" || dataType === "Hours" || dataType === "Benefits" || dataType === "Job Security" || dataType === "Management" || dataType === "Culture") {
                     $.each(selectedOpts[i], function (index, numbers) {
                         var incomingNumber = parseInt(numbers[1]);
                         if( incomingNumber % 1 === 0 ) {
@@ -935,7 +956,26 @@ function Submit(path, params, method) {
                 }
 
                 
-
+                if(dataType === "Gender") {
+                        var male = 0;
+                        var female = 0;
+                        var other = 0;
+                    $.each(selectedOpts[i], function (index, numbers) {
+                        var incomingNumber = numbers[1];
+                            var resultDate = new Date(numbers[2]);
+                            if(resultDate >= timeStart && resultDate <= timeEnd) {
+                                if( incomingNumber === "Male" ) {
+                                    male++;
+                                    } else if( incomingNumber === "Female" ) { 
+                                        female++;
+                                    } else {
+                                        other++;
+                                    }
+                        }
+                    })
+                        var result = parseFloat(Math.round(total/count * 100) / 100).toFixed(2);
+                        resultsArray.push({platformName,dataType,male,female,other});
+                }
                 
                 if(dataType === "Former Employee") {
                     $.each(selectedOpts[i], function (index, numbers) {
@@ -973,23 +1013,26 @@ function Submit(path, params, method) {
 
         function loadBarChart(resultsArray) {
             //$("#charts").html("");
+            var labelGender=[];
             var generatedGraphLabel1 = [];var generatedGraphLabel1x = [];var generatedGraphLabel1y = [];var generatedGraphLabel2 = [];var generatedGraphLabel3 = [];var generatedGraphLabel4 = [];
-            var generatedGraphLabel5 = [];var generatedGraphLabel6 = [];var generatedGraphLabel7 = [];var generatedGraphLabel8 = [];var generatedGraphLabel9 = [];
-            var generatedRadarLabel1 = [];var generatedRadarLabel2 = [];
-            var generatedRadarLabel3 = [];var generatedStatusLabel1 = [];var generatedStackLabel1 = [];
+            var generatedGraphLabel5 = [];var generatedGraphLabel6 = [];var generatedGraphLabel7 = [];var generatedGraphLabel8 = [];var generatedGraphLabel9 = [];var generatedGraphLabel10 = [];var generatedGraphLabel15 = [];
+            var generatedRadarLabel1 = [];var generatedRadarLabel2 = []; var generatedGraphLabel11 = [];var generatedGraphLabel12 = [];var generatedGraphLabel13 = [];var generatedGraphLabel14 = [];var generatedGraphLabel16 = [];
+            var generatedRadarLabel3 = [];var generatedStatusLabel15 = [];var generatedStackLabel16 = [];var generatedGraphLabel17 = [];var generatedGraphLabel18 = [];var generatedGraphLabel19 = [];
 
             var produceRatingChart = false;var produceBalanceChart = false;var produceRadarChart = false;var produceBenefitsChart = false;var produceShareChart = false;var produceRatingTimeChart = false;
-            var produceSecurityChart = false;var produceManagementChart = false;var produceCultureChart = false;var produceStatusChart = false;var produceStackChart = false;
-            var produceHoursChart = false;var produceWageChart = false;
+            var produceSecurityChart = false;var produceManagementChart = false;var produceCultureChart = false;var produceStatusChart = false;var produceStackChart = false;var producePlatformsChart = false;
+            var produceHoursChart = false;var produceWageChart = false;var produceInterestChart = false;var produceGenderChart = false;var produceAgeChart = false;var producePeriodChart = false;
 
             var generatedBarLabel1 = "";var generatedBarLabel1x = "";var generatedBarLabel1y = "";var generatedBarLabel2 = "";var generatedBarLabel3 = "";var generatedBarLabel4 = "";var generatedBarLabel5 = "";
-            var generatedBarLabel6 = "";var generatedBarLabel7 = "";var generatedBarLabel8 = "";var generatedBarLabel9 = "";
+            var generatedBarLabel6 = "";var generatedBarLabel7 = "";var generatedBarLabel8 = "";var generatedBarLabel9 = ""; var generatedBarLabel10 = "";var generatedBarLabel11 = "";var generatedBarLabel12 = "";
+            var generatedBarLabel13 = "";var generatedBarLabel14 = "";var generatedBarLabel15 = "";var generatedBarLabel16 = "";var generatedBarLabel17 = "";var generatedBarLabel18 = "";var generatedBarLabel19 = "";
 
             var generatedRadarXLabel1 = []; var generatedRadarXPlats1 = []; var generatedRadarXLabel2 = ""; var generatedRadarXVals1 = [];
             var generatedRadarXLabel3 = "";var generatedStatusXLabel1 = "";var generatedStackXLabel1 = "";
 
             var generatedData1 = [];var generatedData1x = [];var generatedData1y = [];var generatedData2 = [];var generatedData3 = [];var generatedData4 = [];var generatedData5 = [];var generatedData6 = [];
-            var generatedData77 = [];var generatedData8 = [];var generatedData9 = [];var generatedData10 = [];var generatedData11 = [];var generatedData12 = [];var generatedData13 = [];
+            var generatedData77 = [];var generatedData8 = [];var generatedData9 = [];var generatedData10 = [];var generatedData11 = [];var generatedData12 = [];var generatedData13 = [];var generatedData14 = [];
+            var generatedData15 = [];var generatedData16 = [];var generatedData17 = [];var generatedData18 = [];var generatedData19 = [];var generatedData20 = [];
 
             var currentChart = "";
             var nameShare = [];
@@ -1016,6 +1059,7 @@ function Submit(path, params, method) {
             var i = 0;
             var q = 0;
             var n = 0;
+            var t = 0;
             var radarCounter = 0;
 
             $( ".button2" ).each(function( index, data ) {
@@ -1071,6 +1115,70 @@ function Submit(path, params, method) {
                     })
 
                     produceHoursChart = true;
+                }
+
+                if(item.dataType === "Platforms") {
+                    generatedGraphLabel15.push(item.result);
+                    generatedBarLabel15 = item.dataType;
+                    
+                    
+                    generatedData15.push ({
+                        label:item.platformName,
+                        backgroundColor: colourArray[i],
+                        borderColor:colourArray[i],
+                        borderWidth: 2,
+                        data: [item.maxInt,item.minInt,item.result]
+                    })
+
+                    producePlatformsChart = true;
+                }
+
+                if(item.dataType === "Period") {
+                    generatedGraphLabel16.push(item.result);
+                    generatedBarLabel16 = item.dataType;
+                    
+                    
+                    generatedData16.push ({
+                        label:item.platformName,
+                        backgroundColor: colourArray[i],
+                        borderColor:colourArray[i],
+                        borderWidth: 2,
+                        data: [item.maxInt,item.minInt,item.result]
+                    })
+
+                    producePeriodChart = true;
+                }
+
+                if(item.dataType === "Age") {
+                    generatedGraphLabel17.push(item.result);
+                    generatedBarLabel17 = item.dataType;
+                    
+                    
+                    generatedData17.push ({
+                        label:item.platformName,
+                        backgroundColor: colourArray[i],
+                        borderColor:colourArray[i],
+                        borderWidth: 2,
+                        data: [item.maxInt,item.minInt,item.result]
+                    })
+
+                    produceAgeChart = true;
+                }
+
+                if(item.dataType === "Interest") {
+                    generatedGraphLabel18.push(item.result);
+                    generatedBarLabel18 = item.dataType;
+                    
+                    
+                    generatedData18.push ({
+                        label:item.platformName,
+                        backgroundColor: colourArray[i],
+                        borderColor:colourArray[i],
+                        borderWidth: 2,
+                        data: [item.maxInt,item.minInt,item.result]
+                    })
+
+                    produceInterestChart = true;
                 }
 
                 if(item.dataType === "Wage") {
@@ -1298,6 +1406,28 @@ function Submit(path, params, method) {
                     }
                 }
 
+                if(item.dataType === "Gender" && t === 0) {
+                    t++;
+                    generatedGraphLabel19.push(item.dataType);
+                    generatedBarLabel19 = item.dataType;
+                    
+                    var female = "Female";
+                    var fint = item.female;
+                    var male = "Male";
+                    var mint = item.male;
+                    var other = "Other";
+                    var othint = item.other;
+                    labelGender = [female,male,other];
+                        generatedData19.push ({
+                            label: labelGender,
+                            backgroundColor: ['rgba(15,42,60,.7)','rgba(4,167,136,.7)','rgba(144,148,163,.7)','rgba(25,52,70,.9)','rgba(14,177,146,.9)','rgba(154,158,173,.9)'],
+                            borderColor: ['rgba(15,42,60,.7)','rgba(4,167,136,.7)','rgba(144,148,163,.7)','rgba(25,52,70,.9)','rgba(14,177,146,.9)','rgba(154,158,173,.9)'],
+                            borderWidth: 2,
+                            data: [fint,mint,othint]
+                        })
+                        produceGenderChart = true;
+                }
+
                 i++;
                 
             })
@@ -1397,6 +1527,218 @@ function Submit(path, params, method) {
                         fontSize: 26,
                         display: true,
                         text: "Hours Worked Daily"
+                    },
+                    layout: {
+                        padding: {
+                            left: 10
+                        }
+                    }
+                    }
+                });
+
+            }
+
+            if(producePlatformsChart === true) {
+                if(document.getElementById("chart"+generatedBarLabel15.replace(/ /g, '')) === null) {
+                    $("#charts").append(' <section id="chart'+generatedBarLabel15.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel15.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                } else {
+                    $("#chart"+generatedBarLabel15.replace(/ /g, '')).remove();
+                    $("#charts").append(' <section id="chart'+generatedBarLabel15.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel15.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                }
+            
+                const CHART = document.getElementById("barChart"+generatedBarLabel15.replace(/ /g, ''));
+                Chart.defaults.scale.ticks.beginAtZero = true;
+
+                let barChart = new Chart(CHART,{
+                    type: 'bar',
+                    data: {
+                        labels: ["Highest", "Lowest", "Average"],
+                        datasets: generatedData15
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            scaleLabel: "<%= ' ' + value%>",
+                        xAxes: [{
+                                display: true,
+                                scaleLabel: {
+                                    display: false,
+                                    labelString:  generatedBarLabel15
+                                },
+                                ticks: {
+                                    max: 3
+                                }
+                            }],
+                        yAxes: [{
+                                display: true,
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                    },
+                    title: {
+                        fontSize: 26,
+                        display: true,
+                        text: "Platforms Used By Worker"
+                    },
+                    layout: {
+                        padding: {
+                            left: 10
+                        }
+                    }
+                    }
+                });
+
+            }
+
+            if(producePeriodChart === true) {
+                if(document.getElementById("chart"+generatedBarLabel16.replace(/ /g, '')) === null) {
+                    $("#charts").append(' <section id="chart'+generatedBarLabel16.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel16.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                } else {
+                    $("#chart"+generatedBarLabel16.replace(/ /g, '')).remove();
+                    $("#charts").append(' <section id="chart'+generatedBarLabel16.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel16.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                }
+            
+                const CHART = document.getElementById("barChart"+generatedBarLabel16.replace(/ /g, ''));
+                Chart.defaults.scale.ticks.beginAtZero = true;
+
+                let barChart = new Chart(CHART,{
+                    type: 'bar',
+                    data: {
+                        labels: ["Highest", "Lowest", "Average"],
+                        datasets: generatedData16
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            scaleLabel: "<%= ' ' + value%>",
+                        xAxes: [{
+                                display: true,
+                                scaleLabel: {
+                                    display: false,
+                                    labelString:  generatedBarLabel16
+                                },
+                                ticks: {
+                                    max: 3
+                                }
+                            }],
+                        yAxes: [{
+                                display: true,
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                    },
+                    title: {
+                        fontSize: 26,
+                        display: true,
+                        text: "Period Searching For Work"
+                    },
+                    layout: {
+                        padding: {
+                            left: 10
+                        }
+                    }
+                    }
+                });
+
+            }
+
+            if(produceAgeChart === true) {
+                if(document.getElementById("chart"+generatedBarLabel17.replace(/ /g, '')) === null) {
+                    $("#charts").append(' <section id="chart'+generatedBarLabel17.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel17.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                } else {
+                    $("#chart"+generatedBarLabel17.replace(/ /g, '')).remove();
+                    $("#charts").append(' <section id="chart'+generatedBarLabel17.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel17.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                }
+            
+                const CHART = document.getElementById("barChart"+generatedBarLabel17.replace(/ /g, ''));
+                Chart.defaults.scale.ticks.beginAtZero = true;
+
+                let barChart = new Chart(CHART,{
+                    type: 'bar',
+                    data: {
+                        labels: ["Highest", "Lowest", "Average"],
+                        datasets: generatedData17
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            scaleLabel: "<%= ' ' + value%>",
+                        xAxes: [{
+                                display: true,
+                                scaleLabel: {
+                                    display: false,
+                                    labelString:  generatedBarLabel17
+                                },
+                                ticks: {
+                                    max: 3
+                                }
+                            }],
+                        yAxes: [{
+                                display: true,
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                    },
+                    title: {
+                        fontSize: 26,
+                        display: true,
+                        text: "Age Range"
+                    },
+                    layout: {
+                        padding: {
+                            left: 10
+                        }
+                    }
+                    }
+                });
+
+            }
+
+            if(produceInterestChart === true) {
+                if(document.getElementById("chart"+generatedBarLabel18.replace(/ /g, '')) === null) {
+                    $("#charts").append(' <section id="chart'+generatedBarLabel18.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel18.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                } else {
+                    $("#chart"+generatedBarLabel18.replace(/ /g, '')).remove();
+                    $("#charts").append(' <section id="chart'+generatedBarLabel18.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel18.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                }
+            
+                const CHART = document.getElementById("barChart"+generatedBarLabel18.replace(/ /g, ''));
+                Chart.defaults.scale.ticks.beginAtZero = true;
+
+                let barChart = new Chart(CHART,{
+                    type: 'bar',
+                    data: {
+                        labels: ["Highest", "Lowest", "Average"],
+                        datasets: generatedData18
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            scaleLabel: "<%= ' ' + value%>",
+                        xAxes: [{
+                                display: true,
+                                scaleLabel: {
+                                    display: false,
+                                    labelString:  generatedBarLabel18
+                                },
+                                ticks: {
+                                    max: 3
+                                }
+                            }],
+                        yAxes: [{
+                                display: true,
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                    },
+                    title: {
+                        fontSize: 26,
+                        display: true,
+                        text: "Task Interest and Variety"
                     },
                     layout: {
                         padding: {
@@ -1945,6 +2287,54 @@ function Submit(path, params, method) {
                         fontSize: 26,
                         display: true,
                         text: "Estimated Market Share"
+                    }
+                    }
+                });
+
+            } 
+
+            if(produceGenderChart === true) {
+                t=0;
+                if(document.getElementById("chart"+generatedBarLabel19.replace(/ /g, '')) === null) {
+                    $("#charts").append(' <section id="chart'+generatedBarLabel19.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel19.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                } else {
+                    $("#chart"+generatedBarLabel19.replace(/ /g, '')).remove();
+                    $("#charts").append(' <section id="chart'+generatedBarLabel19.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel19.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                }
+            
+                const CHART = document.getElementById("barChart"+generatedBarLabel19.replace(/ /g, ''));
+                Chart.defaults.scale.ticks.beginAtZero = true;
+
+                let barChart = new Chart(CHART,{
+                    type: 'pie',
+                    data: {
+                        labels: labelGender,
+                        datasets: generatedData19
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                        xAxes: [{
+                                display: false,
+                                scaleLabel: {
+                                    display: false,
+                                    labelString:  generatedBarLabel19
+                                },
+                                ticks: {
+                                    max: 3
+                                }
+                            }],
+                        yAxes: [{
+                                display: false,
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                    },
+                    title: {
+                        fontSize: 26,
+                        display: true,
+                        text: "Gender Pie Chart"
                     }
                     }
                 });
