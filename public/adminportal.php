@@ -15,7 +15,7 @@
         $_SESSION["Username"] = null;
         $_SESSION["Password"] = null;
         $_SESSION['login'] = "please log in";
-        header("Location: login&form/loginFormSplit.php");
+        header("Location: index.php");
         die();
     }
     //Start the session
@@ -26,7 +26,7 @@
     if (isset($_POST["Logout"])){
         clearUser();
         $_SESSION['login'] = "please log in";
-        header("Location: login&form/loginFormSplit.php");
+        header("Location: index.php");
         die();
     }
 
@@ -41,7 +41,7 @@
          }else{
             //Fail.
             $_SESSION['login'] = "failed to log in";
-            header("Location: login&form/loginFormSplit.php");
+            header("Location: index.php");
             die();
         }
 
@@ -54,7 +54,7 @@
         }
         if ($fail){
             $_SESSION['login'] = "please log in";
-            header("Location: login&form/loginFormSplit.php");
+            header("Location: index.php");
             die();
         }
         //header("Location: login&form/loginBasic.php");

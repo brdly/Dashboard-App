@@ -245,7 +245,7 @@ if (session_status() == PHP_SESSION_NONE) {
     once the button is pressed, the actual form div will replace and fill up the screen
 -->
 <div id="formCover">
-    <img src="/SPATProject/public/login&form/img/ilo2.jpg" style="margin-left:15px;margin-top:50px;width:200px;height:auto;float:left;margin-right:50%;" />
+    <img src="/login&form/img/ilo2.jpg" style="margin-left:15px;margin-top:50px;width:200px;height:auto;float:left;margin-right:50%;" />
     <p style="float:left;margin-left:45px;min-width:60%;max-width:90%;text-align:left;margin-top: 70px;font-size: 40px;">HELP US HELP YOU</p>
     <p style="float:left;margin-left:45px;min-width:60%;max-width:80%;text-align:left;margin-top: 20px;font-size: 18px;">
         Here at the International Labour Organisation our aim is to ensure workers are treated fairly. We have been doing this for 
@@ -277,7 +277,7 @@ if (session_status() == PHP_SESSION_NONE) {
         ?>
 
         <section class="loginBling"> <p style="padding-bottom:5px;margin-bottom:10px;width:200px;text-align:center;"><strong>Login</strong></p></section>
-        <form name="form1" method="post" action="../../public/adminportal.php">
+        <form name="form1" method="post" action="adminportal.php">
             <div>
                 <input type="text" placeholder="Email Address" name="Username" required>
 
@@ -302,7 +302,7 @@ if (session_status() == PHP_SESSION_NONE) {
 <div id="backdrop" class="displayOff" style="width:100vw;height:100vh;background-color:rgba(0,0,0,0.7);position:absolute;top:0;left:0;"></div>
 <div id="form" class="ofOn" style="position:absolute;bottom:0px;left:0px;width: 90vw;height: 0px;margin-left: 5vw;margin-bottom: 5vh;z-index:50;border-radius:5px;">
 
-    <form style="float: left;" name="form1" method="post" action="../passingdata.php">
+    <form style="float: left;" name="form1" method="post" action="passingdata.php">
         <div style="float: left;width: 40vw;" class="formFields">
             <section id="formEntry" style="margin-left:20px;font-size:28px;color:#31e5c1;">
                 Please complete the form below
