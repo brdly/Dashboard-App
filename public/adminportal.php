@@ -1,5 +1,5 @@
 <?php
-   /*  function checkLogin($username,$password,$hashed){
+     function checkLogin($username,$password,$hashed){
         if (htmlentities($username) == "adam"){
             if ($hashed){
                 //$hashedpass =  password_hash("password",PASSWORD_BCRYPT);
@@ -15,7 +15,7 @@
         $_SESSION["Username"] = null;
         $_SESSION["Password"] = null;
         $_SESSION['login'] = "please log in";
-        header("Location: login&form/loginBasic.php");
+        header("Location: login&form/loginFormSplit.php");
         die();
     }
     //Start the session
@@ -26,7 +26,7 @@
     if (isset($_POST["Logout"])){
         clearUser();
         $_SESSION['login'] = "please log in";
-        header("Location: login&form/loginBasic.php");
+        header("Location: login&form/loginFormSplit.php");
         die();
     }
 
@@ -41,7 +41,7 @@
          }else{
             //Fail.
             $_SESSION['login'] = "failed to log in";
-            header("Location: login&form/loginBasic.php");
+            header("Location: login&form/loginFormSplit.php");
             die();
         }
 
@@ -54,13 +54,13 @@
         }
         if ($fail){
             $_SESSION['login'] = "please log in";
-            header("Location: login&form/loginBasic.php");
+            header("Location: login&form/loginFormSplit.php");
             die();
         }
         //header("Location: login&form/loginBasic.php");
         //exit();
     }
-*/
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -237,12 +237,21 @@
             cursor:pointer;
         }
 
+        ui-rangeSlider-label{
+            min-width:90px!important;
+        }ui-rangeSlider-label-value{
+            min-width:90px!important;
+        }
+        ui-rangeSlider-leftLabel{
+            min-width:90px!important;
+        }
+
         #slider {
             float:left;
             width:calc(100vw - 400px);
-            margin-left:50px;
+            margin-left:80px;
             margin-bottom:10px;
-            height:40px;
+            height:45px;
         }
 
         .floatRight {
@@ -443,13 +452,8 @@
 
 <script>
 
-    $( document ).ready(function() {
-
-        $(document).on('click', '.titlebox', function () {
-            $("nav").animate({width:'toggle'},400);
-        });
-
-          function Submit(path, params, method) {
+    
+function Submit(path, params, method) {
             method = method || "post";
             var form = document.createElement("form");
             form.setAttribute("method", method);
@@ -473,12 +477,20 @@
             Submit("adminportal.php",{Logout: 1})
         }
 
+    $( document ).ready(function() {
+
+        $(document).on('click', '.titlebox', function () {
+            $("nav").animate({width:'toggle'},400);
+        });
+
+
         $( "#helper" ).click(function() {
             $( this ).toggleClass( "helpOn" );
             if($( this ).hasClass( "helpOn" )) {
                 $( "#helpTips" ).show("slow");
                 $( "#helpTips" ).slideDown();
             } else {
+                $( "#helpTips" ).html("");
                 $( "#helpTips" ).hide("slow");
                 $( "#helpTips" ).slideUp();
             }
