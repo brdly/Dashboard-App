@@ -76,13 +76,13 @@
     <script src="http://d3js.org/d3.v3.min.js"></script>
   <script src="http://d3js.org/topojson.v1.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=BenchNine:700" rel="stylesheet">
-    <link href="/SPATProject/public/build/css/jqcloud.css" rel="stylesheet">
-    <link href="/SPATProject/public/build/js/slider/demo/style.css" rel="stylesheet">
+    <link href="build/css/jqcloud.css" rel="stylesheet">
+    <link href="build/js/slider/demo/style.css" rel="stylesheet">
     <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="http://datamaps.github.io/scripts/datamaps.world.min.js?v=1"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
-    <script src="/SPATProject/public/build/js/slider/jQDateRangeSlider-min.js"></script>
-    <script src="/SPATProject/public/build/js/jqcloud-1.0.4.js"></script>
+    <script src="build/js/slider/jQDateRangeSlider-min.js"></script>
+    <script src="build/js/jqcloud-1.0.4.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 
     <style>
@@ -630,7 +630,7 @@ function Submit(path, params, method) {
                             $( this ).removeClass( "menuOn" );
                         })
                         generatedWords = [];
-                        $("#mapbar").css('display','none'); mapMade=false; $("#container1").html('<div id="mapbar" style="display:none"><img src="/SPATProject/public/build/img/mapbar.png" /></div>');
+                        $("#mapbar").css('display','none'); mapMade=false; $("#container1").html('<div id="mapbar" style="display:none"><img src="build/img/mapbar.png" /></div>');
                     } else if(counter <= 1) {  $("#chartRatingShare".replace(/ /g, '')).remove(); } {
                         createWordBubble("wordBubble","wordBubble",generatedWords);
                     }
@@ -806,7 +806,7 @@ function Submit(path, params, method) {
                                  //please choose a platform 
                             }
                         } else {
-                            if(option === "Location") { $("#mapbar").css('display','none'); mapMade=false; $("#container1").html('<div id="mapbar" style="display:none"><img src="/SPATProject/public/build/img/mapbar.png" /></div>'); }
+                            if(option === "Location") { $("#mapbar").css('display','none'); mapMade=false; $("#container1").html('<div id="mapbar" style="display:none"><img src="build/img/mapbar.png" /></div>'); }
                             if(option === "Review") { $("#bubblewordBubble").remove(); generatedWords=[]; }
                             if(option === "Date") {  $("#chartTime"+option.replace(/ /g, '')).remove(); }
                             if(selectedOpts) {
@@ -2074,14 +2074,14 @@ function Submit(path, params, method) {
     <div id="slider" class="hide"></div>
     <div id="charts"> </div>
     <div id="container1" style="float:left;margin-left:2.5%; width: 45%; max-height: 550px;">
-        <div id="mapbar" style="display:none"><img src="/SPATProject/public/build/img/mapbar.png" /></div>
+        <div id="mapbar" style="display:none"><img src="build/img/mapbar.png" /></div>
     </div>
       
 </main>
 
 <footer>
-    <img src="/SPATProject/public/build/img/logout.png" onclick="clearUser()" />
-    <img id="helper" src="/SPATProject/public/build/img/help.png" />
+    <img src="build/img/logout.png" onclick="clearUser()" />
+    <img id="helper" src="build/img/help.png" />
 </footer>
 
 <div id="helpTips"></div>
