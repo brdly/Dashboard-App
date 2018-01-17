@@ -1,5 +1,5 @@
 <?php
-     function checkLogin($username,$password,$hashed){
+    /* function checkLogin($username,$password,$hashed){
         if (htmlentities($username) == "adam"){
             if ($hashed){
                 //$hashedpass =  password_hash("password",PASSWORD_BCRYPT);
