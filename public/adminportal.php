@@ -382,6 +382,13 @@
             border-radius: 12px;
         }
 
+        
+
+        #chartStackGroup{
+                width:70vw;
+                height:auto;
+            }
+
         @media screen and (max-width: 320px) {
             nav {
                 display:none;
@@ -1116,6 +1123,13 @@ function Submit(path, params, method) {
             var upworkStack = [];
             var awtStack = [];
             var fiverrStack = [];
+            var adjWage = [];
+            var stackOrder = [];
+            
+            var stackOne;
+                var stackTwo;
+                var stackThree;
+                var stackFour;
 
             $.each(resultsArray, function (index, item) {
 
@@ -1149,6 +1163,8 @@ function Submit(path, params, method) {
                     })
 
                     produceHoursChart = true;
+                } else {
+                    try{$("#chart"+item.dataType).remove();}catch(e){}
                 }
 
                 if(item.dataType === "Platforms") {
@@ -1181,6 +1197,8 @@ function Submit(path, params, method) {
                     })
 
                     producePeriodChart = true;
+                } else {
+                    try{$("#chart"+item.dataType).remove();}catch(e){}
                 }
 
                 if(item.dataType === "Age") {
@@ -1229,6 +1247,8 @@ function Submit(path, params, method) {
                     })
 
                     produceWageChart = true;
+                } else {
+                    try{$("#chart"+item.dataType).remove();}catch(e){}
                 }
 
                 if(item.dataType === "Date") {
@@ -1382,45 +1402,253 @@ function Submit(path, params, method) {
                                 upworkStack.push(meep);
                             } else { upworkStack.push(item.result); }
                         }
+
+                        var fiverrNewWage; var awtNewWage; var upworkNewWage;
+                        var amazonOn = $("#AmazonMechanicalTurk").hasClass("menuOn");
+                        var fiverrOn = $("#Fiverr").hasClass("menuOn");
+                        var upworkOn = $("#Upwork").hasClass("menuOn");
                         
-                        if(sc === resultsArray.length -1) { 
+                        if(amazonOn === true && fiverrOn === true && upworkOn === true) {
+                             stackOne = [fiverrStack[1],awtStack[1],upworkStack[1]];
+                             stackTwo = [fiverrStack[2],awtStack[2],upworkStack[2]];
+                             stackThree = [fiverrStack[3],awtStack[3],upworkStack[3]];
+                             stackFour = [fiverrNewWage,awtNewWage,upworkNewWage]
+                        } else if(amazonOn === true && fiverrOn === true && upworkOn === false) {
+                             stackOne = [fiverrStack[1],awtStack[1]];
+                             stackTwo = [fiverrStack[2],awtStack[2]];
+                             stackThree = [fiverrStack[3],awtStack[3]];
+                             stackFour = [fiverrNewWage,awtNewWage]
+                        } else if(amazonOn === true && fiverrOn === false && upworkOn === true) {
+                             stackOne = [awtStack[1],upworkStack[1]];
+                             stackTwo = [awtStack[2],upworkStack[2]];
+                             stackThree = [awtStack[3],upworkStack[3]];
+                             stackFour = [awtNewWage,upworkNewWage]
+                        } else {
+                             stackOne = [fiverrStack[1],upworkStack[1]];
+                             stackTwo = [fiverrStack[2],upworkStack[2]];
+                             stackThree = [fiverrStack[3],upworkStack[3]];
+                             stackFour = [fiverrNewWage,upworkNewWage]
+                        }
+                        
+                        
+                        
+                    }
+
+                    if(sc === resultsArray.length -1) { 
+
+                        stackOrder;
+
+                        if(stackOrder[0] === "Wage" && stackOrder[1] === "Hours") {
+                            generatedData7.push ({
+                                label:"Average Wage",
+                                stack: 'Stack 2',
+                                backgroundColor: 'rgba(14,177,146,.9)',
+                                borderColor:'rgba(14,177,146,.9)',
+                                borderWidth: 2,
+                                data: stackOne
+                            })
                             generatedData7.push ({
                                 label:"Hours Worked",
                                 stack: 'Stack 0',
-                                backgroundColor: "green",
-                                borderColor:colourArray[i],
+                                backgroundColor: 'rgba(154,158,173,.9)',
+                                borderColor:'rgba(154,158,173,.9)',
                                 borderWidth: 2,
-                                data: [fiverrStack[1],awtStack[1],upworkStack[1]]
+                                data: stackTwo
                             })
                             generatedData7.push ({
-                                label:"Search Period",
+                            label:"Search Period",
+                            stack: 'Stack 0',
+                            backgroundColor: 'rgba(25,52,70,.9)',
+                            borderColor:'rgba(25,52,70,.9)',
+                            borderWidth: 2,
+                            data: stackThree
+                            })
+
+                            try{fiverrNewWage = parseFloat((parseFloat(fiverrStack[2]) * parseFloat(fiverrStack[1])) / (parseFloat(fiverrStack[2]) + parseFloat(fiverrStack[3].toString().replace("-",''))));}catch(e){}
+                            try{awtNewWage = parseFloat((parseFloat(awtStack[2]) * parseFloat(awtStack[1])) / (parseFloat(awtStack[2]) + parseFloat(awtStack[3].toString().replace("-",''))));}catch(e){}
+                            try{upworkNewWage = parseFloat((parseFloat(upworkStack[2]) * parseFloat(upworkStack[1])) / (parseFloat(upworkStack[2]) + parseFloat(upworkStack[3].toString().replace("-",''))));}catch(e){}
+                        } else if(stackOrder[0] === "Hours" && stackOrder[1] === "Wage")
+                        {
+                            generatedData7.push ({
+                                label:"Hours Worked",
                                 stack: 'Stack 0',
-                                backgroundColor: "blue",
-                                borderColor:colourArray[i],
+                                backgroundColor: 'rgba(154,158,173,.9)',
+                                borderColor:'rgba(154,158,173,.9)',
                                 borderWidth: 2,
-                                data: [fiverrStack[3],awtStack[3],upworkStack[3]]
+                                data: stackOne
                             })
                             generatedData7.push ({
                                 label:"Average Wage",
                                 stack: 'Stack 2',
-                                backgroundColor: "orange",
-                                borderColor:colourArray[i],
+                                backgroundColor: 'rgba(14,177,146,.9)',
+                                borderColor:'rgba(14,177,146,.9)',
                                 borderWidth: 2,
-                                data: [fiverrStack[2],awtStack[2],upworkStack[2]]
+                                data: stackTwo
                             })
                             generatedData7.push ({
-                                label:"Adjusted Average Wage",
-                                stack: 'Stack 1',
-                                backgroundColor: "red",
-                                borderColor:colourArray[i],
-                                borderWidth: 2,
-                                data: [fiverrStack[2],awtStack[2],upworkStack[2]]
+                            label:"Search Period",
+                            stack: 'Stack 0',
+                            backgroundColor: 'rgba(25,52,70,.9)',
+                            borderColor:'rgba(25,52,70,.9)',
+                            borderWidth: 2,
+                            data: stackThree
                             })
+                            
+                            
+                            try{fiverrNewWage = parseFloat((parseFloat(fiverrStack[2]) * parseFloat(fiverrStack[1])) / (parseFloat(fiverrStack[1]) + parseFloat(fiverrStack[3].toString().replace("-",''))));}catch(e){}
+                            try{awtNewWage = parseFloat((parseFloat(awtStack[2]) * parseFloat(awtStack[1])) / (parseFloat(awtStack[1]) + parseFloat(awtStack[3].toString().replace("-",''))));}catch(e){}
+                            try{upworkNewWage = parseFloat((parseFloat(upworkStack[2]) * parseFloat(upworkStack[1])) / (parseFloat(upworkStack[1]) + parseFloat(upworkStack[3].toString().replace("-",''))));}catch(e){}
+                        } else if(stackOrder[0] === "Period" && stackOrder[1] === "Hours")
+                        {
+                            generatedData7.push ({
+                            label:"Search Period",
+                            stack: 'Stack 0',
+                            backgroundColor: 'rgba(25,52,70,.9)',
+                            borderColor:'rgba(25,52,70,.9)',
+                            borderWidth: 2,
+                            data: stackOne
+                            })
+                            generatedData7.push ({
+                                label:"Hours Worked",
+                                stack: 'Stack 0',
+                                backgroundColor: 'rgba(154,158,173,.9)',
+                                borderColor:'rgba(154,158,173,.9)',
+                                borderWidth: 2,
+                                data: stackTwo
+                            })
+                            generatedData7.push ({
+                                label:"Average Wage",
+                                stack: 'Stack 2',
+                                backgroundColor: 'rgba(14,177,146,.9)',
+                                borderColor:'rgba(14,177,146,.9)',
+                                borderWidth: 2,
+                                data: stackThree
+                            })
+                            
+                            try{fiverrNewWage = parseFloat((parseFloat(fiverrStack[3]) * parseFloat(fiverrStack[2])) / (parseFloat(fiverrStack[2]) + parseFloat(fiverrStack[1].toString().replace("-",''))));}catch(e){}
+                            try{awtNewWage = parseFloat((parseFloat(awtStack[3]) * parseFloat(awtStack[2])) / (parseFloat(awtStack[2]) + parseFloat(awtStack[1].toString().replace("-",''))));}catch(e){}
+                            try{upworkNewWage = parseFloat((parseFloat(upworkStack[3]) * parseFloat(upworkStack[2])) / (parseFloat(upworkStack[2]) + parseFloat(upworkStack[1].toString().replace("-",''))));}catch(e){}
+                        } else if(stackOrder[0] === "Period" && stackOrder[1] === "Wage")
+                        {
+                            generatedData7.push ({
+                            label:"Search Period",
+                            stack: 'Stack 0',
+                            backgroundColor: 'rgba(25,52,70,.9)',
+                            borderColor:'rgba(25,52,70,.9)',
+                            borderWidth: 2,
+                            data: stackOne
+                            })
+                            generatedData7.push ({
+                                label:"Average Wage",
+                                stack: 'Stack 0',
+                                backgroundColor: 'rgba(14,177,146,.9)',
+                                borderColor:'rgba(14,177,146,.9)',
+                                borderWidth: 2,
+                                data: stackTwo
+                            })
+                            generatedData7.push ({
+                                label:"Hours Worked",
+                                stack: 'Stack 2',
+                                backgroundColor: 'rgba(154,158,173,.9)',
+                                borderColor:'rgba(154,158,173,.9)',
+                                borderWidth: 2,
+                                data: stackThree
+                            })
+                            
+                            
+                            try{fiverrNewWage = parseFloat((parseFloat(fiverrStack[3]) * parseFloat(fiverrStack[2])) / (parseFloat(fiverrStack[2]) + parseFloat(fiverrStack[1].toString().replace("-",''))));}catch(e){}
+                            try{awtNewWage = parseFloat((parseFloat(awtStack[3]) * parseFloat(awtStack[2])) / (parseFloat(awtStack[2]) + parseFloat(awtStack[1].toString().replace("-",''))));}catch(e){}
+                            try{upworkNewWage = parseFloat((parseFloat(upworkStack[3]) * parseFloat(upworkStack[2])) / (parseFloat(upworkStack[2]) + parseFloat(upworkStack[1].toString().replace("-",''))));}catch(e){}
+                        } else if(stackOrder[0] === "Hours" && stackOrder[1] === "Period")
+                        {
+                            generatedData7.push ({
+                                label:"Hours Worked",
+                                stack: 'Stack 0',
+                                backgroundColor: 'rgba(154,158,173,.9)',
+                                borderColor:'rgba(154,158,173,.9)',
+                                borderWidth: 2,
+                                data: stackOne
+                            })
+                            generatedData7.push ({
+                            label:"Search Period",
+                            stack: 'Stack 0',
+                            backgroundColor: 'rgba(25,52,70,.9)',
+                            borderColor:'rgba(25,52,70,.9)',
+                            borderWidth: 2,
+                            data: stackTwo
+                            })
+                            generatedData7.push ({
+                                label:"Average Wage",
+                                stack: 'Stack 2',
+                                backgroundColor: 'rgba(14,177,146,.9)',
+                                borderColor:'rgba(14,177,146,.9)',
+                                borderWidth: 2,
+                                data: stackThree
+                            })
+                            
+                            
+                            try{fiverrNewWage = parseFloat((parseFloat(fiverrStack[3]) * parseFloat(fiverrStack[1])) / (parseFloat(fiverrStack[1]) + parseFloat(fiverrStack[2].toString().replace("-",''))));}catch(e){}
+                            try{awtNewWage = parseFloat((parseFloat(awtStack[3]) * parseFloat(awtStack[1])) / (parseFloat(awtStack[1]) + parseFloat(awtStack[2].toString().replace("-",''))));}catch(e){}
+                            try{upworkNewWage = parseFloat((parseFloat(upworkStack[3]) * parseFloat(upworkStack[1])) / (parseFloat(upworkStack[1]) + parseFloat(upworkStack[2].toString().replace("-",''))));}catch(e){}
+                            
+                        } else 
+                        {
+                            generatedData7.push ({
+                                label:"Average Wage",
+                                stack: 'Stack 2',
+                                backgroundColor: 'rgba(14,177,146,.9)',
+                                borderColor:'rgba(14,177,146,.9)',
+                                borderWidth: 2,
+                                data: stackOne
+                            })
+                            generatedData7.push ({
+                            label:"Search Period",
+                            stack: 'Stack 0',
+                            backgroundColor: 'rgba(25,52,70,.9)',
+                            borderColor:'rgba(25,52,70,.9)',
+                            borderWidth: 2,
+                            data: stackTwo
+                            })
+                            generatedData7.push ({
+                                label:"Hours Worked",
+                                stack: 'Stack 0',
+                                backgroundColor: 'rgba(154,158,173,.9)',
+                                borderColor:'rgba(154,158,173,.9)',
+                                borderWidth: 2,
+                                data: stackThree
+                            })
+                            
+                        try{fiverrNewWage = parseFloat((parseFloat(fiverrStack[3]) * parseFloat(fiverrStack[1])) / (parseFloat(fiverrStack[3]) + parseFloat(fiverrStack[2].toString().replace("-",''))));}catch(e){}
+                        try{awtNewWage = parseFloat((parseFloat(awtStack[3]) * parseFloat(awtStack[1])) / (parseFloat(awtStack[3]) + parseFloat(awtStack[2].toString().replace("-",''))));}catch(e){}
+                        try{upworkNewWage = parseFloat((parseFloat(upworkStack[3]) * parseFloat(upworkStack[1])) / (parseFloat(upworkStack[3]) + parseFloat(upworkStack[2].toString().replace("-",''))));}catch(e){}
+                        }
+
+                        if(amazonOn === true && fiverrOn === true && upworkOn === true) {
+                            var stackFour = [fiverrNewWage,awtNewWage,upworkNewWage];
+                        } else if(amazonOn === true && fiverrOn === true && upworkOn === false) {
+                            var stackFour = [fiverrNewWage,awtNewWage];
+                        } else if(amazonOn === true && fiverrOn === false && upworkOn === true) {
+                            var stackFour = [awtNewWage,upworkNewWage];
+                        } else {
+                            var stackFour = [fiverrNewWage,upworkNewWage];
+                        }
+
+                        generatedData7.push ({
+                            label:"Adjusted Average Wage",
+                            stack: 'Stack 1',
+                            backgroundColor: 'rgba(44,48,63,.4)',
+                            borderColor:'rgba(44,48,63,.4)',
+                            borderWidth: 2,
+                            data: stackFour
+                        })
+
+                        produceStackChart = true;
 
                         }
-                        produceStackChart = true;
-                    }
-                    sc++
+                    
+                    if(stackOrder.indexOf(item.dataType) === -1) stackOrder.push(item.dataType);
+                } else {
+                    try{$("#chartStackGroup").remove();}catch(e){}
                 }
 
                 if(radarCounter > 2) {
@@ -1556,6 +1784,9 @@ function Submit(path, params, method) {
                 }
 
                 i++;
+
+                
+                sc++;
                 
             })
             
@@ -2191,10 +2422,10 @@ function Submit(path, params, method) {
 
             if(produceStackChart === true) {
                 if(document.getElementById("chartStackGroup") === null) {
-                    $("#charts").append(' <section id="chartStackGroup" class="chart chartBig ">   <canvas id="barChartStackGroup" height="auto" width="auto"></canvas>  </section>')
+                    $("#charts").append(' <section id="chartStackGroup" class="chart ">   <canvas id="barChartStackGroup" height="auto" width="auto"></canvas>  </section>')
                 } else {
-                    $("chartStackGroup").remove();
-                    $("#charts").append(' <section id="chartStackGroup" class="chart chartBig ">   <canvas id="barChartStackGroup" height="auto" width="auto"></canvas>  </section>')
+                    $("#chartStackGroup").remove();
+                    $("#charts").append(' <section id="chartStackGroup" class="chart ">   <canvas id="barChartStackGroup" height="auto" width="auto"></canvas>  </section>')
                 }
                 const CHART = document.getElementById("barChartStackGroup");
                 Chart.defaults.scale.ticks.beginAtZero = true;
