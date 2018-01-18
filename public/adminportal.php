@@ -1051,11 +1051,11 @@ function Submit(path, params, method) {
             var generatedBarLabel13 = "";var generatedBarLabel14 = "";var generatedBarLabel15 = "";var generatedBarLabel16 = "";var generatedBarLabel17 = "";var generatedBarLabel18 = "";var generatedBarLabel19 = "";
 
             var generatedRadarXLabel1 = []; var generatedRadarXPlats1 = []; var generatedRadarXLabel2 = ""; var generatedRadarXVals1 = [];
-            var generatedRadarXLabel3 = "";var generatedStatusXLabel1 = "";var generatedStackXLabel1 = "";
+            var generatedRadarXLabel3 = "";var generatedStatusXLabel1 = "";var generatedStackXLabel1 = [];
 
             var generatedData1 = [];var generatedData1x = [];var generatedData1y = [];var generatedData2 = [];var generatedData3 = [];var generatedData4 = [];var generatedData5 = [];var generatedData6 = [];
             var generatedData77 = [];var generatedData8 = [];var generatedData9 = [];var generatedData10 = [];var generatedData11 = [];var generatedData12 = [];var generatedData13 = [];var generatedData14 = [];
-            var generatedData15 = [];var generatedData16 = [];var generatedData17 = [];var generatedData18 = [];var generatedData19 = [];var generatedData20 = [];
+            var generatedData15 = [];var generatedData16 = [];var generatedData17 = [];var generatedData18 = [];var generatedData19 = [];var generatedData20 = [];var generatedData7 = [];
 
             var currentChart = "";
             var nameShare = [];
@@ -1112,6 +1112,10 @@ function Submit(path, params, method) {
             
 
             var cc = 0;
+            var sc = 0;
+            var upworkStack = [];
+            var awtStack = [];
+            var fiverrStack = [];
 
             $.each(resultsArray, function (index, item) {
 
@@ -1211,7 +1215,7 @@ function Submit(path, params, method) {
                     produceInterestChart = true;
                 }
 
-                if(item.dataType === "Wage" stackedCounter <= 2) {
+                if(item.dataType === "Wage" && stackedCounter <= 2) {
                     generatedGraphLabel1y.push(item.result);
                     generatedBarLabel1y = item.dataType;
                     
@@ -1342,8 +1346,81 @@ function Submit(path, params, method) {
 
 
                 if(stackedCounter > 2) {
-                    //group hours vs period and wage minus the period
                     
+                    //group hours vs period and wage minus the period
+                    if(item.dataType === "Wage" || item.dataType === "Hours" || item.dataType === "Period" ) {
+                        if(generatedStackLabel16.indexOf(item.platformName) === -1) {
+                            generatedStackLabel16.push(item.platformName);
+                        }
+                        if(generatedStackXLabel1.indexOf(item.dataType) === -1) {
+                            generatedStackXLabel1.push(item.dataType);
+                        }
+
+                        if(item.platformName === "Fiverr" && item.dataType === "Wage" || item.platformName === "Fiverr" && item.dataType === "Hours" || item.platformName === "Fiverr" && item.dataType === "Period") {
+                            if(fiverrStack.indexOf(item.platformName) === -1) {
+                                fiverrStack.push(item.platformName);
+                            }
+                            if(item.dataType === "Period") {
+                                var meep = 0 - item.result;
+                                fiverrStack.push(meep);
+                            } else { fiverrStack.push(item.result); }
+                            
+                        } else if(item.platformName === "Amazon Mechanical Turk" && item.dataType === "Wage" || item.platformName === "Amazon Mechanical Turk" && item.dataType === "Hours" || item.platformName === "Amazon Mechanical Turk" && item.dataType === "Period") {
+                            if(awtStack.indexOf(item.platformName) === -1) {
+                                awtStack.push(item.platformName);
+                            }
+                            if(item.dataType === "Period") {
+                                var meep = 0 - item.result;
+                                awtStack.push(meep);
+                            } else { awtStack.push(item.result); }
+                        } else if(item.platformName === "Upwork" && item.dataType === "Wage" || item.platformName === "Upwork" && item.dataType === "Hours" || item.platformName === "Upwork" && item.dataType === "Period") {
+                            if(upworkStack.indexOf(item.platformName) === -1) {
+                                upworkStack.push(item.platformName);
+                            }
+                            if(item.dataType === "Period") {
+                                var meep = 0 - item.result;
+                                upworkStack.push(meep);
+                            } else { upworkStack.push(item.result); }
+                        }
+                        
+                        if(sc === resultsArray.length -1) { 
+                            generatedData7.push ({
+                                label:"Hours Worked",
+                                stack: 'Stack 0',
+                                backgroundColor: "green",
+                                borderColor:colourArray[i],
+                                borderWidth: 2,
+                                data: [fiverrStack[1],awtStack[1],upworkStack[1]]
+                            })
+                            generatedData7.push ({
+                                label:"Search Period",
+                                stack: 'Stack 0',
+                                backgroundColor: "blue",
+                                borderColor:colourArray[i],
+                                borderWidth: 2,
+                                data: [fiverrStack[3],awtStack[3],upworkStack[3]]
+                            })
+                            generatedData7.push ({
+                                label:"Average Wage",
+                                stack: 'Stack 2',
+                                backgroundColor: "orange",
+                                borderColor:colourArray[i],
+                                borderWidth: 2,
+                                data: [fiverrStack[2],awtStack[2],upworkStack[2]]
+                            })
+                            generatedData7.push ({
+                                label:"Adjusted Average Wage",
+                                stack: 'Stack 1',
+                                backgroundColor: "red",
+                                borderColor:colourArray[i],
+                                borderWidth: 2,
+                                data: [fiverrStack[2],awtStack[2],upworkStack[2]]
+                            })
+
+                        }
+                        produceStackChart = true;
+                    }
+                    sc++
                 }
 
                 if(radarCounter > 2) {
@@ -2113,23 +2190,27 @@ function Submit(path, params, method) {
             }   
 
             if(produceStackChart === true) {
-                if(document.getElementById("chart"+generatedStackLabel1.replace(/ /g, '')) === null) {
-                    $("#charts").append(' <section id="chart'+generatedStackLabel1.replace(/ /g, '')+'" class="chart chartBig ">   <canvas id="barChart'+generatedStackLabel1.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                if(document.getElementById("chartStackGroup") === null) {
+                    $("#charts").append(' <section id="chartStackGroup" class="chart chartBig ">   <canvas id="barChartStackGroup" height="auto" width="auto"></canvas>  </section>')
                 } else {
-                    $("#chart"+generatedStackLabel1.replace(/ /g, '')).remove();
-                    $("#charts").append(' <section id="chart'+generatedStackLabel1.replace(/ /g, '')+'" class="chart chartBig ">   <canvas id="barChart'+generatedStackLabel1.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                    $("chartStackGroup").remove();
+                    $("#charts").append(' <section id="chartStackGroup" class="chart chartBig ">   <canvas id="barChartStackGroup" height="auto" width="auto"></canvas>  </section>')
                 }
-                const CHART = document.getElementById("barChart"+generatedStackLabel1.replace(/ /g, ''));
+                const CHART = document.getElementById("barChartStackGroup");
                 Chart.defaults.scale.ticks.beginAtZero = true;
 
                 let barChart = new Chart(CHART,{
-                    type: 'radar',
+                    type: 'bar',
                     data: {
-                        labels: ["High", "Low", "Average"],
+                        labels: generatedStackLabel16,
                         datasets: generatedData7,
                         fill: '-1'
                     },
                     options: {
+                            tooltips: {
+                            mode: 'index',
+                            intersect: false
+                        },
                         datasetFill: false,
                         responsive: true,
                         scales: {
@@ -2138,7 +2219,7 @@ function Submit(path, params, method) {
                                 display: true,
                                 scaleLabel: {
                                     display: false,
-                                    labelString:  generatedStackLabel1
+                                    labelString:  generatedStackXLabel1
                                 },
                                 ticks: {
                                     max: 3
@@ -2155,7 +2236,7 @@ function Submit(path, params, method) {
                     title: {
                         fontSize: 26,
                         display: true,
-                        text: generatedStackLabel1
+                        text: "Hours vs Search Period with Real Wage"
                     },
                     layout: {
                         padding: {
