@@ -619,7 +619,7 @@ function Submit(path, params, method) {
                 }  else if(value === "Culture") {
                     $( "nav" ).append( '<section id="'+value.replace(/ /g, '')+'" title="'+value+'" class="button2">Relationship</section>' );
                 } else if(value === "Pros") {
-                    
+                    //e
                 } else if(value === "Date") {
                     $( "nav" ).append( '<section id="'+value.replace(/ /g, '')+'" title="'+value+'" class="button2">Timeline</section>' );
                 } else if(value === "Location") {
@@ -928,6 +928,7 @@ function Submit(path, params, method) {
                 var countC = 0;
                 var prevDate;
                 var seriesData = [];
+                var push = false;
 
                 if(dataType === "Rating" || dataType === "Date" || dataType === "Platforms" || dataType === "Period" || dataType === "Age" || dataType === "Interest" || dataType === "Worklife Balance" || dataType === "Wage" || dataType === "Hours" || dataType === "Benefits" || dataType === "Job Security" || dataType === "Management" || dataType === "Culture") {
                     $.each(selectedOpts[i], function (index, numbers) {
@@ -935,7 +936,7 @@ function Submit(path, params, method) {
                         if( incomingNumber % 1 === 0 ) {
                             seriesData.push(incomingNumber);
                             var resultDate = new Date(numbers[2]);
-                            if(!!prevDate) {
+                            if(!!prevDate && dataType === "Rating") {
                                 if(prevDate > resultDate) {
                                     seriesData.push(null);
                                 }
@@ -943,6 +944,7 @@ function Submit(path, params, method) {
                             
                             prevDate = new Date(numbers[2]);
                             if(resultDate >= timeStart && resultDate <= timeEnd) {
+                                push = true;
                                 seriesDates.push(resultDate.toLocaleDateString("en-US"));
                                 if(incomingNumber >= maxInt) { maxInt = incomingNumber;}
                                 if(incomingNumber <= minInt) { minInt = incomingNumber;}
@@ -951,8 +953,11 @@ function Submit(path, params, method) {
                             }
                         }
                     })
+                    if(push === true) {
                         var result = parseFloat(Math.round(total/count * 100) / 100).toFixed(2);
                         resultsArray.push({platformName,dataType,maxInt,minInt,result,total,seriesData,seriesDates});
+                        push = false;
+                    }
                 }
 
                 
@@ -1067,7 +1072,8 @@ function Submit(path, params, method) {
                 data.id === "Culture" && data.className === "button2 menuOn" ||
                 data.id === "Management" && data.className === "button2 menuOn" ||
                 data.id === "JobSecurity" && data.className === "button2 menuOn" ||
-                data.id === "Benefits" && data.className === "button2 menuOn" ) {
+                data.id === "Benefits" && data.className === "button2 menuOn" ||
+                data.id === "Interest" && data.className === "button2 menuOn" ) {
                     radarCounter++;
                 }
 
@@ -1165,7 +1171,7 @@ function Submit(path, params, method) {
                     produceAgeChart = true;
                 }
 
-                if(item.dataType === "Interest") {
+                if(item.dataType === "Interest" && radarCounter <= 2) {
                     generatedGraphLabel18.push(item.result);
                     generatedBarLabel18 = item.dataType;
                     
@@ -1276,6 +1282,7 @@ function Submit(path, params, method) {
                     })
                     produceManagementChart = true;
                 }
+                
 
                 
 
@@ -1312,13 +1319,19 @@ function Submit(path, params, method) {
 
                 if(radarCounter > 2) {
 
-                    if(item.dataType === "Worklife Balance" || item.dataType === "Culture" || item.dataType === "Benefits" || item.dataType === "Management" || item.dataType === "Job Security") {
+                    if(item.dataType === "Worklife Balance" || item.dataType === "Culture" || item.dataType === "Benefits" || item.dataType === "Management" || item.dataType === "Job Security" || item.dataType === "Interest") {
                         
+                        if(item.dataType === "Management") {
+                            item.dataType = "Support";
+                        } else if(item.dataType === "Culture") {
+                            item.dataType = "Relationship";
+                        }
+
                         $("#chart"+item.dataType.replace(/ /g, '')).remove();
                         generatedRadarXLabel1.push(item.dataType);
                         generatedRadarXPlats1.push(item.platformName);
                         generatedRadarXVals1.push(item.result);
-                        
+                        //e
                     }
                     cc++
                     if(resultsArray.length === cc) {
@@ -1362,6 +1375,14 @@ function Submit(path, params, method) {
                                             var values = [generatedRadarXVals1[5],generatedRadarXVals1[6],generatedRadarXVals1[7],generatedRadarXVals1[8],generatedRadarXVals1[9]];
                                         } else {
                                             var values = [generatedRadarXVals1[10],generatedRadarXVals1[11],generatedRadarXVals1[12],generatedRadarXVals1[13],generatedRadarXVals1[14]];
+                                        }
+                                    } else if(radarCounter === 6) {
+                                        if(colCount === 0) {
+                                            var values = [generatedRadarXVals1[0],generatedRadarXVals1[1],generatedRadarXVals1[2],generatedRadarXVals1[3],generatedRadarXVals1[4],generatedRadarXVals1[5]];
+                                        } else if(colCount === 1) {
+                                            var values = [generatedRadarXVals1[6],generatedRadarXVals1[7],generatedRadarXVals1[8],generatedRadarXVals1[9],generatedRadarXVals1[10]];
+                                        } else {
+                                            var values = [generatedRadarXVals1[11],generatedRadarXVals1[12],generatedRadarXVals1[13],generatedRadarXVals1[14],generatedRadarXVals1[15]];
                                         }
                                     }
                                     
@@ -1686,59 +1707,6 @@ function Submit(path, params, method) {
                         fontSize: 26,
                         display: true,
                         text: "Age Range"
-                    },
-                    layout: {
-                        padding: {
-                            left: 10
-                        }
-                    }
-                    }
-                });
-
-            }
-
-            if(produceInterestChart === true) {
-                if(document.getElementById("chart"+generatedBarLabel18.replace(/ /g, '')) === null) {
-                    $("#charts").append(' <section id="chart'+generatedBarLabel18.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel18.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
-                } else {
-                    $("#chart"+generatedBarLabel18.replace(/ /g, '')).remove();
-                    $("#charts").append(' <section id="chart'+generatedBarLabel18.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel18.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
-                }
-            
-                const CHART = document.getElementById("barChart"+generatedBarLabel18.replace(/ /g, ''));
-                Chart.defaults.scale.ticks.beginAtZero = true;
-
-                let barChart = new Chart(CHART,{
-                    type: 'bar',
-                    data: {
-                        labels: ["Highest", "Lowest", "Average"],
-                        datasets: generatedData18
-                    },
-                    options: {
-                        responsive: true,
-                        scales: {
-                            scaleLabel: "<%= ' ' + value%>",
-                        xAxes: [{
-                                display: true,
-                                scaleLabel: {
-                                    display: false,
-                                    labelString:  generatedBarLabel18
-                                },
-                                ticks: {
-                                    max: 3
-                                }
-                            }],
-                        yAxes: [{
-                                display: true,
-                                ticks: {
-                                    beginAtZero: true
-                                }
-                            }]
-                    },
-                    title: {
-                        fontSize: 26,
-                        display: true,
-                        text: "Task Interest and Variety"
                     },
                     layout: {
                         padding: {
@@ -2115,9 +2083,6 @@ function Submit(path, params, method) {
 
             }   
 
-
-        
-
             if(produceStackChart === true) {
                 if(document.getElementById("chart"+generatedStackLabel1.replace(/ /g, '')) === null) {
                     $("#charts").append(' <section id="chart'+generatedStackLabel1.replace(/ /g, '')+'" class="chart chartBig ">   <canvas id="barChart'+generatedStackLabel1.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
@@ -2162,6 +2127,59 @@ function Submit(path, params, method) {
                         fontSize: 26,
                         display: true,
                         text: generatedStackLabel1
+                    },
+                    layout: {
+                        padding: {
+                            left: 10
+                        }
+                    }
+                    }
+                });
+
+            }
+
+            if(produceInterestChart === true) {
+                if(document.getElementById("chart"+generatedBarLabel18.replace(/ /g, '')) === null) {
+                    $("#charts").append(' <section id="chart'+generatedBarLabel18.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel18.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                } else {
+                    $("#chart"+generatedBarLabel18.replace(/ /g, '')).remove();
+                    $("#charts").append(' <section id="chart'+generatedBarLabel18.replace(/ /g, '')+'" class="chart ">   <canvas id="barChart'+generatedBarLabel18.replace(/ /g, '')+'" height="auto" width="auto"></canvas>  </section>')
+                }
+            
+                const CHART = document.getElementById("barChart"+generatedBarLabel18.replace(/ /g, ''));
+                Chart.defaults.scale.ticks.beginAtZero = true;
+
+                let barChart = new Chart(CHART,{
+                    type: 'bar',
+                    data: {
+                        labels: ["Highest", "Lowest", "Average"],
+                        datasets: generatedData18
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            scaleLabel: "<%= ' ' + value%>",
+                        xAxes: [{
+                                display: true,
+                                scaleLabel: {
+                                    display: false,
+                                    labelString:  generatedBarLabel18
+                                },
+                                ticks: {
+                                    max: 3
+                                }
+                            }],
+                        yAxes: [{
+                                display: true,
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                    },
+                    title: {
+                        fontSize: 26,
+                        display: true,
+                        text: "Task Interest and Variety"
                     },
                     layout: {
                         padding: {
