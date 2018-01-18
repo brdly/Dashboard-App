@@ -929,6 +929,10 @@ function Submit(path, params, method) {
                 var prevDate;
                 var seriesData = [];
                 var push = false;
+                var first = 0;
+                var second = 0;
+                var third = 0;
+                var fourth = 0;
 
                 if(dataType === "Rating" || dataType === "Date" || dataType === "Platforms" || dataType === "Period" || dataType === "Age" || dataType === "Interest" || dataType === "Worklife Balance" || dataType === "Wage" || dataType === "Hours" || dataType === "Benefits" || dataType === "Job Security" || dataType === "Management" || dataType === "Culture") {
                     $.each(selectedOpts[i], function (index, numbers) {
@@ -946,16 +950,30 @@ function Submit(path, params, method) {
                             if(resultDate >= timeStart && resultDate <= timeEnd) {
                                 push = true;
                                 seriesDates.push(resultDate.toLocaleDateString("en-US"));
-                                if(incomingNumber >= maxInt) { maxInt = incomingNumber;}
-                                if(incomingNumber <= minInt) { minInt = incomingNumber;}
-                                total = total + incomingNumber;
+                                if(dataType === "Age") {
+                                    if(incomingNumber < 21) {
+                                        first++;
+                                    } else if(incomingNumber > 20 && incomingNumber < 41) {
+                                        second++;
+                                      }  else    if(incomingNumber > 60) {
+                                        fourth++;
+                                    } else { third++; }
+                                } else {
+                                    if(incomingNumber >= maxInt) { maxInt = incomingNumber;}
+                                    if(incomingNumber <= minInt) { minInt = incomingNumber;}
+                                    total = total + incomingNumber;
+                                }
                                 count++;
                             }
                         }
                     })
                     if(push === true) {
-                        var result = parseFloat(Math.round(total/count * 100) / 100).toFixed(2);
-                        resultsArray.push({platformName,dataType,maxInt,minInt,result,total,seriesData,seriesDates});
+                        if(dataType === "Age") {
+                            resultsArray.push({platformName,dataType,first,second,third,fourth,seriesData,seriesDates});
+                        } else {
+                            var result = parseFloat(Math.round(total/count * 100) / 100).toFixed(2);
+                            resultsArray.push({platformName,dataType,maxInt,minInt,result,total,seriesData,seriesDates});
+                        }
                         push = false;
                     }
                 }
@@ -1066,6 +1084,7 @@ function Submit(path, params, method) {
             var n = 0;
             var t = 0;
             var radarCounter = 0;
+            var stackedCounter = 0;
 
             $( ".button2" ).each(function( index, data ) {
                 if(data.id === "WorklifeBalance" && data.className === "button2 menuOn" ||
@@ -1075,6 +1094,11 @@ function Submit(path, params, method) {
                 data.id === "Benefits" && data.className === "button2 menuOn" ||
                 data.id === "Interest" && data.className === "button2 menuOn" ) {
                     radarCounter++;
+                }
+                if(data.id === "Wage" && data.className === "button2 menuOn" ||
+                data.id === "Hours" && data.className === "button2 menuOn" ||
+                data.id === "Period" && data.className === "button2 menuOn" ) {
+                    stackedCounter++;
                 }
 
             })
@@ -1107,7 +1131,7 @@ function Submit(path, params, method) {
                     produceRatingChart = true;
                 }
 
-                if(item.dataType === "Hours") {
+                if(item.dataType === "Hours" && stackedCounter <= 2) {
                     generatedGraphLabel1x.push(item.result);
                     generatedBarLabel1x = item.dataType;
                     
@@ -1139,7 +1163,7 @@ function Submit(path, params, method) {
                     producePlatformsChart = true;
                 }
 
-                if(item.dataType === "Period") {
+                if(item.dataType === "Period" && stackedCounter <= 2) {
                     generatedGraphLabel16.push(item.result);
                     generatedBarLabel16 = item.dataType;
                     
@@ -1156,7 +1180,7 @@ function Submit(path, params, method) {
                 }
 
                 if(item.dataType === "Age") {
-                    generatedGraphLabel17.push(item.result);
+                    generatedGraphLabel17.push(item.dataType);
                     generatedBarLabel17 = item.dataType;
                     
                     
@@ -1165,7 +1189,7 @@ function Submit(path, params, method) {
                         backgroundColor: colourArray[i],
                         borderColor:colourArray[i],
                         borderWidth: 2,
-                        data: [item.maxInt,item.minInt,item.result]
+                        data: [item.first,item.second,item.third,item.fourth]
                     })
 
                     produceAgeChart = true;
@@ -1187,7 +1211,7 @@ function Submit(path, params, method) {
                     produceInterestChart = true;
                 }
 
-                if(item.dataType === "Wage") {
+                if(item.dataType === "Wage" stackedCounter <= 2) {
                     generatedGraphLabel1y.push(item.result);
                     generatedBarLabel1y = item.dataType;
                     
@@ -1316,6 +1340,11 @@ function Submit(path, params, method) {
                     produceStatusChart = true;
                 }
 
+
+                if(stackedCounter > 2) {
+                    //group hours vs period and wage minus the period
+                    
+                }
 
                 if(radarCounter > 2) {
 
@@ -1679,7 +1708,7 @@ function Submit(path, params, method) {
                 let barChart = new Chart(CHART,{
                     type: 'bar',
                     data: {
-                        labels: ["Highest", "Lowest", "Average"],
+                        labels: ["Under 20", "20 to 40", "40 to 60", "Over 60"],
                         datasets: generatedData17
                     },
                     options: {
