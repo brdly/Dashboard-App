@@ -1,5 +1,5 @@
 <?php
-    /* function checkLogin($username,$password,$hashed){
+     function checkLogin($username,$password,$hashed){
         if (htmlentities($username) == "adam"){
             if ($hashed){
                 //$hashedpass =  password_hash("password",PASSWORD_BCRYPT);
@@ -61,7 +61,7 @@
         //exit();
     }
 
-     */
+     
 
 ?>
 <!DOCTYPE html>
@@ -94,6 +94,7 @@
             font-weight: 100;
             height: 100vh;
             width: 100vw;
+            overflow:hidden;
              /*background-image: url(build/img/images7.jpg);
             background-size: auto auto;
             background-position: bottom right;
@@ -133,14 +134,14 @@
             clear: both;
             background-color:rgb(24,187,156);
             width:10px;
-            height:calc(100vh - 70px);
+            height:calc(100vh - 120px);
         }
         
         #mainLeftSpacer {
             float: left;
             background-color:rgb(45,62,80);
             width:10px;
-            height:calc(100vh - 70px);
+            height:calc(100vh - 120px);
             overflow:hidden;
         }
 
@@ -156,7 +157,7 @@
         #mainTopSpacer {
             float: left;
             background-color: rgb(45,62,80);
-            width: calc(100vw - 190px);
+            width: calc(100vw - 230px);
         }
         
         header {
@@ -187,10 +188,13 @@
         }
         
         nav {
+            opacity:1;transition: opacity 1.5s; transition-timing-function: ease-in-out;
             float:left;
             background-color:rgb(45,62,80);
-            height:calc(100vh - 70px);
+            height:calc(100vh - 120px);
             width:170px;
+            overflow:auto;
+            overflow-x:hidden;
         }
         
         nav > section {
@@ -218,8 +222,8 @@
 
         main {
             float:left;
-            width:calc(100vw - 190px);
-            height:calc(100vh - 71px);
+            width: calc(100vw - 190px);
+            height: calc(100vh - 71px);
             overflow:auto;
         }
         
@@ -230,10 +234,26 @@
             margin:10px;
             line-height:250px;
         }
+
+        .footerMob {
+            width: 10px;
+            background-size: auto;
+            background-position: -5px;
+        }
+
+        .footerMob2 {
+            width: 10px;
+            background-size: auto;
+            background-position: -5px;
+        }
         
         footer {    
+            background-image:url(build/img/menubkg.png);
+            background-size:contain;
+            float: left;
+            background-color: rgb(45,62,80);
             position: absolute;
-            bottom: 10px;
+            bottom: 0px;
             left: 0px;
             height: 50px;
             text-align: center;
@@ -277,6 +297,8 @@
             background-color:transparent!important;
             cursor:auto!important;
         }
+
+        .topper{ margin-top:80px;opacity:0.2;transition: opacity 1.5s; transition-timing-function: ease-in-out;}
 
         .titlebox {
             padding-left: barLeftypx;
@@ -420,6 +442,9 @@
             #mainLeftSpacer2{
                 display:none;
             }
+            #mainLeftSpacer{
+                display:none;
+            }
             #chartStackGroup{
                 display:none;
             }
@@ -487,7 +512,7 @@
 
             main {
                 float: left;
-                width: calc(100vw - 20px);
+                width: calc(100vw - 10px);
                 height: calc(100vh - 71px);
                 overflow: auto;
                 overflow-x: hidden;
@@ -673,7 +698,17 @@
 
 <script>
 
-    
+        var windowSize = $( window ).width()
+        $( window ).resize(function() {
+            var newWindowSize = $( window ).width();
+            if(newWindowSize > 720 && windowSize > 720) {
+            } else
+            if(newWindowSize < 720 && windowSize < 720) {
+            } else {
+                location.reload();
+            }
+        })
+
         function Submit(path, params, method) {
             method = method || "post";
             var form = document.createElement("form");
@@ -702,10 +737,20 @@
     $( document ).ready(function() {
 
         $(document).on('click', '.titlebox', function () {
-            $("nav").animate({width:'toggle'},400);
-            $(".logBut").toggle();
-            $(".helpBut").toggle();
-            $("body").toggleClass("darkout");
+            if(window.innerWidth < 721) {
+                $("nav").animate({width:'toggle'},400);
+                $(".logBut").toggle();
+                $(".helpBut").toggle();
+                $("body").toggleClass("darkout");
+                var meep = $("footer").css("width")
+                if(meep === "180px") {
+                    $("footer").animate({'width':'10px'},400);
+                    $("main").animate({'opacity':'1'},1000);
+                } else {
+                    $("footer").animate({'width':'180px'},400);
+                    $("main").animate({'opacity':'0'},200);
+                }
+            }
         });
         $( "#helper" ).click(function() {
             $( this ).toggleClass( "helpOn" );
@@ -765,6 +810,7 @@
         var mapHeightDef = 500;
         var mobile = false;
         if(window.innerWidth < 721) {
+            $("footer").addClass("footerMob");
             fontSizeX = 16; barLefty = 2; mapHeightDef = 140;
             mobile = true;
         }
@@ -796,8 +842,10 @@
         $("#slider").bind("valuesChanged", function(e, data){
             min = data.values.min;
             max = data.values.max;
-            loadChartData(selectedOpts);
-            createWordBubble("wordBubble","wordBubble",generatedWords);
+            if(loading === false) {
+                loadChartData(selectedOpts);
+                createWordBubble("wordBubble","wordBubble",generatedWords);
+            }
         });
 
         $( ".chart" ).click(function() {
@@ -855,6 +903,7 @@
             //})
 
             $( ".button" ).click(function() {
+                loading = true;
                 $( this ).toggleClass( "menuOn" );
 
                 if($( this ).hasClass( "menuOn" )) {
@@ -918,6 +967,9 @@
                                 }
                             })
                             loadChartData(selectedOpts);
+                            setTimeout(function(){         
+                                loading = false;
+                            }, 50);
                         } else { 
                             //please choose a platform 
                         }
@@ -935,7 +987,11 @@
                                         }
                                     }
                                     if(selectedOpts.length === 0) { $("#charts").html(""); } else {
-                                    loadChartData(selectedOpts);}
+                                    loadChartData(selectedOpts);
+                                    setTimeout(function(){         
+                                        loading = false;
+                                    }, 50);
+                                    }
                             }
                         } catch(e) {
                             //no platforms selected
@@ -994,7 +1050,7 @@
 
                 $( ".button2" ).click(function() { 
 
-                    loadHelperTips(this);
+                    
                     
                     var counter = 0;
                     $( ".button" ).each(function( index, data ) {
@@ -1008,6 +1064,7 @@
 
                         if($( this ).hasClass( "menuOn" )) {
                             menuAction = "enable";
+                            loadHelperTips(this);
                         } else { menuAction = "disable"; };
 
                         if(menuAction == "enable") { 
@@ -1073,6 +1130,9 @@
                         alert("please choose a platform first");
                     }
                     loadChartData(selectedOpts);
+                    setTimeout(function(){         
+                        loading = false;
+                     }, 50);
                  }); 
         });
 
