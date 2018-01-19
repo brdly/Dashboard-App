@@ -49,7 +49,6 @@ if (session_status() == PHP_SESSION_NONE) {
         #formCover
         {
             background-color: #2d3e50;
-            width: 60%;
             height: 100vh;
             float: left;
             font-family: 'Roboto', sans-serif;
@@ -243,6 +242,7 @@ if (session_status() == PHP_SESSION_NONE) {
             margin-bottom: 4px;
             margin-left: 50px;
             padding:5px;
+            
 
         }
 
@@ -339,6 +339,17 @@ if (session_status() == PHP_SESSION_NONE) {
         #formCancel:hover{border:2px solid white;}
 
 
+        .formInactive
+        {
+            width:60%;
+        }
+
+        .formActive
+        {
+            width: 100%;
+        }
+
+
 
         @media only screen and (max-width: 1441px) {
 
@@ -389,7 +400,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 
 
-        @media only screen and (max-width: 768px) {
+        @media only screen and (max-width: 800px) {
 
 
 
@@ -464,7 +475,7 @@ if (session_status() == PHP_SESSION_NONE) {
     the formCover div will have the ILO logo, as well as a welcome message on it.
     once the button is pressed, the actual form div will replace and fill up the screen
 --><div id="wrapAround">
-<div id="formCover">
+<div id="formCover" class="formInactive">
     <img src="/SPATProject/public/login&form/img/ilo2.jpg" style="margin-left:15px;margin-top:50px;width:200px;height:auto;float:left;margin-right:50%;" />
     <p style="float:left;margin-left:45px;min-width:60%;max-width:90%;text-align:left;margin-top: 70px;font-size: 40px;">HELP US HELP YOU</p>
     <p style="float:left;margin-left:45px;min-width:60%;max-width:80%;text-align:left;margin-top: 20px;font-size: 18px;">
@@ -655,24 +666,29 @@ if (session_status() == PHP_SESSION_NONE) {
 $(document).ready(function() {
     $("#formButton").click(function() {
           $("#form").animate({height: "90vh"});
-          $("#formCover").animate({width: "100%"});
           $("#form").toggleClass("ofOff");
           $("#form").toggleClass("ofOn");
           $("#backdrop").toggleClass("displayOn");
           $("#backdrop").toggleClass("displayOff");
           $("#login").hide();
+          $("#formCover").toggleClass("formInactive");
+          $("#formCover").toggleClass("formActive");
+
+
+
 
 
 
     });
     $("#formCancel").click(function() {
         $("#form").animate({height: "0vh"});
-        $("#formCover").animate({width: "60%"});
-          $("#form").toggleClass("ofOff");
-          $("#form").toggleClass("ofOn");
-          $("#backdrop").toggleClass("displayOn");
-          $("#backdrop").toggleClass("displayOff");
-          $("#login").show();
+        $("#form").toggleClass("ofOff");
+        $("#form").toggleClass("ofOn");
+        $("#backdrop").toggleClass("displayOn");
+        $("#backdrop").toggleClass("displayOff");
+        $("#login").show();
+        $("#formCover").toggleClass("formInactive");
+        $("#formCover").toggleClass("formActive");
 
     });
 });
