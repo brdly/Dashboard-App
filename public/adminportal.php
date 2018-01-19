@@ -279,7 +279,7 @@
         }
 
         .titlebox {
-            padding-left: 10px;
+            padding-left: barLeftypx;
             margin-left: 25px;
             background-image: url(build/img/ilo.png);
             background-repeat: no-repeat;
@@ -382,14 +382,190 @@
             border-radius: 12px;
         }
 
-        
+        .darkout {
+            background-color:rgba(0,0,0,.65);
+            overflow:hidden;
+        }
 
         #chartStackGroup{
                 width:70vw;
                 height:auto;
             }
 
-        @media screen and (max-width: 320px) {
+        @media screen and (max-width: 720px) {
+
+            #helpTips {
+                display: none;
+                position: fixed;
+                bottom: 0px;
+                right: 0;
+                width: 100vw;
+                height: 24px;
+                font-size: 20px;
+                line-height: 24px;
+                background-color: rgb(45,62,80);
+                border-top: 1px rgb(24,187,156) solid;
+                color: white;
+            }
+
+            .logBut {
+                display:none;
+            }
+            .helpBut {
+                display:none;
+            }
+            nav {
+                display:none;
+            }
+            #mainLeftSpacer2{
+                display:none;
+            }
+            #chartStackGroup{
+                display:none;
+            }
+            #chartTimeDate{
+                display:none;
+            }
+            #chartRadar{
+                display:none;
+            }
+
+            #AmazonMechanicalTurk {
+                background-image: url(build/img/amt.png);
+                background-repeat: no-repeat;
+                background-size: 20px auto;
+                background-position: 10px 16px;
+                padding-right: 5px;
+            }
+
+            .titlebox {
+                padding-left: 0px;
+                margin-left: 0px;
+                background-image: url(build/img/menu.png);
+                background-repeat: no-repeat;
+                background-position: center center;
+                background-size: contain;
+                font-size: 20px;
+                margin-top: 13px;
+                color: rgb(24,187,156);
+                line-height: 150px;
+                overflow:hidden;
+                cursor:pointer;
+                color: rgb(24,187,156);
+            }
+
+            #Upwork {
+                background-image: url(build/img/upwork.png);
+                background-repeat: no-repeat;
+                background-size: 20px auto;
+                background-position: 2px center;
+            }
+
+            #Fiverr {
+                background-image: url(build/img/fiverr.png);
+                background-repeat: no-repeat;
+                background-size: 20px auto;
+                background-position: 4px center;
+                padding-right: 0px;
+            }
+
+            header > section {
+                margin: 0px;
+                padding: 4px;
+                height: 42px;
+                margin-top: 10px;
+                margin-right: 3px;
+                min-width: 50px;
+                width: 90px;
+                line-height: 42px;
+                font-size: 22px;
+            }
+
+            .min{
+                height:5px;
+            }
+
+            main {
+                float: left;
+                width: calc(100vw - 20px);
+                height: calc(100vh - 71px);
+                overflow: auto;
+                overflow-x: hidden;
+            }
+            #slider {
+                float: left;
+                width: 90%;
+                margin-left: 5%;
+                margin-bottom: 2px;
+                height: 40px;
+            }
+            #mapbar > img { width: calc(100vw - 60px);}
+            .chart {
+                float: left;
+                overflow: hidden;
+                cursor: pointer;
+                width: calc(100vw - 60px);
+                margin-left: 3%;
+                margin-bottom: 10px;
+                height: auto;
+                min-width: 270px;
+                min-height: 160px;
+            }
+
+            #chartStackGroup{
+                float: left!important;
+                width: calc(100vw - 60px)!important;
+            }
+
+            .chartHalf {
+                float: left!important;
+                width: calc(100vw - 60px)!important;
+            }
+
+            #bubblewordBubble{
+                height:640px!important;
+                width:660px!important;
+                margin:0!important;
+            }
+
+            #container1 {
+                display:none;
+            }
+
+            .chartDar {
+                float: left!important;
+                width: calc(100vw - 60px)!important;
+            }
+
+            #Location{display:none;}
+
+        }
+
+
+        @media screen and (max-width: 620px) {
+
+
+            #bubblewordBubble{
+                height:540px!important;
+                width:580px!important;
+                margin:0!important;
+            }
+        }
+
+
+        @media screen and (max-width: 520px) {
+
+
+            #bubblewordBubble{
+                height:440px!important;
+                width:480px!important;
+                margin:0!important;
+            }
+        }
+
+        @media screen and (max-width: 420px) {
+
+
             nav {
                 display:none;
             }
@@ -451,19 +627,25 @@
                 height:5px;
             }
 
-            main {
-                float: left;
-                width: calc(100vw - 20px);
-                height: calc(100vh - 71px);
-                overflow: auto;
+
+
+
+            #bubblewordBubble{
+                height:340px!important;
+                width:380px!important;
+                margin:0!important;
             }
-            #slider {
-                float: left;
-                width: calc(100vw - 30px);
-                margin-left: 5px;
-                margin-bottom: 2px;
-                height: 40px;
+        }
+
+        @media screen and (max-width: 320px) {
+
+           
+            #bubblewordBubble{
+                height:300px!important;
+                width:270px!important;
+                margin:0!important;
             }
+
         }
 
     </style>
@@ -471,7 +653,7 @@
 <script>
 
     
-function Submit(path, params, method) {
+        function Submit(path, params, method) {
             method = method || "post";
             var form = document.createElement("form");
             form.setAttribute("method", method);
@@ -491,6 +673,7 @@ function Submit(path, params, method) {
             document.body.appendChild(form);
             form.submit();
         }
+        
         function clearUser(){
             Submit("adminportal.php",{Logout: 1})
         }
@@ -499,9 +682,10 @@ function Submit(path, params, method) {
 
         $(document).on('click', '.titlebox', function () {
             $("nav").animate({width:'toggle'},400);
+            $(".logBut").toggle();
+            $(".helpBut").toggle();
+            $("body").toggleClass("darkout");
         });
-
-
         $( "#helper" ).click(function() {
             $( this ).toggleClass( "helpOn" );
             if($( this ).hasClass( "helpOn" )) {
@@ -541,20 +725,28 @@ function Submit(path, params, method) {
                 } else if(content.textContent === "Hours") {
                     $( "#helpTips" ).html("Hours Chart: The amount of hours a worker will generally spend per day on the platform");
                 } else if(content.textContent === "Platforms") {
-                    $( "#helpTips" ).html("Platforms Chart: ");
+                    $( "#helpTips" ).html("Platforms Chart: The amount of different platforms a worker uses");
                 }else if(content.textContent === "Period") {
-                    $( "#helpTips" ).html("Period Chart: ");
+                    $( "#helpTips" ).html("Period Chart: How long it takes the worker to get a task");
                 }else if(content.textContent === "Age") {
-                    $( "#helpTips" ).html("Age Chart: ");
+                    $( "#helpTips" ).html("Age Chart: How old the workers are");
                 }else if(content.textContent === "Gender") {
-                    $( "#helpTips" ).html("Gender Chart: ");
+                    $( "#helpTips" ).html("Gender Chart: What gender the workers are");
                 }else if(content.textContent === "Interest") {
-                    $( "#helpTips" ).html("Interest Chart: ");
+                    $( "#helpTips" ).html("Interest Chart: The interest and variety of tasks on the platform");
                 }
             }
         }
 
         var allData;
+        var fontSizeX = 26;
+        var barLefty = 10;
+        var mapHeightDef = 500;
+        var mobile = false;
+        if(window.innerWidth < 721) {
+            fontSizeX = 16; barLefty = 2; mapHeightDef = 140;
+            mobile = true;
+        }
         var selectedData = []; //for chosen platforms, auto-update the data on a timer
         //selectedData is all the data from the DB for the chosen platforms
         var selectedOpts = []; //if the above updates, reload the selected opts for all chosen platforms
@@ -758,6 +950,7 @@ function Submit(path, params, method) {
                     });
                     min = oldestDate;
                     max = newestDate;
+                    $("#slider").dateRangeSlider("values", oldestDate, newestDate);
                     loadTimeBar();
                 });
 
@@ -1149,7 +1342,7 @@ function Submit(path, params, method) {
                     produceRatingChart = true;
                 }
 
-                if(item.dataType === "Hours" && stackedCounter <= 2) {
+                if(item.dataType === "Hours" && stackedCounter <= 2 || item.dataType === "Hours" && mobile === true) {
                     generatedGraphLabel1x.push(item.result);
                     generatedBarLabel1x = item.dataType;
                     
@@ -1183,7 +1376,7 @@ function Submit(path, params, method) {
                     producePlatformsChart = true;
                 }
 
-                if(item.dataType === "Period" && stackedCounter <= 2) {
+                if(item.dataType === "Period" && stackedCounter <= 2 || item.dataType === "Period" && mobile === true) {
                     generatedGraphLabel16.push(item.result);
                     generatedBarLabel16 = item.dataType;
                     
@@ -1217,7 +1410,7 @@ function Submit(path, params, method) {
                     produceAgeChart = true;
                 }
 
-                if(item.dataType === "Interest" && radarCounter <= 2) {
+                if(item.dataType === "Interest" && radarCounter <= 2 || item.dataType === "Interest" && mobile === true) {
                     generatedGraphLabel18.push(item.result);
                     generatedBarLabel18 = item.dataType;
                     
@@ -1233,7 +1426,7 @@ function Submit(path, params, method) {
                     produceInterestChart = true;
                 }
 
-                if(item.dataType === "Wage" && stackedCounter <= 2) {
+                if(item.dataType === "Wage" && stackedCounter <= 2 || item.dataType === "Wage" && mobile === true) {
                     generatedGraphLabel1y.push(item.result);
                     generatedBarLabel1y = item.dataType;
                     
@@ -1269,7 +1462,7 @@ function Submit(path, params, method) {
                     produceRatingTimeChart = true;
                 }
 
-                if(item.dataType === "Worklife Balance" && radarCounter <= 2) {
+                if(item.dataType === "Worklife Balance" && radarCounter <= 2 || item.dataType === "Worklife Balance" && mobile === true) {
                     generatedGraphLabel2.push(item.result);
                     generatedBarLabel2 = item.dataType;
                     
@@ -1282,10 +1475,7 @@ function Submit(path, params, method) {
                     })
                     produceBalanceChart = true;
                 }
-
-                
-
-                if(item.dataType === "Benefits" && radarCounter <= 2) {
+                if(item.dataType === "Benefits" && radarCounter <= 2 || item.dataType === "Benefits" && mobile === true) {
                     generatedGraphLabel3.push(item.result);
                     generatedBarLabel3 = item.dataType;
                     
@@ -1298,10 +1488,7 @@ function Submit(path, params, method) {
                     })
                     produceBenefitsChart = true;
                 }
-
-                
-
-                if(item.dataType === "Job Security" && radarCounter <= 2) {
+                if(item.dataType === "Job Security" && radarCounter <= 2 || item.dataType === "Job Security" && mobile === true) {
                     generatedGraphLabel4.push(item.result);
                     generatedBarLabel4 = item.dataType;
                     
@@ -1314,10 +1501,7 @@ function Submit(path, params, method) {
                     })
                     produceSecurityChart = true;
                 }
-
-                
-
-                if(item.dataType === "Management" && radarCounter <= 2) {
+                if(item.dataType === "Management" && radarCounter <= 2 || item.dataType === "Management" && mobile === true) {
                     generatedGraphLabel5.push(item.result);
                     generatedBarLabel5 = "Support";
                     
@@ -1330,11 +1514,7 @@ function Submit(path, params, method) {
                     })
                     produceManagementChart = true;
                 }
-                
-
-                
-
-                if(item.dataType === "Culture" && radarCounter <= 2) {
+                if(item.dataType === "Culture" && radarCounter <= 2 || item.dataType === "Culture" && mobile === true) {
                     generatedGraphLabel6.push(item.result);
                     generatedBarLabel6 = "Relationship";
                     
@@ -1347,9 +1527,6 @@ function Submit(path, params, method) {
                     })
                     produceCultureChart = true;
                 }
-
-                
-
                 if(item.dataType === "Former Employee") {
                     generatedGraphLabel7.push(item.result);
                     generatedBarLabel7 = item.dataType;
@@ -1363,9 +1540,7 @@ function Submit(path, params, method) {
                     })
                     produceStatusChart = true;
                 }
-
-
-                if(stackedCounter > 2) {
+                if(stackedCounter > 2 && mobile === false) {
                     
                     //group hours vs period and wage minus the period
                     if(item.dataType === "Wage" || item.dataType === "Hours" || item.dataType === "Period" ) {
@@ -1651,7 +1826,7 @@ function Submit(path, params, method) {
                     try{$("#chartStackGroup").remove();}catch(e){}
                 }
 
-                if(radarCounter > 2) {
+                if(radarCounter > 2 && mobile === false) {
 
                     if(item.dataType === "Worklife Balance" || item.dataType === "Culture" || item.dataType === "Benefits" || item.dataType === "Management" || item.dataType === "Job Security" || item.dataType === "Interest") {
                         
@@ -1829,13 +2004,13 @@ function Submit(path, params, method) {
                             }]
                     },
                     title: {
-                        fontSize: 26,
+                        fontSize: fontSizeX,
                         display: true,
                         text: generatedBarLabel1
                     },
                     layout: {
                         padding: {
-                            left: 10
+                            left: barLefty
                         }
                     }
                     }
@@ -1882,13 +2057,13 @@ function Submit(path, params, method) {
                             }]
                     },
                     title: {
-                        fontSize: 26,
+                        fontSize: fontSizeX,
                         display: true,
                         text: "Hours Worked Daily"
                     },
                     layout: {
                         padding: {
-                            left: 10
+                            left: barLefty
                         }
                     }
                     }
@@ -1935,13 +2110,13 @@ function Submit(path, params, method) {
                             }]
                     },
                     title: {
-                        fontSize: 26,
+                        fontSize: fontSizeX,
                         display: true,
                         text: "Platforms Used By Worker"
                     },
                     layout: {
                         padding: {
-                            left: 10
+                            left: barLefty
                         }
                     }
                     }
@@ -1988,13 +2163,13 @@ function Submit(path, params, method) {
                             }]
                     },
                     title: {
-                        fontSize: 26,
+                        fontSize: fontSizeX,
                         display: true,
                         text: "Period Searching For Work"
                     },
                     layout: {
                         padding: {
-                            left: 10
+                            left: barLefty
                         }
                     }
                     }
@@ -2041,13 +2216,13 @@ function Submit(path, params, method) {
                             }]
                     },
                     title: {
-                        fontSize: 26,
+                        fontSize: fontSizeX,
                         display: true,
                         text: "Age Range"
                     },
                     layout: {
                         padding: {
-                            left: 10
+                            left: barLefty
                         }
                     }
                     }
@@ -2094,13 +2269,13 @@ function Submit(path, params, method) {
                             }]
                     },
                     title: {
-                        fontSize: 26,
+                        fontSize: fontSizeX,
                         display: true,
                         text: "Hourly Wage ($)"
                     },
                     layout: {
                         padding: {
-                            left: 10
+                            left: barLefty
                         }
                     }
                     }
@@ -2146,13 +2321,13 @@ function Submit(path, params, method) {
                             }]
                     },
                     title: {
-                        fontSize: 26,
+                        fontSize: fontSizeX,
                         display: true,
                         text: generatedBarLabel2
                     },
                     layout: {
                         padding: {
-                            left: 10
+                            left: barLefty
                         }
                     }
                     }
@@ -2198,13 +2373,13 @@ function Submit(path, params, method) {
                             }]
                     },
                     title: {
-                        fontSize: 26,
+                        fontSize: fontSizeX,
                         display: true,
                         text: generatedBarLabel3
                     },
                     layout: {
                         padding: {
-                            left: 10
+                            left: barLefty
                         }
                     }
                     }
@@ -2250,13 +2425,13 @@ function Submit(path, params, method) {
                             }]
                     },
                     title: {
-                        fontSize: 26,
+                        fontSize: fontSizeX,
                         display: true,
                         text: generatedBarLabel4
                     },
                     layout: {
                         padding: {
-                            left: 10
+                            left: barLefty
                         }
                     }
                     }
@@ -2302,13 +2477,13 @@ function Submit(path, params, method) {
                             }]
                     },
                     title: {
-                        fontSize: 26,
+                        fontSize: fontSizeX,
                         display: true,
                         text: generatedBarLabel5
                     },
                     layout: {
                         padding: {
-                            left: 10
+                            left: barLefty
                         }
                     }
                     }
@@ -2354,13 +2529,13 @@ function Submit(path, params, method) {
                             }]
                     },
                     title: {
-                        fontSize: 26,
+                        fontSize: fontSizeX,
                         display: true,
                         text: generatedBarLabel6
                     },
                     layout: {
                         padding: {
-                            left: 10
+                            left: barLefty
                         }
                     }
                     }
@@ -2406,13 +2581,13 @@ function Submit(path, params, method) {
                             }]
                     },
                     title: {
-                        fontSize: 26,
+                        fontSize: fontSizeX,
                         display: true,
                         text: "Rating By Employee Status"
                     },
                     layout: {
                         padding: {
-                            left: 10
+                            left: barLefty
                         }
                     }
                     }
@@ -2465,13 +2640,13 @@ function Submit(path, params, method) {
                             }]
                     },
                     title: {
-                        fontSize: 26,
+                        fontSize: fontSizeX,
                         display: true,
                         text: "Hours vs Search Period with Real Wage"
                     },
                     layout: {
                         padding: {
-                            left: 10
+                            left: barLefty
                         }
                     }
                     }
@@ -2518,13 +2693,13 @@ function Submit(path, params, method) {
                             }]
                     },
                     title: {
-                        fontSize: 26,
+                        fontSize: fontSizeX,
                         display: true,
                         text: "Task Interest and Variety"
                     },
                     layout: {
                         padding: {
-                            left: 10
+                            left: barLefty
                         }
                     }
                     }
@@ -2589,13 +2764,13 @@ function Submit(path, params, method) {
                             }]
                     },
                     title: {
-                        fontSize: 26,
+                        fontSize: fontSizeX,
                         display: true,
                         text: "Rating Over Time"
                     },
                     layout: {
                         padding: {
-                            left: 10,
+                            left: barLefty,
                             top:10
                         }
                     }
@@ -2643,7 +2818,7 @@ function Submit(path, params, method) {
                             }]
                     },
                     title: {
-                        fontSize: 26,
+                        fontSize: fontSizeX,
                         display: true,
                         text: "Estimated Market Share"
                     }
@@ -2691,7 +2866,7 @@ function Submit(path, params, method) {
                             }]
                     },
                     title: {
-                        fontSize: 26,
+                        fontSize: fontSizeX,
                         display: true,
                         text: "Gender Pie Chart"
                     }
@@ -2739,13 +2914,13 @@ function Submit(path, params, method) {
                             }]
                     },
                     title: {
-                        fontSize: 26,
+                        fontSize: fontSizeX,
                         display: true,
                         text: "Comparison via Radar Chart"
                     },
                     layout: {
                         padding: {
-                            left: 10
+                            left: barLefty
                         }
                     }
                     }
@@ -2764,7 +2939,7 @@ function Submit(path, params, method) {
                     scope: 'world',
                     element: document.getElementById('container1'),
                     projection: 'mercator',
-                    height: 500,
+                    height: mapHeightDef,
                     fills: {
                     defaultFill: '#e8e9ec',
                     usa: '#2d3e50',
@@ -2772,7 +2947,7 @@ function Submit(path, params, method) {
                     can: '#b1b4be',
                     },
                     geographyConfig: {
-                        highlightOnHover: false,
+                        highlightOnHover: true,
                         popupOnHover: false
                     },
                     data: {
@@ -2829,8 +3004,8 @@ function Submit(path, params, method) {
 </main>
 
 <footer>
-    <img src="build/img/logout.png" onclick="clearUser()" />
-    <img id="helper" src="build/img/help.png" />
+    <img class="logBut" src="/SPATProject/public/build/img/logout.png" onclick="clearUser()" />
+    <img class="helpBut" id="helper" src="/SPATProject/public/build/img/help.png" />
 </footer>
 
 <div id="helpTips"></div>
