@@ -53,7 +53,7 @@
             clear: both;
             background-color:rgb(24,187,156);
             width:10px;
-            height:calc(100vh - 70px);
+            height:2100px;
         }
 
         #mainLeftSpacer {
@@ -109,7 +109,7 @@
         nav {
             float:left;
             background-color:rgb(45,62,80);
-            height:calc(100vh - 70px);
+            height:2100px;
             width:170px;
         }
 
@@ -180,6 +180,7 @@
         {
             text-align: center;
             padding: 10%;
+            margin-left: 70px;
 
 
         }
@@ -240,11 +241,11 @@
 
         <label>What Platform are you reviewing? </label>
         <select>
-            <option value="Fiverr">Volvo</option>
-            <option value="Upwork">Saab</option>
-            <option value="AMT">Fiat</option>
-            <option value="CrowdFlower">Audi</option>
-            <option value="ClickWorker">Audi</option>
+            <option value="Fiverr">Fiverr</option>
+            <option value="Upwork">Upwork</option>
+            <option value="AMT">AMT</option>
+            <option value="CrowdFlower">CrowdFlower</option>
+            <option value="ClickWorker">ClickWorker</option>
 
         </select>
             <label>How would you rate the work / life balance? </label>
@@ -296,24 +297,6 @@
             <select>
                 <option value="current">current</option>
                 <option value="former">former</option>
-
-            </select>
-            <label>What is your location? DONT THINK WE NEED THIS </label>
-            <select>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-
-            </select>
-            <label>What is the date?  DONT THINK WE NEED THIS  </label>
-            <select>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
 
             </select>
             <label>Please write your review here </label>
