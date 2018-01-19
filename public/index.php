@@ -364,7 +364,7 @@ if (isset($_SESSION["error"])){
 
         .formActive
         {
-            width: 100%;
+            width: 100%!important;
         }
 
 
@@ -426,13 +426,13 @@ if (isset($_SESSION["error"])){
             #login
             {
                 width: 100%;
+                position: static;
             }
 
 
             #formCover
             {
                 width: 100%;
-                position: static;
             }
 
             #formButton
@@ -495,7 +495,7 @@ if (isset($_SESSION["error"])){
     once the button is pressed, the actual form div will replace and fill up the screen
 --><div id="wrapAround">
     <div id="formCover" class="formInactive">
-        <img src="/SPATProject/public/login&form/img/ilo2.jpg" style="margin-left:15px;margin-top:50px;width:200px;height:auto;float:left;margin-right:50%;" />
+        <img src="/login&form/img/ilo2.jpg" style="margin-left:15px;margin-top:50px;width:200px;height:auto;float:left;margin-right:50%;" />
         <p style="float:left;margin-left:45px;min-width:60%;max-width:90%;text-align:left;margin-top: 70px;font-size: 40px;">HELP US HELP YOU</p>
         <p style="float:left;margin-left:45px;min-width:60%;max-width:80%;text-align:left;margin-top: 20px;font-size: 18px;">
             Here at the International Labour Organisation our aim is to ensure workers are treated fairly. We have been doing this for
