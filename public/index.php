@@ -468,7 +468,7 @@ if (isset($_SESSION["error"])){
         }
 
         .formOpen {
-            width: 100%!important;
+            width: 100% !important;
         }
 
     </style>
@@ -700,8 +700,7 @@ if (isset($_SESSION["error"])){
             $("#backdrop").toggleClass("displayOn");
             $("#backdrop").toggleClass("displayOff");
             $("#login").hide();
-            $("#formCover").toggleClass("formInactive");
-            $("#formCover").toggleClass("formActive");
+            $("#formCover").toggleClass("formOpen");
 
 
 
@@ -716,8 +715,7 @@ if (isset($_SESSION["error"])){
             $("#backdrop").toggleClass("displayOn");
             $("#backdrop").toggleClass("displayOff");
             $("#login").show();
-            $("#formCover").toggleClass("formInactive");
-            $("#formCover").toggleClass("formActive");
+            $("#formCover").toggleClass("formOpen");
 
         });
     });
