@@ -217,6 +217,7 @@ if (session_status() == PHP_SESSION_NONE) {
         #leftForm
         {
 
+
         }
 
         #formEntry
@@ -246,6 +247,16 @@ if (session_status() == PHP_SESSION_NONE) {
         }
 
         .formFields > textarea
+        {
+            font-size:16px;
+            display: block;
+            margin-top: 2px;
+            margin-bottom: 4px;
+            margin-left: 50px;
+
+        }
+
+        .formFields > input
         {
             font-size:16px;
             display: block;
@@ -597,6 +608,31 @@ if (session_status() == PHP_SESSION_NONE) {
             <select>
                 <option value="current">I currently work here</option>
                 <option value="former">I am a former platform worker</option>
+
+            </select>
+            <label>How many platforms do you generally use?</label>
+            <input name="platforms" value="platforms" type="number" min="1" max="20">
+
+            <label>How many hours, on average, does it take you to find/get a task/job?</label>
+            <input name="period" value="period" type="number" min="1" max="500">
+
+            <label>How old are you?</label>
+            <input name="age" value="age" type="number" min="1" max="100">
+
+            <label>What is your gender?</label>
+            <select name="gender">
+                <option value="male">male</option>
+                <option value="female">female</option>
+                <option value="other">other</option>
+
+            </select>
+            <label>How would you describe the task/job variety and interest?</label>
+            <select name="interest">
+                <option value="1">very little to no variety/interest</option>
+                <option value="2">some variety/interest</option>
+                <option value="3">some variety but not much interest</option>
+                <option value="4">some interest but not much variety</option>
+                <option value="5">very high variety/interest</option>
 
             </select>
         
