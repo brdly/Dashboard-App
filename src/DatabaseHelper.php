@@ -171,7 +171,7 @@ class DatabaseHelper
 
     public static function getReviewFromReviewID($dbh, $id)
     {
-        $sth = $dbh->prepare("SELECT * FROM FormData WHERE `deleted` = 0 AND `idReview` = :fieldID", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+        $sth = $dbh->prepare("SELECT * FROM FormData WHERE `deleted` = 0 AND (`idReview` = :fieldID OR `id` = :fieldID)", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
         $sth->execute(array(':fieldID' => $id));
 

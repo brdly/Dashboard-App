@@ -47,11 +47,11 @@ foreach ($platforms as $platform)
 
     foreach ($reviewIDs as $reviewID)
     {
+        $reviewArray = array();
+
         if ($reviewID["idReview"] != null)
         {
             $review = DatabaseHelper::getReviewFromReviewID($dbh, (int)$reviewID["idReview"]);
-
-            $reviewArray = array();
 
             for ($i = 0; $i < count($review); $i++)
             {

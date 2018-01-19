@@ -76,7 +76,7 @@
                 <option value="5">5</option>
             </select>
             <label>How would you rate the work / life balance? </label>
-            <select name = "worklife_balance" required>
+            <select name = "Worklife Balance" required>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -85,7 +85,7 @@
 
             </select>
             <label>How would you rate benefits or social support you receive, if any? </label>
-            <select name = "benefits" required>
+            <select name = "Benefits" required>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -94,7 +94,7 @@
 
             </select>
             <label>How would you rate your job security? </label>
-            <select name="job_security" required>
+            <select name="Job Security" required>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -103,7 +103,7 @@
 
             </select>
             <label>How would you rate the management of the platform? </label>
-            <select name = "management" required>
+            <select name = "Management" required>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -112,7 +112,7 @@
 
             </select>
             <label>How would you rate the culture?</label>
-            <select name = "culture" required>
+            <select name = "Culture" required>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -120,7 +120,7 @@
                 <option value="5">5</option>
             </select>
             <label>Are you a current or former employee?</label>
-            <select name = "former_employee" required>
+            <select name = "Former Employee" required>
                 <option value="Current">current</option>
                 <option value="Former">former</option>
             </select>
@@ -130,6 +130,7 @@
             </textarea>
 
             <label>Pros? </label>
+
             <textarea maxlength="50" name="pros" rows="10" cols="80">
 
             </textarea>
