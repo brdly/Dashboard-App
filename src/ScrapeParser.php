@@ -8,9 +8,8 @@
 
 namespace SPATApp\App;
 //__DIR__ DID NOT WORK. WARN!
-$ROOT = $_SERVER['DOCUMENT_ROOT'];
-require_once ($ROOT . "/src/DatabaseHelper.php");
-require_once ($ROOT. "/config.php");
+require_once (__DIR__ . "/DatabaseHelper.php");
+require_once (__DIR__ . "/../config.php");
 
 use SPATApp\App\DatabaseHelper;
 use SPATApp\Config;

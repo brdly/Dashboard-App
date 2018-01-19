@@ -1,8 +1,11 @@
 <?php
-namespace SPATApp\App;
-$ROOT = $_SERVER['DOCUMENT_ROOT'];
-require_once $ROOT . "/src/ScrapeParser.php";
+
+require_once __DIR__ . "/../src/ScrapeParser.php";
+require_once __DIR__ . "/../src/DatabaseHelper.php";
+require_once __DIR__ . "/../config.php";
 use SPATApp\App\ScrapeParser;
+use SPATApp\App\DatabaseHelper;
+use SPATApp\Config;
 $data = array();
 foreach($_POST as $key => $value) {
     $data[$key] = $value;
@@ -24,7 +27,7 @@ if (session_status() == PHP_SESSION_NONE) {
 //    "pros",
 //    "cons"
 //);
-$GOAL_LOCATION = "/public/index.php";
+$GOAL_LOCATION = "/index.php";
 $data["date"] = time();
 $parser = new ScrapeParser();
 
