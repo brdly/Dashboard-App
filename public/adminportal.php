@@ -523,8 +523,8 @@
             }
 
             #bubblewordBubble{
-                height:640px!important;
-                width:660px!important;
+                height:550px!important;
+                width:650px!important;
                 margin:0!important;
             }
 
@@ -546,8 +546,19 @@
 
 
             #bubblewordBubble{
-                height:540px!important;
-                width:580px!important;
+                height:490px!important;
+                width:550px!important;
+                margin:0!important;
+            }
+        }
+
+
+        @media screen and (max-width: 555px) {
+
+
+            #bubblewordBubble{
+                height:410px!important;
+                width:480px!important;
                 margin:0!important;
             }
         }
@@ -557,11 +568,21 @@
 
 
             #bubblewordBubble{
-                height:440px!important;
-                width:480px!important;
+                height:380px!important;
+                width:440px!important;
                 margin:0!important;
             }
         }
+
+        @media screen and (max-width: 465px) {
+
+
+            #bubblewordBubble{
+                height:330px!important;
+                width:400px!important;
+                margin:0!important;
+            }
+            }
 
         @media screen and (max-width: 420px) {
 
