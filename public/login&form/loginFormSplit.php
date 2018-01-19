@@ -112,18 +112,18 @@ if (session_status() == PHP_SESSION_NONE) {
         #formSubmit
         {
             background-color: #31e5c1;
-            float: left;
-            clear: left;
-            margin-left: 3%;
+            float: right;
+            clear: right;
+            margin-right: 3%;
         }
 
         #formCancel
         {
             background-color: rgba(33,33,33,0.8);
             color: white;
-            float: right;
-            clear: right;
-            margin-right: 3%;
+            float: left;
+            clear: left;
+            margin-left: 3%;
 
         }
 
@@ -355,6 +355,13 @@ if (session_status() == PHP_SESSION_NONE) {
                 width: 160%;
             }
 
+            .formFields > select
+            {
+                border: transparent;
+                border-top: solid;
+
+            }
+
 
             #form > form > button
             {
@@ -408,16 +415,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
                 }
 
-                .formFields
-                {
-                    width: 100%;
-                    display: block;
-                }
 
-                #form > form > button
-                {
-                    width: 45%;
-                }
 
 
             }
@@ -448,21 +446,6 @@ if (session_status() == PHP_SESSION_NONE) {
                 height:10%;
                 text-align: center;
             }
-
-            #form
-            {
-            }
-
-            #form > form
-            {
-                width: 100%;
-            }
-
-            .formFields > *
-            {
-                width: 160%;
-            }
-
 
 
 
@@ -610,14 +593,6 @@ if (session_status() == PHP_SESSION_NONE) {
                 <option value="former">I am a former platform worker</option>
 
             </select>
-            <label>How many platforms do you generally use?</label>
-            <input name="platforms" value="platforms" type="number" min="1" max="20">
-
-            <label>How many hours, on average, does it take you to find/get a task/job?</label>
-            <input name="period" value="period" type="number" min="1" max="500">
-
-            <label>How old are you?</label>
-            <input name="age" value="age" type="number" min="1" max="100">
 
             <label>What is your gender?</label>
             <select name="gender">
@@ -635,6 +610,16 @@ if (session_status() == PHP_SESSION_NONE) {
                 <option value="5">very high variety/interest</option>
 
             </select>
+
+
+            <label>How many platforms do you generally use?</label>
+            <input name="platforms" value="platforms" type="number" min="1" max="20">
+
+            <label>How many hours, on average, does it take you to find/get a task/job?</label>
+            <input name="period" value="period" type="number" min="1" max="500">
+
+            <label>How old are you?</label>
+            <input name="age" value="age" type="number" min="1" max="100">
         
         </div>
         <div style="float: left;padding-top:10px;width: 45vw;" class="formFields" id="rightForm">
@@ -649,9 +634,9 @@ if (session_status() == PHP_SESSION_NONE) {
             <label>What are you most unhappy about?</label>
             <textarea name="cons" rows="2" cols="50"></textarea>
         </div>
-        <button id="formSubmit" type="submit">Submit</button>
+        <button id="formCancel" type="reset">Cancel</button>
         <!--<button style="float: right;clear: right;margin-right:50px;margin-top:50px;font-size:36px;float: right; clear: right; height: 80px; color: black; width: 200px; border: 1px darkgreen solid; background-color: #31e5c1; border-radius: 7px; margin-right: 50px; margin-top: 50px; font-size: 40px;cursor:pointer;" id="formSubmit" type="submit">Submit</button>-->
-        <button id="formCancel" type="cancel">Cancel</button>
+        <button id="formSubmit"  type="submit">Submit</button>
         
     </form><!--<button style="float: left;margin-left:50px;margin-top:10px;font-size:26px;border-radius: 4px; height: 50px; background-color: rgba(33,33,33,0.8); cursor: pointer; color: grey; border: 1px solid darkrgrey; float: left;" id="formCancel" type="cancel">Cancel</button>-->
 </div>
@@ -669,38 +654,25 @@ if (session_status() == PHP_SESSION_NONE) {
 <script>
 $(document).ready(function() {
     $("#formButton").click(function() {
-        $("#form").animate({
-            height: "90vh"
-          })
+          $("#form").animate({height: "90vh"});
+          $("#formCover").animate({width: "100%"});
           $("#form").toggleClass("ofOff");
           $("#form").toggleClass("ofOn");
           $("#backdrop").toggleClass("displayOn");
           $("#backdrop").toggleClass("displayOff");
+          $("#login").hide();
 
-          if ($(window).width() < 768)
-          {
-            $("#login").hide();
 
-          }
 
     });
     $("#formCancel").click(function() {
-        $("#form").animate({
-            height: "0vh"
-          })
+        $("#form").animate({height: "0vh"});
+        $("#formCover").animate({width: "60%"});
           $("#form").toggleClass("ofOff");
           $("#form").toggleClass("ofOn");
           $("#backdrop").toggleClass("displayOn");
           $("#backdrop").toggleClass("displayOff");
-
-
-          if ($(window).width() >= 768)
-
-          {
-            $("#login").hide();
-
-
-          }
+          $("#login").show();
 
     });
 });
