@@ -19,31 +19,41 @@ if (session_status() == PHP_SESSION_NONE) {
     depending on the situation.
 
 
---->
+-->
 
 
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Form</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<base href="">
+<meta charset="utf-8">
+<title>Worker Feedback Form - Group 4</title>
+<meta name="description" content="Worker Feedback Form for SPAT Task - Group 4.">
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
 
 
-    <!-- --------------------CSS STYLING------------------------------------------------------>
+    <!-- CSS STYLING -->
     <style>
         body
         {
+            margin:0;
+            padding:0;
         }
 
         #formCover
         {
-            background-color: black;
+            background-color: #2d3e50;
             width: 60%;
-            height: 105vh;
-            margin-left: -1%;
-            margin-top: -5%;
+            height: 100vh;
             float: left;
+            font-family: 'Roboto', sans-serif;
+            overflow:auto;
         }
 
         #formCover h1
@@ -66,8 +76,9 @@ if (session_status() == PHP_SESSION_NONE) {
         {
             margin-left: 10%;
             margin-top: 5%;
+            margin-bottom: 5%;
             padding: 1%;
-            background-color: rgb(24,187,156);
+            background-color: #67707f;
             border-radius: 8%;
             border: transparent;
             color: white;
@@ -78,64 +89,187 @@ if (session_status() == PHP_SESSION_NONE) {
         }
 
 
+
+
+        #formButton:hover{
+            background-color:rgb(24,187,156);
+            color:white;
+        }
+
+
+
+        #form > form > button
+        {
+            margin-top: 5%;
+            margin-bottom: 2%;
+            width: 10%;
+            height: 10vh;
+            border-radius: 5%;
+            font-size: 150%;
+            font-weight: 900;
+        }
+
+        #formSubmit
+        {
+            background-color: #31e5c1;
+            float: left;
+            clear: left;
+            margin-left: 3%;
+        }
+
+        #formCancel
+        {
+            background-color: rgba(33,33,33,0.8);
+            color: white;
+            float: right;
+            clear: right;
+            margin-right: 3%;
+
+        }
+
+
+
+
+/**
+
+        #formSubmit
+        {
+            float: right;
+            clear: right;
+            height: 80px;
+            color: black;
+            width: 200px;
+            border: 1px darkgreen solid;
+            background-color: #31e5c1;
+            border-radius: 7px;
+            margin-right: 5%;
+            margin-top: 3%;
+            margin-bottom: 2%;
+            font-size: 40px;
+            cursor:pointer;
+        }
+
+
+
+        #formCancel
+        {
+            float: left;
+            margin-left-5%;
+            margin-top:10%;
+            font-size:26px;
+            border-radius: 4px;
+            height: 50px;
+            background-color: rgba(33,33,33,0.8);
+            cursor: pointer;
+            color: grey;
+            border: 1px solid darkrgrey;
+        }
+
+
         /**
         the form background had issues when filling up the screen, had to set
         the height at 240vh to compensate.
          */
 
 
+
         #form
         {
-            display: none;
             background-color:rgb(45,62,80);
-            width: 100%;
-            height: 240vh;
-            margin-left: -1%;
-            margin-top: -5%;
-            padding-left: 5%;
-            float: left;
-
+            height:0px;
         }
 
-        #formFields
+        .ofOn {
+            overflow:hidden;
+            border: 0px solid white;
+        }
+        .ofOff {
+            overflow:auto;
+            border: 5px solid white;
+        }
+
+        .formFields
         {
+            font-family:'Roboto', sans-serif;
             text-align: left;
             display:block;
             color: white;
-            margin-top: 8%;
+            background-color: transparent;
+            margin-top: 50px;
+            font-size:19px;
+
+
+        }
+
+        .formFields > *
+        {
+            background-color: transparent;
+            color: white;
+            border-radius: 3%;
+        }
+
+        #rightForm
+        {
+
+            margin-left: 50px;
+        }
+
+        #leftForm
+        {
+
         }
 
         #formEntry
         {
-            font-size: 200%;
-            margin-bottom: 10%;
+            font-family:'Roboto', sans-serif;
+            font-size: 36px;
+            margin-bottom: 25px;
         }
 
 
-        #formFields > label
+        .formFields > label
         {
             display: block;
-            margin-top: 1%;
-            margin-bottom: 0.5%;
+            margin-top: 20px;
+            margin-bottom: 4px;
+            margin-left: 50px;
+        }
+        .formFields > select
+        {
+            display: block;
+            font-size:18px;
+            margin-top: 2px;
+            margin-bottom: 4px;
+            margin-left: 50px;
+            padding:5px;
+
         }
 
+        .formFields > textarea
+        {
+            font-size:16px;
+            display: block;
+            margin-top: 2px;
+            margin-bottom: 4px;
+            margin-left: 50px;
 
+        }
 
 
         #login
         {
+            font-family: 'Lato', sans-serif;
             background-color: rgb(24,187,156);
-            width: 42%;
-            height: 105vh;
-            margin-right: -1%;
-            margin-top: -5%;
+            width: 40%;
+            height: 100vh;
             float: right;
+            overflow:auto;
         }
 
         #loginCover
         {
             margin-top: 50%;
-            margin-left: 10%;
+            margin-left: 30%;
             color:white;
             font-size: 25px;
         }
@@ -146,20 +280,33 @@ if (session_status() == PHP_SESSION_NONE) {
 
         #loginCover > form > div > input
          {
+            
              display: block;
-             width: 36%;
-             background-color: transparent;
+             width: 200px;
              color: white;
+             border-color:transparent;
              padding: 2%;
-             margin-bottom: 5%;
+             font-size: 22px;
+             margin-bottom: 20px;
              border: transparent;
+             background-color: transparent;
             border-bottom: solid;
+            border-radius:4px;
          }
 
         #loginForm_failed
         {
+            text-transform: uppercase;
             font-size: 30px;
             color:red;
+        }
+        .displayOn
+        {
+            display:block;
+        }
+        .displayOff
+        {
+            display:none;
         }
 
         /**
@@ -169,19 +316,151 @@ if (session_status() == PHP_SESSION_NONE) {
         #submit
         {
             padding: 1%;
-            width: 20%;
+            width: 218px;
             font-size: 100%;
             font-weight: 900;
             color: rgb(24,187,156);
+            border-radius:4px;
         }
 
+        #submit:hover{color:black}
+        #formSubmit:hover{border:2px solid white;}
+        #formCancel:hover{border:2px solid white;}
+
+
+
+        @media only screen and (max-width: 1441px) {
+
+
+
+            .formFields
+            {
+                float: left;
+                clear: left;
+            }
+
+            .formFields > *
+            {
+                width: 160%;
+            }
+
+
+            #form > form > button
+            {
+                width: 45%;
+            }
+
+
+            #rightForm
+            {
+                margin-left: 0px;
+            }
+
+            #leftForm
+            {
+                margin-left: 0px;
+            }
+
+
+
+
+
+        }
+
+
+
+
+
+        @media only screen and (max-width: 768px) {
+
+
+
+
+                #login
+                {
+                   width: 100%;
+                }
+
+
+                #formCover
+                {
+                    width: 100%;
+                }
+
+                #formButton
+                {
+                    margin-bottom: 10%;
+                }
+
+                #backdrop
+                {
+
+                }
+
+                .formFields
+                {
+                    width: 100%;
+                    display: block;
+                }
+
+                #form > form > button
+                {
+                    width: 45%;
+                }
+
+
+            }
+
+        @media only screen and (max-width: 600px) {
+
+
+            #login
+            {
+                width: 100%;
+            }
+
+
+            #formCover
+            {
+                width: 100%;
+                height: 100vh;
+            }
+
+            #formButton
+            {
+                margin-bottom: 10%;
+            }
+
+            #formEntry
+            {
+                width: 180%;
+                height:10%;
+                text-align: center;
+            }
+
+            #form
+            {
+            }
+
+            #form > form
+            {
+                width: 100%;
+            }
+
+            .formFields > *
+            {
+                width: 160%;
+            }
+
+
+
+
+        }
 
     </style>
 
 
-    <!---------------------------------------END OF CSS----------------------------------------->
-
-
+    <!---END OF CSS -->
 
 </head>
 <body>
@@ -190,12 +469,20 @@ if (session_status() == PHP_SESSION_NONE) {
 
     the formCover div will have the ILO logo, as well as a welcome message on it.
     once the button is pressed, the actual form div will replace and fill up the screen
--->
+--><div id="wrapAround">
 <div id="formCover">
-    <h1>Welcome to the platform feedback website</h1>
-    <p>If you would like to leave feedback for a platform<br>
-        please click here</p>
-    <button id="formButton" type="submit">Give Review</button>
+    <img src="/SPATProject/public/login&form/img/ilo2.jpg" style="margin-left:15px;margin-top:50px;width:200px;height:auto;float:left;margin-right:50%;" />
+    <p style="float:left;margin-left:45px;min-width:60%;max-width:90%;text-align:left;margin-top: 70px;font-size: 40px;">HELP US HELP YOU</p>
+    <p style="float:left;margin-left:45px;min-width:60%;max-width:80%;text-align:left;margin-top: 20px;font-size: 18px;">
+        Here at the International Labour Organisation our aim is to ensure workers are treated fairly. We have been doing this for 
+        almost 100 years and we have had a Nobel Peace Prize awarded to us in the past for our achievements. </br></br>
+        As the world becomes more digital, so must we. </br></br>
+        The rise of freelance, self-employed, home-based workforces is growing exponentially. This
+        is great for many reasons, but there are always negatives. These negatives are common with new types of labour, especially in the early days. </br></br>
+        <u>So, how can you help us?</u></br></br>
+        We need your feedback, whether that is negative or positive, it is all useful! </br></br>
+        We can help ensure that the things that you find good are not scrapped and the things that you find bad are improved. We are your voice, please enable us to act for you.</p>
+    <button style="float:left;margin-left:45px;text-align:left;margin-top: 25px;border-radius:4px;cursor:pointer;" id="formButton" type="submit">I want to help</button>
 </div>
 
 <!--
@@ -206,7 +493,7 @@ if (session_status() == PHP_SESSION_NONE) {
 -->
 
 <div id="login">
-    <div id="loginCover">
+    <div id="loginCover" style="width:auto;height:auto;">
 
         <?php
         if (isset($_SESSION['login'])){
@@ -215,15 +502,15 @@ if (session_status() == PHP_SESSION_NONE) {
         }
         ?>
 
-        <section class="loginBling"> <p><strong>Please enter your email and password:</strong></p></section>
+        <section class="loginBling"> <p style="padding-bottom:5px;margin-bottom:10px;width:200px;text-align:center;"><strong>Login</strong></p></section>
         <form name="form1" method="post" action="../../public/adminportal.php">
             <div>
                 <input type="text" placeholder="Email Address" name="Username" required>
 
                 <input type="password" placeholder="Password" name="Password" required>
 
-                <button id="submit" type="submit">Login</button>
-                <section class="loginBling"><p>
+                <button id="submit" type="submit" style="cursor:pointer;">Login</button>
+                <section class="loginBling" style="font-size:14px"><p>
                         Forgot Password? Click <a href="">here</a> !
                     </p></section>
             </div>
@@ -238,102 +525,105 @@ if (session_status() == PHP_SESSION_NONE) {
    to display:none and is activated by a jQuery script when the formButton element
    is pressed.
 -->
-<div id="form">
+<div id="backdrop" class="displayOff" style="width:100vw;height:100vh;background-color:rgba(0,0,0,0.7);position:absolute;top:0;left:0;"></div>
+<div id="form" class="ofOn" style="position:absolute;bottom:0px;left:0px;width: 90vw;height: 0px;margin-left: 5vw;margin-bottom: 5vh;z-index:50;border-radius:5px;">
 
-    <form name="form1" method="post" action="passingdata.php">
-        <div id="formFields">
-            <section id="formEntry">
-                Please Complete the form below
+    <form style="float: left;" name="form1" method="post" action="../passingdata.php">
+        <div style="float: left;width: 40vw;" class="formFields" id="leftForm">
+            <section id="formEntry" style="margin-left:20px;font-size:28px;color:#31e5c1;">
+                Please complete the form below
             </section>
-            <label>What Platform are you reviewing? </label>
+            <label>Which platform are you reviewing? </label>
             <select>
                 <option value="Fiverr">Fiverr</option>
                 <option value="Upwork">Upwork</option>
                 <option value="AMT">AMT</option>
-                <option value="CrowdFlower">CrowdFlower</option>
-                <option value="ClickWorker">ClickWorker</option>
 
             </select>
-            <label>What is your overall review </label>
+            <label>What is your overall rating for this platform? </label>
             <select name = "rating" required>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
+                <option value="1">I would prefer to use a better platform</option>
+                <option value="2">It is the best I have tried, but still bad</option>
+                <option value="3">It is okay, it could be better</option>
+                <option value="4">It is a good platform</option>
+                <option value="5">It is amazing, I will never leave</option>
             </select>
-            <label>How would you rate the work / life balance? </label>
+            <label>How would you rate the work/life balance? </label>
             <select>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
+                <option value="1">I don't have much personal time, I have to work a lot</option>
+                <option value="2">I have some personal time, but working is priority</option>
+                <option value="3">I have enough time to get things done</option>
+                <option value="4">I have lots of freedom and don't have to worry</option>
+                <option value="5">I am very happy with my life and my work</option>
 
             </select>
-            <label>How would you rate benefits or social support you receive, if any? </label>
+            <label>How would you rate the benefits of working for this platform? </label>
             <select>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
+                <option value="1">I haven't received any benefits</option>
+                <option value="2">They do offer things but they don't relate to me</option>
+                <option value="3">They offer a variety of benefits</option>
+                <option value="4">I have used the benefits they offer</option>
+                <option value="5">They add new benefits and I use them a lot</option>
 
             </select>
-            <label>How would you rate your job security? </label>
+            <label>How secure do you feel that your job on this platform? </label>
             <select>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
+                <option value="1">I am worried I might not get jobs/tasks</option>
+                <option value="2">It is hard to get jobs/task but I manage</option>
+                <option value="3">There is work available, but it isn't right for me</option>
+                <option value="4">There is lots of varied work available</option>
+                <option value="5">I do something different every day, it is great</option>
 
             </select>
-            <label>How would you rate the management of the platform? </label>
+            <label>How would you rate the support give to you by the platform? </label>
             <select>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
+                <option value="1">I don't know how to contact them</option>
+                <option value="2">They never replied to my messages</option>
+                <option value="3">They never really helped me</option>
+                <option value="4">They tried to help me</option>
+                <option value="5">They always act on my feedback</option>
 
             </select>
-            <label>How would you rate the culture?</label>
+            <label>How would you rate your relationship with the platform?</label>
             <select>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
+                <option value="1">I don't know much about the platform</option>
+                <option value="2">The emails they send aren't related to me</option>
+                <option value="3">There is lots of information available</option>
+                <option value="4">The emails they send are helpful</option>
+                <option value="5">The emails they send have helped me be more productive</option>
 
             </select>
-            <label>Are you a current or former employee?</label>
+            <label>Are you a current or former employee of this platform?</label>
             <select>
-                <option value="current">current</option>
-                <option value="former">former</option>
+                <option value="current">I currently work here</option>
+                <option value="former">I am a former platform worker</option>
 
             </select>
-            <label>Please write your review here </label>
-            <textarea name="review" rows="20" cols="80">
-
-            </textarea>
-
-            <label>Pros? </label>
-            <textarea name="review" rows="10" cols="80">
-
-            </textarea>
-            <label>Cons?</label>
-            <textarea name="review" rows="10" cols="80">
-
-            </textarea>
+        
         </div>
-    </form>
-    <button id="formSubmit" type="submit">Submit</button>
+        <div style="float: left;padding-top:10px;width: 45vw;" class="formFields" id="rightForm">
+            <label>How many hours on average do you work per day? </label>
+            <textarea name="hours" rows="1" cols="20"></textarea>
+            <label>On average, how much do you earn per hour? </label>
+            <textarea name="wage" rows="1" cols="20"></textarea>
+            <label>Please tell us about your experience on this platform</label>
+            <textarea name="review" rows="13" cols="50"></textarea>
+            <label>What are you most happy about?</label>
+            <textarea name="pros" rows="2" cols="50"></textarea>
+            <label>What are you most unhappy about?</label>
+            <textarea name="cons" rows="2" cols="50"></textarea>
+        </div>
+        <button id="formSubmit" type="submit">Submit</button>
+        <!--<button style="float: right;clear: right;margin-right:50px;margin-top:50px;font-size:36px;float: right; clear: right; height: 80px; color: black; width: 200px; border: 1px darkgreen solid; background-color: #31e5c1; border-radius: 7px; margin-right: 50px; margin-top: 50px; font-size: 40px;cursor:pointer;" id="formSubmit" type="submit">Submit</button>-->
+        <button id="formCancel" type="cancel">Cancel</button>
+        
+    </form><!--<button style="float: left;margin-left:50px;margin-top:10px;font-size:26px;border-radius: 4px; height: 50px; background-color: rgba(33,33,33,0.8); cursor: pointer; color: grey; border: 1px solid darkrgrey; float: left;" id="formCancel" type="cancel">Cancel</button>-->
+</div>
 </div>
 
-<!---------------------------------------JQUERY ANIMATION----------------------------------->
+<!---JQUERY ANIMATION->
 
-<!--
+<!
     jQuery script, when the formButton element is clicked, the login and formCover
     divs are hidden and the form div is set to visible, letting users fill out
     the review form.
@@ -342,15 +632,45 @@ if (session_status() == PHP_SESSION_NONE) {
 
 <script>
 $(document).ready(function() {
-$("#formButton").click(function() {
-$("#formCover").css("display" , "none");
-$("#login").css("display" , "none");
-$("#form").show();
-});
+    $("#formButton").click(function() {
+        $("#form").animate({
+            height: "90vh"
+          })
+          $("#form").toggleClass("ofOff");
+          $("#form").toggleClass("ofOn");
+          $("#backdrop").toggleClass("displayOn");
+          $("#backdrop").toggleClass("displayOff");
+
+          if ($(window).width() < 768)
+          {
+            $("#login").hide();
+
+          }
+
+    });
+    $("#formCancel").click(function() {
+        $("#form").animate({
+            height: "0vh"
+          })
+          $("#form").toggleClass("ofOff");
+          $("#form").toggleClass("ofOn");
+          $("#backdrop").toggleClass("displayOn");
+          $("#backdrop").toggleClass("displayOff");
+
+
+          if ($(window).width() >= 768)
+
+          {
+            $("#login").hide();
+
+
+          }
+
+    });
 });
 </script>
 
-<!----------------------------------------END OF JQUERY-------------------------------------->
+<!--END OF JQUERY-->
 
 
 
