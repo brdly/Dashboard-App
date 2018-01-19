@@ -220,6 +220,11 @@ if (session_status() == PHP_SESSION_NONE) {
 
         }
 
+        .pull-right {
+            float: right;
+            right: 0;
+        }
+
         #formEntry
         {
             font-family:'Roboto', sans-serif;
@@ -275,6 +280,7 @@ if (session_status() == PHP_SESSION_NONE) {
             height: 100vh;
             float: right;
             overflow:auto;
+            position: fixed;
         }
 
         #loginCover
@@ -397,6 +403,7 @@ if (session_status() == PHP_SESSION_NONE) {
             #login
             {
                 width: 100%;
+                position: static;
             }
 
 
@@ -490,7 +497,7 @@ if (session_status() == PHP_SESSION_NONE) {
         the user here with a specific message (logout or failed to log in)
     -->
 
-    <div id="login">
+    <div id="login" class="pull-right">
         <div id="loginCover" style="width:auto;height:auto;">
 
             <?php
