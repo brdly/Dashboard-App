@@ -24,7 +24,7 @@ if (session_status() == PHP_SESSION_NONE) {
 //    "pros",
 //    "cons"
 //);
-$GOAL_LOCATION = "landing.php";
+$GOAL_LOCATION = "/public/index.php";
 $data["date"] = time();
 $parser = new ScrapeParser();
 

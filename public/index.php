@@ -2,6 +2,18 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+if (isset($_SESSION["error"])){
+    //COPY THIS CODE TO WHERE U WANT UR ERRORS IN.
+    echo $_SESSION["error"];
+    echo $_SESSION["error_msg"];
+    echo $_SESSION["warning"];
+
+    //DO NOT FORGET TO CLEAR THEM TOO!
+    $_SESSION["error"] = null;
+    $_SESSION["error_msg"] = null;
+    $_SESSION["warning"] = null;
+}
+
 ?>
 
 
@@ -539,7 +551,7 @@ if (session_status() == PHP_SESSION_NONE) {
                     Please complete the form below
                 </section>
                 <label>Which platform are you reviewing? </label>
-                <select>
+                <select name="platform" required>
                     <option value="Fiverr">Fiverr</option>
                     <option value="Upwork">Upwork</option>
                     <option value="AMT">AMT</option>
