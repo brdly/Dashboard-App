@@ -18,6 +18,7 @@ if (isset($_SESSION["error"])){
 
 
 
+
 <!--
 
       The Form Panel Cover on the left side displays a welcome message and
@@ -188,7 +189,7 @@ if (isset($_SESSION["error"])){
         #form
         {
             background-color:rgb(45,62,80);
-            height:0px;
+            height:240vh;
         }
 
         .ofOn {
@@ -357,17 +358,6 @@ if (isset($_SESSION["error"])){
         #formCancel:hover{border:2px solid white;}
 
 
-        .formInactive
-        {
-            width:60%;
-        }
-
-        .formActive
-        {
-            width: 100%!important;
-        }
-
-
 
         @media only screen and (max-width: 1441px) {
 
@@ -440,10 +430,6 @@ if (isset($_SESSION["error"])){
                 margin-bottom: 10%;
             }
 
-            #backdrop
-            {
-
-            }
 
 
 
@@ -481,6 +467,10 @@ if (isset($_SESSION["error"])){
 
         }
 
+        .formOpen {
+            width: 100%!important;
+        }
+
     </style>
 
 
@@ -494,7 +484,7 @@ if (isset($_SESSION["error"])){
     the formCover div will have the ILO logo, as well as a welcome message on it.
     once the button is pressed, the actual form div will replace and fill up the screen
 --><div id="wrapAround">
-    <div id="formCover" class="formInactive">
+    <div id="formCover">
         <img src="/login&form/img/ilo2.jpg" style="margin-left:15px;margin-top:50px;width:200px;height:auto;float:left;margin-right:50%;" />
         <p style="float:left;margin-left:45px;min-width:60%;max-width:90%;text-align:left;margin-top: 70px;font-size: 40px;">HELP US HELP YOU</p>
         <p style="float:left;margin-left:45px;min-width:60%;max-width:80%;text-align:left;margin-top: 20px;font-size: 18px;">
@@ -519,11 +509,31 @@ if (isset($_SESSION["error"])){
     <div id="login" class="pull-right">
         <div id="loginCover" style="width:auto;height:auto;">
 
+
+
             <?php
             if (isset($_SESSION['login'])){
                 echo "<p id='loginForm_failed'>".$_SESSION['login']."</p>";
                 $_SESSION['login'] = null;
             }
+            ?>
+
+
+            <?php
+            if (session_status() == PHP_SESSION_NONE) {
+                session_start();
+            }
+            if (isset($_SESSION["error"])){
+                //COPY THIS CODE TO WHERE U WANT UR ERRORS IN.
+                echo $_SESSION["error_msg"];
+                echo $_SESSION["warning"];
+
+                //DO NOT FORGET TO CLEAR THEM TOO!
+                $_SESSION["error"] = null;
+                $_SESSION["error_msg"] = null;
+                $_SESSION["warning"] = null;
+            }
+
             ?>
 
             <section class="loginBling"> <p style="padding-bottom:5px;margin-bottom:10px;width:200px;text-align:center;"><strong>Login</strong></p></section>
