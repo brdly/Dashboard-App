@@ -528,7 +528,7 @@ if (session_status() == PHP_SESSION_NONE) {
                 Please complete the form below
             </section>
             <label>Which platform are you reviewing? </label>
-            <select>
+            <select >
                 <option value="Fiverr">Fiverr</option>
                 <option value="Upwork">Upwork</option>
                 <option value="AMT">AMT</option>

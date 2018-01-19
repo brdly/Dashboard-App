@@ -50,10 +50,13 @@ class DatabaseHelper
 
     public static function addData($dbh, $formField, $platformID, $reviewID, $dataItem)
     {
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
         $sth = $dbh->prepare("INSERT INTO FormData VALUES (DEFAULT, :formField, :platformID, :reviewID, :dataItem, DEFAULT)", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
         $result =$sth->execute(array(':formField' => $formField, ':platformID' => $platformID, ':reviewID' => $reviewID, ':dataItem' => $dataItem));
         if (!$result){
-            echo $sth->errorInfo();
+            echo "err:";
+            var_dump($sth->errorInfo());
+            echo ";";
         }
         return $result;
     }

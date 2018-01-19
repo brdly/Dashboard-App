@@ -7,9 +7,10 @@
  */
 
 namespace SPATApp\App;
-
-require_once __DIR__ . "/DatabaseHelper.php";
-require_once __DIR__ . "/../config.php";
+//__DIR__ DID NOT WORK. WARN!
+$ROOT = $_SERVER['DOCUMENT_ROOT'];
+require_once ($ROOT . "/src/DatabaseHelper.php");
+require_once ($ROOT. "/config.php");
 
 use SPATApp\App\DatabaseHelper;
 use SPATApp\Config;
@@ -55,7 +56,7 @@ class ScrapeParser
         "age",
         "country"
     );
-
+    public $VITAL_FIELDS;
     public $COUNTRIES = array(
         "USA",
         "CAN",
@@ -74,7 +75,9 @@ class ScrapeParser
     );
 
     public function  __construct(){
-
+        $this->VITAL_FIELDS = array(
+            "platform"
+        );
     }
     public function uploadFile($filename){
 
@@ -82,7 +85,7 @@ class ScrapeParser
 
     public function createEntry($company){
         $active_entry = new ScrapeEntry();
-        $active_entry["company"] = $company;
+        $active_entry["platform"] = $company;
         //$active_entry["country"] = $country;
         return $active_entry;
     }
@@ -157,8 +160,11 @@ class ScrapeParser
 
         $database = DatabaseHelper::databaseConnection();
         foreach ($data_array as $data){
+            $data["age"] = mt_rand(18,44);
+            $countryIndex = array_rand($this->COUNTRIES);
+            $data["country"] = $this->COUNTRIES[$countryIndex];
 
-            $company = $data["company"];
+            $company = $data["platform"];
             //$country = $data["country"];
             $platform_index = DatabaseHelper::findPlatformID($database,$company);
             if (sizeof($platform_index) == 0) {
@@ -179,11 +185,12 @@ class ScrapeParser
                     DatabaseHelper::addField($database,$field_name);
                     $field_index = DatabaseHelper::findFieldID($database,$field_name);
 
-                    var_dump($field_index);
+                    //var_dump($field_index);
                 }
 
-                $target = $data[$field_name];
-                if ($target != null){
+
+                if (array_key_exists($field_name,$data)){
+                    $target = $data[$field_name];
                     $field_index_real = $field_index[0];
                     if (gettype($field_index_real) == "array"){
                         $field_index_real = $field_index_real["id"];
@@ -193,41 +200,64 @@ class ScrapeParser
                     //addData($dbh, $formFieldID, $platformID, $reviewID, $dataItem)
                     $result = DatabaseHelper::addData($database,$field_index_real,$platform_index_real,$index,$target);
 
+//                    DEBUG!
+                    echo $field_name;
+                    echo "</br>";
+                    echo $field_index_real;
+                    echo "</br>";
+                    echo "plat".$platform_index_real;
+                    echo "</br>";
+                    echo $index;
+                    echo "</br>";
+                    echo $target;
+                    echo "</br>";
+
+
                     if ($index == null){$index = DatabaseHelper::getNextUniqueIndex($database,"FormData")-1;};
 
                     if (!$result){
-                        die("failed to upload data!");
-                    }
-                } else if ($field_name == "age") {
-                    $field_index_real = $field_index[0];
-                    if (gettype($field_index_real) == "array"){
-                        $field_index_real = $field_index_real["id"];
+                        echo $result;
+
+                        //die("failed to upload data!");
+                        return -1;
                     }
 
-                    $age = mt_rand(18,44);
-
-                    $result = DatabaseHelper::addData($database,$field_index_real,$platform_index_real,$index,$age);
-
-                    if (!$result){
-                        die("failed to upload data!");
-                    }
                 }
-                else if ($field_name == "country") {
-                    $field_index_real = $field_index[0];
-                    if (gettype($field_index_real) == "array"){
-                        $field_index_real = $field_index_real["id"];
-                    }
 
-                    $countryIndex = array_rand($this->COUNTRIES);
-                    $result = DatabaseHelper::addData($database,$field_index_real,$platform_index_real,$index,$this->COUNTRIES[$countryIndex]);
-
-                    if (!$result){
-                        die("failed to upload data!");
-                    }
-                }
+//INEFFICIENT AND UGLY.
+//Alt is to do $data["age"] =  mt_rand(18,44);
+//It will auto add the field.
+//                else if ($field_name == "age") {
+//                    $field_index_real = $field_index[0];
+//                    if (gettype($field_index_real) == "array"){
+//                        $field_index_real = $field_index_real["id"];
+//                    }
+//
+//                    $age = mt_rand(18,44);
+//
+//                    $result = DatabaseHelper::addData($database,$field_index_real,$platform_index_real,$index,$age);
+//
+//                    if (!$result){
+//                        return -2;
+//                    }
+//                }
+//                else if ($field_name == "country") {
+//                    $field_index_real = $field_index[0];
+//                    if (gettype($field_index_real) == "array"){
+//                        $field_index_real = $field_index_real["id"];
+//                    }
+//
+//                    $countryIndex = array_rand($this->COUNTRIES);
+//                    $result = DatabaseHelper::addData($database,$field_index_real,$platform_index_real,$index,$this->COUNTRIES[$countryIndex]);
+//
+//                    if (!$result){
+//                        return -3;
+//                    }
+//                }
             }
 
         }
+        return 0;
 
     }
     public function  download_data(){
