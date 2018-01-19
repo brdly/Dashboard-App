@@ -357,6 +357,17 @@ if (isset($_SESSION["error"])){
         #formCancel:hover{border:2px solid white;}
 
 
+        .formInactive
+        {
+            width:60%;
+        }
+
+        .formActive
+        {
+            width: 100%;
+        }
+
+
 
         @media only screen and (max-width: 1441px) {
 
@@ -407,7 +418,7 @@ if (isset($_SESSION["error"])){
 
 
 
-        @media only screen and (max-width: 768px) {
+        @media only screen and (max-width: 800px) {
 
 
 
@@ -415,13 +426,13 @@ if (isset($_SESSION["error"])){
             #login
             {
                 width: 100%;
-                position: static;
             }
 
 
             #formCover
             {
                 width: 100%;
+                position: static;
             }
 
             #formButton
@@ -470,10 +481,6 @@ if (isset($_SESSION["error"])){
 
         }
 
-        .formOpen {
-            width: 100%!important;
-        }
-
     </style>
 
 
@@ -487,8 +494,8 @@ if (isset($_SESSION["error"])){
     the formCover div will have the ILO logo, as well as a welcome message on it.
     once the button is pressed, the actual form div will replace and fill up the screen
 --><div id="wrapAround">
-    <div id="formCover">
-        <img src="/login&form/img/ilo2.jpg" style="margin-left:15px;margin-top:50px;width:200px;height:auto;float:left;margin-right:50%;" />
+    <div id="formCover" class="formInactive">
+        <img src="/SPATProject/public/login&form/img/ilo2.jpg" style="margin-left:15px;margin-top:50px;width:200px;height:auto;float:left;margin-right:50%;" />
         <p style="float:left;margin-left:45px;min-width:60%;max-width:90%;text-align:left;margin-top: 70px;font-size: 40px;">HELP US HELP YOU</p>
         <p style="float:left;margin-left:45px;min-width:60%;max-width:80%;text-align:left;margin-top: 20px;font-size: 18px;">
             Here at the International Labour Organisation our aim is to ensure workers are treated fairly. We have been doing this for
@@ -678,24 +685,29 @@ if (isset($_SESSION["error"])){
     $(document).ready(function() {
         $("#formButton").click(function() {
             $("#form").animate({height: "90vh"});
-            $("#formCover").toggleClass("formOpen");
             $("#form").toggleClass("ofOff");
             $("#form").toggleClass("ofOn");
             $("#backdrop").toggleClass("displayOn");
             $("#backdrop").toggleClass("displayOff");
             $("#login").hide();
+            $("#formCover").toggleClass("formInactive");
+            $("#formCover").toggleClass("formActive");
+
+
+
 
 
 
         });
         $("#formCancel").click(function() {
             $("#form").animate({height: "0vh"});
-            $("#formCover").toggleClass("formOpen");
             $("#form").toggleClass("ofOff");
             $("#form").toggleClass("ofOn");
             $("#backdrop").toggleClass("displayOn");
             $("#backdrop").toggleClass("displayOff");
             $("#login").show();
+            $("#formCover").toggleClass("formInactive");
+            $("#formCover").toggleClass("formActive");
 
         });
     });
