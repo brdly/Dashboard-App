@@ -1,7 +1,7 @@
 
 <?php
-$ROOT = $_SERVER['DOCUMENT_ROOT'];
-require_once $ROOT . "/src/ScrapeParser.php";
+
+require_once __DIR__ . "/src/ScrapeParser.php";
 /**
  * Created by PhpStorm.
  * User: Mikus
@@ -10,7 +10,7 @@ require_once $ROOT . "/src/ScrapeParser.php";
  */
 
 $parser = new \SPATApp\App\ScrapeParser();
-$data = $parser->read_file("data/UpworkUS.txt");
+$data = $parser->read_file("data/Amazon-Mechanical-TurkUS.txt");
 //$parser->printEntry($data);
 //$data = $parser->read_file("raw_data.txt");
 $parser->upload_data($data);

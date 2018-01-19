@@ -6,9 +6,8 @@
  * Time: 16:38
  */
 
-$ROOT = $_SERVER['DOCUMENT_ROOT'];
-require_once $ROOT . "/../src/DatabaseHelper.php";
-require_once $ROOT . "/../config.php";
+require_once __DIR__ . "/../src/DatabaseHelper.php";
+require_once __DIR__ . "/../config.php";
 
 use SPATApp\App\DatabaseHelper;
 use SPATApp\Config;
