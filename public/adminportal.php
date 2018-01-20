@@ -3085,8 +3085,8 @@
 </main>
 
 <footer>
-    <img class="logBut" src="/build/img/logout.png" onclick="clearUser()" />
-    <img class="helpBut" id="helper" src="/build/img/help.png" />
+    <img class="logBut" src="/SPATProject/public/build/img/logout.png" onclick="clearUser()" />
+    <img class="helpBut" id="helper" src="/SPATProject/public/build/img/help.png" />
 </footer>
 
 <div id="helpTips"></div>
