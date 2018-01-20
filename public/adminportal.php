@@ -1,4 +1,6 @@
 <?php
+
+
      function checkLogin($username,$password,$hashed){
         if (htmlentities($username) == "adam"){
             if ($hashed){
@@ -61,7 +63,7 @@
         //exit();
     }
 
-     
+   
 
 ?>
 <!DOCTYPE html>
@@ -824,11 +826,16 @@
         var newestDate;
         var option;
         var platform;
+        var gCount = 0;
+        var gMax = 0;
         var min;
         var max;
         var generatedWords = [];
         var seriesDates = [];
         var menuAction = "disable";
+        var male = 0;
+        var female = 0;
+        var other = 0;
 
         function SortByDate(){
             seriesDates.sort(function(a,b){
@@ -1261,10 +1268,14 @@
 
                 
                 if(dataType === "Gender") {
-                        var male = 0;
-                        var female = 0;
-                        var other = 0;
+                    if(i===0) {
+                        male = 0;
+                        female = 0;
+                        other = 0;
+                    }
                     $.each(selectedOpts[i], function (index, numbers) {
+                        gCount = i;
+                        gMax = selectedOpts.length;
                         var incomingNumber = numbers[1];
                             var resultDate = new Date(numbers[2]);
                             if(resultDate >= timeStart && resultDate <= timeEnd) {
@@ -1277,8 +1288,10 @@
                                     }
                         }
                     })
+                    if(gCount === gMax - 1) {
                         var result = parseFloat(Math.round(total/count * 100) / 100).toFixed(2);
                         resultsArray.push({platformName,dataType,male,female,other});
+                    }
                 }
                 
                 if(dataType === "Former Employee") {
@@ -1625,6 +1638,7 @@
                     
                     //group hours vs period and wage minus the period
                     if(item.dataType === "Wage" || item.dataType === "Hours" || item.dataType === "Period" ) {
+                        if(stackOrder.indexOf(item.dataType) === -1) stackOrder.push(item.dataType);
                         if(generatedStackLabel16.indexOf(item.platformName) === -1) {
                             generatedStackLabel16.push(item.platformName);
                         }
@@ -1663,7 +1677,25 @@
                         var amazonOn = $("#AmazonMechanicalTurk").hasClass("menuOn");
                         var fiverrOn = $("#Fiverr").hasClass("menuOn");
                         var upworkOn = $("#Upwork").hasClass("menuOn");
-                        
+                        if(amazonOn === true && fiverrOn === false && upworkOn === false) {
+                            //a
+                            stackOne = [awtStack[1]];
+                             stackTwo = [awtStack[2]];
+                             stackThree = [awtStack[3]];
+                             stackFour = [awtNewWage]
+                        } else if(amazonOn === false && fiverrOn === true && upworkOn === false) {
+                            //f
+                            stackOne = [fiverrStack[1]];
+                             stackTwo = [fiverrStack[2]];
+                             stackThree = [fiverrStack[3]];
+                             stackFour = [fiverrNewWage]
+                        } else if(amazonOn === false && fiverrOn === false && upworkOn === true) {
+                            //u
+                            stackOne = [upworkStack[1]];
+                             stackTwo = [upworkStack[2]];
+                             stackThree = [upworkStack[3]];
+                             stackFour = [upworkNewWage]
+                        } else
                         if(amazonOn === true && fiverrOn === true && upworkOn === true) {
                              stackOne = [fiverrStack[1],awtStack[1],upworkStack[1]];
                              stackTwo = [fiverrStack[2],awtStack[2],upworkStack[2]];
@@ -1879,6 +1911,16 @@
                         try{upworkNewWage = parseFloat((parseFloat(upworkStack[3]) * parseFloat(upworkStack[1])) / (parseFloat(upworkStack[3]) + parseFloat(upworkStack[2].toString().replace("-",''))));}catch(e){}
                         }
 
+                        if(amazonOn === true && fiverrOn === false && upworkOn === false) {
+                            //a
+                             stackFour = [awtNewWage]
+                        } else if(amazonOn === false && fiverrOn === true && upworkOn === false) {
+                            //f
+                             stackFour = [fiverrNewWage]
+                        } else if(amazonOn === false && fiverrOn === false && upworkOn === true) {
+                            //u
+                             stackFour = [upworkNewWage]
+                        } else
                         if(amazonOn === true && fiverrOn === true && upworkOn === true) {
                             var stackFour = [fiverrNewWage,awtNewWage,upworkNewWage];
                         } else if(amazonOn === true && fiverrOn === true && upworkOn === false) {
@@ -1902,7 +1944,7 @@
 
                         }
                     
-                    if(stackOrder.indexOf(item.dataType) === -1) stackOrder.push(item.dataType);
+                    
                 } else {
                     try{$("#chartStackGroup").remove();}catch(e){}
                 }
