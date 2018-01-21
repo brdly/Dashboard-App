@@ -2,6 +2,7 @@
 
 
 
+
 <!--
 
       The Form Panel Cover on the left side displays a welcome message and
@@ -46,7 +47,7 @@
         {
             background-color: #2d3e50;
             width: 60%;
-            min-height: 100vh;
+            height: 100vh;
             float: left;
             font-family: 'Roboto', sans-serif;
             overflow:auto;
@@ -166,7 +167,6 @@
                 the form background had issues when filling up the screen, had to set
                 the height at 240vh to compensate.
                  */
-
 
 
 
@@ -432,12 +432,10 @@
             #formCover
             {
                 width: 100%;
-                height: 100vh;
             }
 
             #formButton
             {
-                margin-bottom: 10%;
             }
 
             #formEntry
@@ -452,7 +450,7 @@
         }
 
         .formOpen {
-            width: 100%!important;
+            width: 100% !important;
         }
 
     </style>
@@ -679,24 +677,27 @@
     $(document).ready(function() {
         $("#formButton").click(function() {
             $("#form").animate({height: "90vh"});
-            $("#formCover").toggleClass("formOpen");
             $("#form").toggleClass("ofOff");
             $("#form").toggleClass("ofOn");
             $("#backdrop").toggleClass("displayOn");
             $("#backdrop").toggleClass("displayOff");
             $("#login").hide();
+            $("#formCover").toggleClass("formOpen");
+
+
+
 
 
 
         });
         $("#formCancel").click(function() {
             $("#form").animate({height: "0vh"});
-            $("#formCover").toggleClass("formOpen");
             $("#form").toggleClass("ofOff");
             $("#form").toggleClass("ofOn");
             $("#backdrop").toggleClass("displayOn");
             $("#backdrop").toggleClass("displayOff");
             $("#login").show();
+            $("#formCover").toggleClass("formOpen");
 
         });
     });
