@@ -19,6 +19,7 @@ if (isset($_SESSION["error"])){
 
 
 
+
 <!--
 
       The Form Panel Cover on the left side displays a welcome message and
@@ -63,7 +64,7 @@ if (isset($_SESSION["error"])){
         {
             background-color: #2d3e50;
             width: 60%;
-            min-height: 100vh;
+            height: 100vh;
             float: left;
             font-family: 'Roboto', sans-serif;
             overflow:auto;
@@ -448,12 +449,10 @@ if (isset($_SESSION["error"])){
             #formCover
             {
                 width: 100%;
-                height: 100vh;
             }
 
             #formButton
             {
-                margin-bottom: 10%;
             }
 
             #formEntry
