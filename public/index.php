@@ -217,7 +217,7 @@ if (isset($_SESSION["error"])){
 
         .formFields > *
         {
-            background-color: transparent;
+            background-color:rgb(45,62,80);
             color: white;
             border-radius: 3%;
         }
@@ -363,7 +363,6 @@ if (isset($_SESSION["error"])){
         @media only screen and (max-width: 1441px) {
 
 
-
             .formFields
             {
                 float: left;
@@ -398,10 +397,6 @@ if (isset($_SESSION["error"])){
             {
                 margin-left: 0px;
             }
-
-
-
-
 
         }
 
@@ -484,7 +479,7 @@ if (isset($_SESSION["error"])){
     once the button is pressed, the actual form div will replace and fill up the screen
 --><div id="wrapAround">
     <div id="formCover">
-        <img src="/login&form/img/ilo2.jpg" style="margin-left:15px;margin-top:50px;width:200px;height:auto;float:left;margin-right:50%;" />
+        <img src="login&form/img/ilo2.jpg" style="margin-left:15px;margin-top:50px;width:200px;height:auto;float:left;margin-right:50%;" />
         <p style="float:left;margin-left:45px;min-width:60%;max-width:90%;text-align:left;margin-top: 70px;font-size: 40px;">HELP US HELP YOU</p>
         <p style="float:left;margin-left:45px;min-width:60%;max-width:80%;text-align:left;margin-top: 20px;font-size: 18px;">
             Here at the International Labour Organisation our aim is to ensure workers are treated fairly. We have been doing this for
@@ -543,9 +538,6 @@ if (isset($_SESSION["error"])){
                     <input type="password" placeholder="Password" name="Password" required>
 
                     <button id="submit" type="submit" style="cursor:pointer;">Login</button>
-                    <section class="loginBling" style="font-size:14px"><p>
-                            Forgot Password? Click <a href="">here</a> !
-                        </p></section>
                 </div>
             </form>
         </div>
@@ -635,18 +627,18 @@ if (isset($_SESSION["error"])){
 
                 <label>What is your gender?</label>
                 <select name="gender">
-                    <option value="male">male</option>
-                    <option value="female">female</option>
-                    <option value="other">other</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
 
                 </select>
                 <label>How would you describe the task/job variety and interest?</label>
                 <select name="interest">
-                    <option value="1">very little to no variety/interest</option>
-                    <option value="2">some variety/interest</option>
-                    <option value="3">some variety but not much interest</option>
-                    <option value="4">some interest but not much variety</option>
-                    <option value="5">very high variety/interest</option>
+                    <option value="1">Very little to no variety/interest</option>
+                    <option value="2">Some variety/interest</option>
+                    <option value="3">Some variety but not much interest</option>
+                    <option value="4">Some interest but not much variety</option>
+                    <option value="5">Very high variety/interest</option>
 
                 </select>
 
@@ -663,9 +655,9 @@ if (isset($_SESSION["error"])){
             </div>
             <div style="float: left;padding-top:10px;width: 45vw;" class="formFields" id="rightForm">
                 <label>How many hours on average do you work per day? </label>
-                <textarea name="hours" rows="1" cols="20"></textarea>
+                <input name="hours" value="hours" type="number" rows="1" cols="20"></>
                 <label>On average, how much do you earn per hour? </label>
-                <textarea name="wage" rows="1" cols="20"></textarea>
+                <input name="wage" value="wage" type="number" rows="1" cols="20"></input>
                 <label>Please tell us about your experience on this platform</label>
                 <textarea name="review" rows="13" cols="50"></textarea>
                 <label>What are you most happy about?</label>
@@ -691,6 +683,7 @@ if (isset($_SESSION["error"])){
 
 
 <script>
+
     $(document).ready(function() {
         $("#formButton").click(function() {
             $("#form").animate({height: "90vh"});
@@ -718,6 +711,7 @@ if (isset($_SESSION["error"])){
 
         });
     });
+
 </script>
 
 <!--END OF JQUERY-->
