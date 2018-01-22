@@ -1,8 +1,8 @@
-# SPATProject
+# Dashboard App
 
 [![Build Status](https://travis-ci.com/GeorgeBroadley/SPATProject.svg?token=n6yY13dBGN2s9Ja5ok2S&branch=master)](https://travis-ci.com/GeorgeBroadley/SPATProject)
 
-![Imgur](https://i.imgur.com/llt8t6b.jpg)
+![AdminPanel](https://lh6.googleusercontent.com/YZK0Ho9HWWluuXFrRfincaRzByEsoQRn-cjEb5IU2V6mkXZThpq82zCTI5vnOfzfy122DcJpL8VjkUCIVYtm=w2880-h1616-rw)
 
 ## Setup
 
@@ -16,4 +16,12 @@
 
 ### Troubleshooting
 
-* See [here](http://spat-documentation.readthedocs.io/en/latest/setup.html) if setup fails.
+* See [here](https://sites.google.com/view/spatproject/setup) if setup fails.
+
+## Dev Server
+
+URL: http://spat.dev.broadley.co/
+
+Username: adam
+
+Password: password
