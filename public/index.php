@@ -4,14 +4,14 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 if (isset($_SESSION["error"])){
     //COPY THIS CODE TO WHERE U WANT UR ERRORS IN.
-    //echo $_SESSION["error"];
-    //echo $_SESSION["error_msg"];
-    //echo $_SESSION["warning"];
+    echo $_SESSION["error"];
+    echo $_SESSION["error_msg"];
+    echo $_SESSION["warning"];
 
     //DO NOT FORGET TO CLEAR THEM TOO!
-    //$_SESSION["error"] = null;
-    //$_SESSION["error_msg"] = null;
-    //$_SESSION["warning"] = null;
+    $_SESSION["error"] = null;
+    $_SESSION["error_msg"] = null;
+    $_SESSION["warning"] = null;
 }
 
 ?>
@@ -517,15 +517,15 @@ if (isset($_SESSION["error"])){
             if (session_status() == PHP_SESSION_NONE) {
                 session_start();
             }
-            if (isset($_GET["response"])){
+            if (isset($_SESSION["error"])){
                 //COPY THIS CODE TO WHERE U WANT UR ERRORS IN.
-                //echo $_SESSION["error_msg"];
-               echo "Thank you for your submission!";
+                echo $_SESSION["error_msg"];
+                echo $_SESSION["warning"];
 
                 //DO NOT FORGET TO CLEAR THEM TOO!
-                //$_SESSION["error"] = null;
-                //$_SESSION["error_msg"] = null;
-               // $_SESSION["warning"] = null;
+                $_SESSION["error"] = null;
+                $_SESSION["error_msg"] = null;
+                $_SESSION["warning"] = null;
             }
 
             ?>
@@ -574,7 +574,7 @@ if (isset($_SESSION["error"])){
                     <option value="5">It is amazing, I will never leave</option>
                 </select>
                 <label>How would you rate the work/life balance? </label>
-                <select name="worklife_balance" required>
+                <select>
                     <option value="1">I don't have much personal time, I have to work a lot</option>
                     <option value="2">I have some personal time, but working is priority</option>
                     <option value="3">I have enough time to get things done</option>
@@ -583,7 +583,7 @@ if (isset($_SESSION["error"])){
 
                 </select>
                 <label>How would you rate the benefits of working for this platform? </label>
-                <select name="benefits" required>
+                <select>
                     <option value="1">I haven't received any benefits</option>
                     <option value="2">They do offer things but they don't relate to me</option>
                     <option value="3">They offer a variety of benefits</option>
@@ -592,7 +592,7 @@ if (isset($_SESSION["error"])){
 
                 </select>
                 <label>How secure do you feel that your job on this platform? </label>
-                <select name="job_security" required>
+                <select>
                     <option value="1">I am worried I might not get jobs/tasks</option>
                     <option value="2">It is hard to get jobs/task but I manage</option>
                     <option value="3">There is work available, but it isn't right for me</option>
@@ -601,7 +601,7 @@ if (isset($_SESSION["error"])){
 
                 </select>
                 <label>How would you rate the support give to you by the platform? </label>
-                <select name="culture" required>
+                <select>
                     <option value="1">I don't know how to contact them</option>
                     <option value="2">They never replied to my messages</option>
                     <option value="3">They never really helped me</option>
@@ -610,7 +610,7 @@ if (isset($_SESSION["error"])){
 
                 </select>
                 <label>How would you rate your relationship with the platform?</label>
-                <select name="relationship" required>
+                <select>
                     <option value="1">I don't know much about the platform</option>
                     <option value="2">The emails they send aren't related to me</option>
                     <option value="3">There is lots of information available</option>
@@ -619,21 +619,21 @@ if (isset($_SESSION["error"])){
 
                 </select>
                 <label>Are you a current or former employee of this platform?</label>
-                <select name="former_employee" required>
+                <select>
                     <option value="current">I currently work here</option>
                     <option value="former">I am a former platform worker</option>
 
                 </select>
 
                 <label>What is your gender?</label>
-                <select name="gender" required>
+                <select name="gender">
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                     <option value="other">Other</option>
 
                 </select>
                 <label>How would you describe the task/job variety and interest?</label>
-                <select name="interest" required>
+                <select name="interest">
                     <option value="1">Very little to no variety/interest</option>
                     <option value="2">Some variety/interest</option>
                     <option value="3">Some variety but not much interest</option>
@@ -644,26 +644,26 @@ if (isset($_SESSION["error"])){
 
 
                 <label>How many platforms do you generally use?</label>
-                <input name="platforms" value="platforms" type="number" min="1" max="20" required>
+                <input name="platforms" value="platforms" type="number" min="1" max="20">
 
                 <label>How many hours, on average, does it take you to find/get a task/job?</label>
-                <input name="period" value="period" type="number" min="1" max="500" required>
+                <input name="period" value="period" type="number" min="1" max="500">
 
                 <label>How old are you?</label>
-                <input name="age" value="age" type="number" min="1" max="100" required>
+                <input name="age" value="age" type="number" min="1" max="100">
 
             </div>
             <div style="float: left;padding-top:10px;width: 45vw;" class="formFields" id="rightForm">
                 <label>How many hours on average do you work per day? </label>
-                <input name="hours" value="hours" type="number" min="1" max="500" required></input>
+                <input name="hours" value="hours" type="number" rows="1" cols="20"></>
                 <label>On average, how much do you earn per hour? </label>
-                <input name="wage" value="wage" type="number" min="1" max="500" required></input>
+                <input name="wage" value="wage" type="number" rows="1" cols="20"></input>
                 <label>Please tell us about your experience on this platform</label>
-                <textarea name="review" rows="13" cols="50" required></textarea>
+                <textarea name="review" rows="13" cols="50"></textarea>
                 <label>What are you most happy about?</label>
-                <textarea name="pros" rows="2" cols="50" required></textarea>
+                <textarea name="pros" rows="2" cols="50"></textarea>
                 <label>What are you most unhappy about?</label>
-                <textarea name="cons" rows="2" cols="50" required></textarea>
+                <textarea name="cons" rows="2" cols="50"></textarea>
             </div>
             <button id="formCancel" type="reset">Cancel</button>
             <!--<button style="float: right;clear: right;margin-right:50px;margin-top:50px;font-size:36px;float: right; clear: right; height: 80px; color: black; width: 200px; border: 1px darkgreen solid; background-color: #31e5c1; border-radius: 7px; margin-right: 50px; margin-top: 50px; font-size: 40px;cursor:pointer;" id="formSubmit" type="submit">Submit</button>-->
