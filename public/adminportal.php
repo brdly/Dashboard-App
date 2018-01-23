@@ -80,13 +80,13 @@
     <script src="http://d3js.org/d3.v3.min.js"></script>
   <script src="http://d3js.org/topojson.v1.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=BenchNine:700" rel="stylesheet">
-    <link href="/SPATProject/public/build/css/jqcloud.css" rel="stylesheet">
-    <link href="/SPATProject/public/build/js/slider/demo/style.css" rel="stylesheet">
+    <link href="/build/css/jqcloud.css" rel="stylesheet">
+    <link href="/build/js/slider/demo/style.css" rel="stylesheet">
     <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="http://datamaps.github.io/scripts/datamaps.world.min.js?v=1"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
-    <script src="/SPATProject/public/build/js/slider/jQDateRangeSlider-min.js"></script>
-    <script src="/SPATProject/public/build/js/jqcloud-1.0.4.js"></script>
+    <script src="/build/js/slider/jQDateRangeSlider-min.js"></script>
+    <script src="/build/js/jqcloud-1.0.4.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 
     <style>
@@ -250,7 +250,7 @@
         }
         
         footer {    
-            background-image:url(/SPATProject/public/build/img/menubkg.png);
+            background-image:url(/build/img/menubkg.png);
             background-size:contain;
             float: left;
             background-color: rgb(45,62,80);
@@ -305,7 +305,7 @@
         .titlebox {
             padding-left: barLeftypx;
             margin-left: 25px;
-            background-image: url(/SPATProject/public/build/img/ilo.png);
+            background-image: url(/build/img/ilo.png);
             background-repeat: no-repeat;
             background-position: center center;
             background-size: contain;
@@ -365,14 +365,14 @@
         }
 
         #Upwork {
-            background-image: url(/SPATProject/public/build/img/upwork.png);
+            background-image: url(/build/img/upwork.png);
             background-repeat: no-repeat;
             background-size: 35px auto;
             background-position: 5px center;
         }
 
         #Fiverr {
-            background-image: url(/SPATProject/public/build/img/fiverr.png);
+            background-image: url(/build/img/fiverr.png);
             background-repeat: no-repeat;
             background-size: 35px auto;
             background-position: 10px center;
@@ -380,7 +380,7 @@
         }
 
         #AmazonMechanicalTurk {
-            background-image: url(/SPATProject/public/build/img/amt.png);
+            background-image: url(/build/img/amt.png);
             background-repeat: no-repeat;
             background-size: 45px auto;
             background-position: 10px 5px;
@@ -458,7 +458,7 @@
             }
 
             #AmazonMechanicalTurk {
-                background-image: url(/SPATProject/public/build/img/amt.png);
+                background-image: url(/build/img/amt.png);
                 background-repeat: no-repeat;
                 background-size: 20px auto;
                 background-position: 10px 16px;
@@ -468,7 +468,7 @@
             .titlebox {
                 padding-left: 0px;
                 margin-left: 0px;
-                background-image: url(/SPATProject/public/build/img/menu.png);
+                background-image: url(/build/img/menu.png);
                 background-repeat: no-repeat;
                 background-position: center center;
                 background-size: contain;
@@ -482,14 +482,14 @@
             }
 
             #Upwork {
-                background-image: url(/SPATProject/public/build/img/upwork.png);
+                background-image: url(/build/img/upwork.png);
                 background-repeat: no-repeat;
                 background-size: 20px auto;
                 background-position: 2px center;
             }
 
             #Fiverr {
-                background-image: url(/SPATProject/public/build/img/fiverr.png);
+                background-image: url(/build/img/fiverr.png);
                 background-repeat: no-repeat;
                 background-size: 20px auto;
                 background-position: 4px center;
@@ -622,7 +622,7 @@
             }
 
             #AmazonMechanicalTurk {
-                background-image: url(/SPATProject/public/build/img/amt.png);
+                background-image: url(/build/img/amt.png);
                 background-repeat: no-repeat;
                 background-size: 20px auto;
                 background-position: 5px 9px;
@@ -632,7 +632,7 @@
             .titlebox {
                 padding-left: 0px;
                 margin-left: 0px;
-                background-image: url(/SPATProject/public/build/img/menu.png);
+                background-image: url(/build/img/menu.png);
                 background-repeat: no-repeat;
                 background-position: center center;
                 background-size: contain;
@@ -646,14 +646,14 @@
             }
 
             #Upwork {
-                background-image: url(/SPATProject/public/build/img/upwork.png);
+                background-image: url(/build/img/upwork.png);
                 background-repeat: no-repeat;
                 background-size: 20px auto;
                 background-position: 2px center;
             }
 
             #Fiverr {
-                background-image: url(/SPATProject/public/build/img/fiverr.png);
+                background-image: url(/build/img/fiverr.png);
                 background-repeat: no-repeat;
                 background-size: 20px auto;
                 background-position: 4px center;
@@ -927,7 +927,7 @@
                             $( this ).removeClass( "menuOn" );
                         })
                         generatedWords = [];
-                        $("#mapbar").css('display','none'); mapMade=false; $("#container1").html('<div id="mapbar" style="display:none"><img src="/SPATProject/public/build/img/mapbar.png" /></div>');
+                        $("#mapbar").css('display','none'); mapMade=false; $("#container1").html('<div id="mapbar" style="display:none"><img src="/build/img/mapbar.png" /></div>');
                     } else if(counter <= 1) {  $("#chartRatingShare".replace(/ /g, '')).remove(); } {
                         createWordBubble("wordBubble","wordBubble",generatedWords);
                     }
@@ -1112,7 +1112,7 @@
                                  //please choose a platform 
                             }
                         } else {
-                            if(option === "Location") { $("#mapbar").css('display','none'); mapMade=false; $("#container1").html('<div id="mapbar" style="display:none"><img src="/SPATProject/public/build/img/mapbar.png" /></div>'); }
+                            if(option === "Location") { $("#mapbar").css('display','none'); mapMade=false; $("#container1").html('<div id="mapbar" style="display:none"><img src="/build/img/mapbar.png" /></div>'); }
                             if(option === "Review") { $("#bubblewordBubble").remove(); generatedWords=[]; }
                             if(option === "Date") {  $("#chartTime"+option.replace(/ /g, '')).remove(); }
                             if(selectedOpts) {
@@ -3121,14 +3121,14 @@
     <div id="slider" class="hide"></div>
     <div id="charts"> </div>
     <div id="container1" style="float:left;margin-left:2.5%; width: 45%; max-height: 550px;">
-        <div id="mapbar" style="display:none"><img src="/SPATProject/public/build/img/mapbar.png" /></div>
+        <div id="mapbar" style="display:none"><img src="/build/img/mapbar.png" /></div>
     </div>
       
 </main>
 
 <footer>
-    <img class="logBut" src="/SPATProject/public/build/img/logout.png" onclick="clearUser()" />
-    <img class="helpBut" id="helper" src="/SPATProject/public/build/img/help.png" />
+    <img class="logBut" src="/build/img/logout.png" onclick="clearUser()" />
+    <img class="helpBut" id="helper" src="/build/img/help.png" />
 </footer>
 
 <div id="helpTips"></div>
