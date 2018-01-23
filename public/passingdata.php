@@ -1,5 +1,6 @@
 <?php
 
+/*
 require_once __DIR__ . "/../src/ScrapeParser.php";
 require_once __DIR__ . "/../src/DatabaseHelper.php";
 require_once __DIR__ . "/../config.php";
@@ -72,3 +73,6 @@ echo "</br>";
 echo $_SESSION["error"];
 echo $_SESSION["error_msg"];
 header("Location: ".$GOAL_LOCATION);
+*/
+
+header("Location: index.php?response=thanks");
