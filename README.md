@@ -13,15 +13,3 @@
 3) Rename `config.php-example` to `config.php` and add your MySQL server details
 
 4) Run PHPUnit tests with `phpunit`
-
-### Troubleshooting
-
-* See [here](https://sites.google.com/view/spatproject/setup) if setup fails.
-
-## Dev Server
-
-URL: http://spat.dev.broadley.co/
-
-Username: adam
-
-Password: password
