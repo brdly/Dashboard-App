@@ -1,6 +1,6 @@
 # Dashboard App
 
-[![Build Status](https://travis-ci.com/GeorgeBroadley/SPATProject.svg?token=n6yY13dBGN2s9Ja5ok2S&branch=master)](https://travis-ci.com/GeorgeBroadley/SPATProject)
+[![Build Status](https://travis-ci.com/GeorgeBroadley/DashboardApp.svg?branch=master)](https://travis-ci.com/GeorgeBroadley/DashboardApp)
 
 ![AdminPanel](https://lh6.googleusercontent.com/YZK0Ho9HWWluuXFrRfincaRzByEsoQRn-cjEb5IU2V6mkXZThpq82zCTI5vnOfzfy122DcJpL8VjkUCIVYtm=w2880-h1616-rw)
 
